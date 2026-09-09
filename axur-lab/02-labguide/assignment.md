@@ -21,15 +21,12 @@ Lab Guide
 Understand the importance of creating and defining assets to be monitored.
 
 ### Steps
-1. Log into your CSP account
-![Screenshot 2026-08-13 at 8.58.15 AM.png](../assets/Screenshot%202026-08-13%20at%208.58.15%E2%80%AFAM.png)
-2. On the left panel click on the Axur icon
-![Screenshot 2026-08-13 at 9.53.41 AM.png](../assets/Screenshot%202026-08-13%20at%209.53.41%E2%80%AFAM.png)
-3. Navigate to Settings > Monitoring Settings
+1. Open the **Axur Portal** tab and sign in to Axur ONE
+2. Navigate to Settings > Monitoring Settings
 ![Screenshot 2026-07-13 at 2.25.19 PM.png](../assets/Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png)
-4. Select Asset Management
-5. Select one of the pre-configured Asset. (Demo Netflix)
-6. Review the visible metadata, associated monitoring context, and any linked coverage areas
+3. Select Asset Management
+4. Select one of the pre-configured Asset. (Demo Netflix)
+5. Review the visible metadata, associated monitoring context, and any linked coverage areas
 ![Jul-13-2026_at_14.27.38-image.png](../assets/Jul-13-2026_at_14.27.38-image.png)
 
 ### What participants should observe

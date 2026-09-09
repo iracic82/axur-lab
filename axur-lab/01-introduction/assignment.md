@@ -10,7 +10,7 @@ notes:
   contents: |-
     # **Infoblox Axur Introductory lab**
 
-    Your environment is being provisioned. You will access your Axur environment from your Infoblox CSP tenant.
+    Your environment is being provisioned. You will access your Axur environment through the **Axur Portal** tab.
 
     **In this lab you will…**
     - Explore Axur’s key features and security solutions.
