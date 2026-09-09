@@ -1,0 +1,47 @@
+#!/bin/bash
+set -euxo pipefail
+
+echo "=== Axur Lab - Setup: create one Axur MSSP tenant per sandbox ==="
+
+# --- Install dependencies ---
+apt update -y
+apt install -y git jq python3-pip
+pip3 install requests || pip3 install --break-system-packages requests
+
+# --- Clone lab scripts repo ---
+mkdir -p /root/lab/
+git clone https://github.com/iracic82/axur-lab.git /root/lab/axur-lab
+
+# --- Set Instruqt agent variables ---
+# Use -- to prevent values starting with - from being interpreted as flags
+agent variable set Sandbox_ID -- "${INSTRUQT_PARTICIPANT_ID}"
+agent variable set User_Email -- "${INSTRUQT_USER_EMAIL}"
+
+# --- Environment file (sourced by cleanup and by interactive shells) ---
+# xtrace is off in this block so the AXUR_TOKEN secret never reaches the Instruqt logs.
+set +x
+if [ -z "${AXUR_TOKEN:-}" ]; then
+  echo "ERROR: AXUR_TOKEN secret is not set (Instruqt team Secrets -> AXUR_TOKEN; declared in config.yml)"
+  exit 1
+fi
+cat > /root/lab/axur.env << ENVEOF
+export AXUR_TOKEN=${AXUR_TOKEN}
+export INSTRUQT_EMAIL=${INSTRUQT_USER_EMAIL}
+export INSTRUQT_PARTICIPANT_ID=${INSTRUQT_PARTICIPANT_ID}
+export INSTRUQT_SANDBOX_ID=${INSTRUQT_SANDBOX_ID:-${INSTRUQT_PARTICIPANT_ID}}
+export AXUR_CTI_ENABLED=true
+ENVEOF
+chmod 600 /root/lab/axur.env
+grep -q 'axur.env' /root/.bashrc || echo 'source /root/lab/axur.env' >> /root/.bashrc
+source /root/lab/axur.env
+set -x
+
+# --- Create the Axur tenant (tenant + brand name = sandbox id) ---
+cd /root/lab/axur-lab
+echo "=== Creating Axur tenant ==="
+python3 create_tenant.py
+
+agent variable set AXUR_TENANT_KEY -- "$(cat tenant_key.txt)"
+agent variable set AXUR_TENANT_NAME -- "$(cat tenant_name.txt)"
+
+echo "=== Setup complete: Axur tenant $(cat tenant_key.txt) ==="

@@ -1,0 +1,30 @@
+slug: axur-lab
+id: rsqko78gxgac
+title: Axur Lab
+description: ""
+icon: ./assets/Infoblox-logo-for-email.png
+tags:
+- threat-intel
+- infoblox
+- sec-ops
+- ai
+- security
+- incident-response
+owner: infoblox
+developers:
+- kzettel@infoblox.com
+- zmiszkiewicz@infoblox.com
+- ssingh3@infoblox.com
+show_timer: true
+skipping_enabled: true
+idle_timeout: 7200
+timelimit: 14400
+lab_config:
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  override_challenge_layout: false
+  hideStopButton: false
+checksum: "6127242570269791240"
+enhanced_loading: false

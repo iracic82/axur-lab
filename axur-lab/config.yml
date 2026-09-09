@@ -1,0 +1,13 @@
+version: "3"
+containers:
+- name: shell
+  image: gcr.io/instruqt/cloud-client
+  shell: /bin/bash
+  memory: 1024
+virtualbrowsers:
+- name: infoblox
+  url: https://portal.infoblox.com/
+- name: axur
+  url: https://one.axur.com/
+secrets:
+- name: AXUR_TOKEN

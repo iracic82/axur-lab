@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euxo pipefail
+
+echo "=== Axur Lab - Cleanup: suspend the sandbox's Axur tenant ==="
+
+# Secrets stay out of the logs
+set +x
+source /root/lab/axur.env 2>/dev/null || source /root/.bashrc || true
+set -x
+
+cd /root/lab/axur-lab || {
+    echo "WARNING: /root/lab/axur-lab not found (setup never finished?), nothing to suspend."
+    exit 0
+}
+
+echo "=== Suspending Axur tenant ==="
+# Uses tenant_key.txt from setup; falls back to a lookup by tenant name (INSTRUQT_SANDBOX_ID).
+python3 delete_tenant.py || echo "WARNING: delete_tenant.py failed, tenant may still be active - check Axur ONE"
+
+echo "=== Cleanup complete ==="

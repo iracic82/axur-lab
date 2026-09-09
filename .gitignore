@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.log
+*.log.*
+tenant_key.txt
+tenant_name.txt
+.env
+axur-support-email.md
