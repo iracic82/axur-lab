@@ -9,7 +9,7 @@ tabs:
   title: Infoblox Portal
   type: browser
   hostname: infoblox
-- id: z3nh8rtw5cq2
+- id: 8xk2pbuykb1r
   title: Axur Portal
   type: browser
   hostname: axur

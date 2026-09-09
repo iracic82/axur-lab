@@ -21,7 +21,7 @@ tabs:
   title: Infoblox Portal
   type: browser
   hostname: infoblox
-- id: q7dm2vx9kp4a
+- id: tg0fzhghiigb
   title: Axur Portal
   type: browser
   hostname: axur

@@ -13,6 +13,7 @@ tags:
 owner: infoblox
 developers:
 - kzettel@infoblox.com
+- iracic@infoblox.com
 - zmiszkiewicz@infoblox.com
 - ssingh3@infoblox.com
 show_timer: true
@@ -26,5 +27,5 @@ lab_config:
   loadingMessages: true
   override_challenge_layout: false
   hideStopButton: false
-checksum: "6127242570269791240"
+checksum: "12027749655034967415"
 enhanced_loading: false
