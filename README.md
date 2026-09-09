@@ -69,9 +69,9 @@ Every request is logged to `AxurTenant.log` (rotating, 5 MB × 3).
 
 The track is pulled into `axur-lab/` (`instruqt track pull axur-lab`). What was added:
 
-- `config.yml`: a `shell` container (`gcr.io/instruqt/cloud-client`) to run lifecycle scripts, a second virtual
-  browser `axur` → https://one.axur.com/, and the secret `AXUR_TOKEN`.
-- Both challenges got an **Axur Portal** tab (`type: browser`, `hostname: axur`) next to Infoblox Portal.
+- `config.yml`: a `shell` container (`gcr.io/instruqt/cloud-client`) to run lifecycle scripts, one virtual
+  browser `axur` → https://one.axur.com/ (the Infoblox Portal browser was removed), and the secret `AXUR_TOKEN`.
+- Both challenges have a single **Axur Portal** tab (`type: browser`, `hostname: axur`).
 - `track_scripts/setup-shell` (same pattern as the other labs): installs deps, `git clone`s this repo
   (https://github.com/iracic82/axur-lab, public so the sandbox can clone anonymously) to `/root/lab/axur-lab`, writes `/root/lab/axur.env` with the
   token and sandbox id (xtrace off so the secret never hits the logs), and runs `create_tenant.py` with

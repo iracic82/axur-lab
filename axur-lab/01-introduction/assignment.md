@@ -17,10 +17,6 @@ notes:
     - Understand why external threat monitoring is needed.
     - See how Axur helps detect, investigate, and respond to digital threats.
 tabs:
-- id: fm3hfxqavhbh
-  title: Infoblox Portal
-  type: browser
-  hostname: infoblox
 - id: tg0fzhghiigb
   title: Axur Portal
   type: browser

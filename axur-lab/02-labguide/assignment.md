@@ -5,10 +5,6 @@ type: challenge
 title: Lab Guide
 teaser: ' Explore the deployed Axur lab environment'
 tabs:
-- id: 23bhvqdgujjx
-  title: Infoblox Portal
-  type: browser
-  hostname: infoblox
 - id: 8xk2pbuykb1r
   title: Axur Portal
   type: browser
