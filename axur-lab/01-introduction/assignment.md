@@ -69,11 +69,12 @@ This lab is focused on analysis and navigation rather than setup. Participants w
 ____
 
 By the end of the lab, participants should be able to:
-	• Navigate the Axur interface confidently across assets, monitoring brand protection, data leakage, executive protection, deep and dark web, threat hunting and CTI workflows
-	• Explain how Axur helps surface external threats such as brand abuse, impersonation, fraudulent domains, leaked credentials and deep/dark web exposure
-	• Use keyword libraries, bots, and filters to surface relevant insights
-	• Review ticket states and analyze possible response actions such as safelisting, escalation, quarantine, and closure
-	• Demonstrate how Axur supports external threat disruption and monitoring through automation and takedown-oriented workflows
+
+- Navigate the Axur interface confidently across assets, monitoring brand protection, data leakage, executive protection, deep and dark web, threat hunting and CTI workflows
+- Explain how Axur helps surface external threats such as brand abuse, impersonation, fraudulent domains, leaked credentials and deep/dark web exposure
+- Use keyword libraries, bots, and filters to surface relevant insights
+- Review ticket states and analyze possible response actions such as safelisting, escalation, quarantine, and closure
+- Demonstrate how Axur supports external threat disruption and monitoring through automation and takedown-oriented workflows
 
 ***
 
