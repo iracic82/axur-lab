@@ -1,7 +1,9 @@
 #!/bin/bash
 # Challenge 2 (Lab Guide) setup: preload / configure this sandbox's Axur tenant.
-# What gets preloaded is declared in tenant_preload.yml in the repo (empty placeholder until Axur
-# specifies it). Idempotent, so restarting the challenge is safe.
+#   1. tenant_preload.yml  -> applied by preload_tenant.py (declarative: credit limit, assets, safelist, raw requests)
+#   2. preload.d/*         -> any extra executable scripts in the repo, run in name order (10-foo.py, 20-bar.sh, ...)
+# Both come from the repo via `git pull`, so adding preload content is a commit + push — no track push.
+# Everything runs in /root/lab/axur-lab with tenant_key.txt / tenant_name.txt and AXUR_TOKEN available.
 set -euxo pipefail
 
 echo "=== Axur Lab - Challenge 2 setup: preload tenant configuration ==="
@@ -12,9 +14,23 @@ set -x
 
 cd /root/lab/axur-lab || { echo "ERROR: /root/lab/axur-lab missing (track setup did not run?)"; exit 1; }
 
-# Pick up the latest preload spec without a track push
+# Pick up the latest preload spec and scripts without a track push
 git pull -q --ff-only || echo "WARNING: git pull failed, using the cloned version"
 
+echo "=== 1/2 declarative preload (tenant_preload.yml) ==="
 python3 preload_tenant.py
+
+echo "=== 2/2 extra preload scripts (preload.d/) ==="
+if [ -d preload.d ]; then
+  for script in $(ls preload.d/* 2>/dev/null | sort); do
+    case "$script" in *.md|*README*) continue ;; esac
+    echo "--- running $script ---"
+    case "$script" in
+      *.py) python3 "$script" ;;
+      *.sh) bash "$script" ;;
+      *)    [ -x "$script" ] && "$script" || echo "skip $script (not executable)" ;;
+    esac
+  done
+fi
 
 echo "=== Challenge 2 setup complete ==="
