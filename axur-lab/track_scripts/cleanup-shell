@@ -13,6 +13,13 @@ cd /root/lab/axur-lab || {
     exit 0
 }
 
+# ==============================================================================
+# DISABLED UNTIL AXUR PROVIDES THE USER API — uncomment together with the block in setup-shell.
+# ==============================================================================
+# echo "=== Deleting Axur user ==="
+# python3 user_provision.py --delete || echo "WARNING: user_provision.py --delete failed, continuing..."
+# ==============================================================================
+
 echo "=== Suspending Axur tenant ==="
 # Uses tenant_key.txt from setup; falls back to a lookup by tenant name (INSTRUQT_SANDBOX_ID).
 python3 delete_tenant.py || echo "WARNING: delete_tenant.py failed, tenant may still be active - check Axur ONE"

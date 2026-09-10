@@ -8,6 +8,7 @@ Same pattern as the Infoblox CSP `sandbox_api.py` / `create_sandbox.py` / `delet
 | `create_tenant.py` | Creates a tenant named after `INSTRUQT_SANDBOX_ID`, retries transient errors, writes `tenant_key.txt` |
 | `delete_tenant.py` | Reads `tenant_key.txt` (or takes a key argument), **suspends** the tenant, removes the file |
 | `resume_tenant.py` | `python3 resume_tenant.py <KEY>` re-activates a suspended tenant |
+| `user_provision.py` | **Placeholder.** Creates the participant user on the tenant (`--delete` removes it); writes `user_email.txt`, `user_password.txt`, `user_id.txt`, `user_credentials.sh`. Until Axur publishes the user endpoint it runs in *pending* mode: credentials are generated, `user_id.txt` = `PENDING`, exit 0. **The calls to it in `setup-shell` / `cleanup-shell` are commented out** until then. |
 | `list_tenants.py` | Read-only listing of key / name / active / suspended. Good first check of the API key. |
 
 ## No login / 2FA needed — use an API key
@@ -50,6 +51,10 @@ deactivated the key is revoked, and it can be revoked from the same tab at any t
 | `AXUR_CTI_ENABLED` | `true` | `true` activates the CTI & EASM workspace and **consumes credits** |
 | `AXUR_BILLING_COUNTRY` | `ES` (Spain) | ISO 3166-1 alpha-2 |
 | `AXUR_BASE_URL` | `https://api.axur.com/gateway/1.0` | Override for testing |
+| `USER_DOMAIN` | `infoblox.lab` | `user_provision.py`: login email = `<participant id>@<USER_DOMAIN>` |
+| `AXUR_USER_PERMISSION` | `MANAGER` | `user_provision.py`: permission level requested for the participant |
+| `AXUR_USER_CREATE_PATH` | `/api/customers-api/customer/{key}/user` | `user_provision.py`: **to be confirmed by Axur**; `{key}` = tenant key |
+| `AXUR_USER_DELETE_PATH` | `/api/customers-api/customer/{key}/user/{user_id}` | `user_provision.py`: **to be confirmed by Axur** |
 
 ## Run
 

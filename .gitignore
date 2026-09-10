@@ -6,3 +6,7 @@ tenant_key.txt
 tenant_name.txt
 .env
 axur-support-email.md
+user_email.txt
+user_password.txt
+user_id.txt
+user_credentials.sh

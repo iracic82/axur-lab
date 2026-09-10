@@ -44,4 +44,24 @@ python3 create_tenant.py
 agent variable set AXUR_TENANT_KEY -- "$(cat tenant_key.txt)"
 agent variable set AXUR_TENANT_NAME -- "$(cat tenant_name.txt)"
 
+# ==============================================================================
+# DISABLED UNTIL AXUR PROVIDES THE USER API — uncomment this block (and the matching
+# block in cleanup-shell) once the endpoint is confirmed and set AXUR_USER_CREATE_PATH /
+# AXUR_USER_DELETE_PATH in user_provision.py or /root/lab/axur.env accordingly.
+# ==============================================================================
+# # --- Provision the participant user on the tenant ---
+# echo "=== Provisioning Axur user ==="
+# python3 user_provision.py
+# sleep 10
+#
+# # Expose the credentials to interactive shells, cleanup and the assignment (password kept out of xtrace)
+# set +x
+# echo "export AXUR_USER_EMAIL='$(cat /root/lab/axur-lab/user_email.txt)'" >> /root/lab/axur.env
+# echo "export AXUR_USER_PASSWORD='$(cat /root/lab/axur-lab/user_password.txt)'" >> /root/lab/axur.env
+# source /root/lab/axur.env
+# agent variable set AXUR_USER_EMAIL -- "${AXUR_USER_EMAIL}"
+# agent variable set AXUR_USER_PASSWORD -- "${AXUR_USER_PASSWORD}"
+# set -x
+# ==============================================================================
+
 echo "=== Setup complete: Axur tenant $(cat tenant_key.txt) ==="
