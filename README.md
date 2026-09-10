@@ -8,6 +8,7 @@ Same pattern as the Infoblox CSP `sandbox_api.py` / `create_sandbox.py` / `delet
 | `create_tenant.py` | Creates a tenant named after `INSTRUQT_SANDBOX_ID`, retries transient errors, writes `tenant_key.txt` |
 | `delete_tenant.py` | Reads `tenant_key.txt` (or takes a key argument), **suspends** the tenant, removes the file |
 | `resume_tenant.py` | `python3 resume_tenant.py <KEY>` re-activates a suspended tenant |
+| `preload_tenant.py` + `tenant_preload.yml` | Per-tenant preload/config driver run by the **challenge-2 setup script**. Declarative YAML: `credit_limit`, `assets`, `safelist`, and a raw `requests` escape hatch; idempotent; `--dry-run` and `--undo`. The YAML is empty until Axur specifies what each lab tenant needs. |
 | `user_provision.py` | **Placeholder.** Creates the participant user on the tenant (`--delete` removes it); writes `user_email.txt`, `user_password.txt`, `user_id.txt`, `user_credentials.sh`. Until Axur publishes the user endpoint it runs in *pending* mode: credentials are generated, `user_id.txt` = `PENDING`, exit 0. **The calls to it in `setup-shell` / `cleanup-shell` are commented out** until then. |
 | `list_tenants.py` | Read-only listing of key / name / active / suspended. Good first check of the API key. |
 
@@ -84,6 +85,11 @@ The track is pulled into `axur-lab/` (`instruqt track pull axur-lab`). What was 
   are exported as agent variables `AXUR_TENANT_KEY` / `AXUR_TENANT_NAME`.
 - `track_scripts/cleanup-shell` sources `axur.env` and runs `delete_tenant.py` (= suspend), using
   `tenant_key.txt` from setup or a lookup by name if that file is gone.
+
+- `02-labguide/setup-shell` (challenge-2 setup) does `git pull` in `/root/lab/axur-lab` and runs
+  `preload_tenant.py`, which applies `tenant_preload.yml` to the sandbox's tenant. The same partner API key
+  is used for every tenant (per-tenant endpoints take the `customerKey`); no per-tenant keys exist.
+  Because of the `git pull`, changing what is preloaded is a commit + push of the YAML — no track push.
 
 Workflow:
 

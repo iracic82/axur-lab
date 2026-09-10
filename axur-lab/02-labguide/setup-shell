@@ -1,0 +1,20 @@
+#!/bin/bash
+# Challenge 2 (Lab Guide) setup: preload / configure this sandbox's Axur tenant.
+# What gets preloaded is declared in tenant_preload.yml in the repo (empty placeholder until Axur
+# specifies it). Idempotent, so restarting the challenge is safe.
+set -euxo pipefail
+
+echo "=== Axur Lab - Challenge 2 setup: preload tenant configuration ==="
+
+set +x
+source /root/lab/axur.env
+set -x
+
+cd /root/lab/axur-lab || { echo "ERROR: /root/lab/axur-lab missing (track setup did not run?)"; exit 1; }
+
+# Pick up the latest preload spec without a track push
+git pull -q --ff-only || echo "WARNING: git pull failed, using the cloned version"
+
+python3 preload_tenant.py
+
+echo "=== Challenge 2 setup complete ==="

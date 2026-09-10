@@ -1,0 +1,50 @@
+# Per-tenant preload for the Axur Instruqt lab — executed by preload_tenant.py from the
+# challenge-2 setup script for EVERY sandbox tenant. Idempotent: safe to re-run.
+#
+# Placeholders usable in any string: {key} = tenant key (e.g. OSMR), {name} = tenant name (sandbox id).
+# All sections are optional. Everything below is EMPTY on purpose until Axur tells us what to preload;
+# uncomment / fill in the examples as needed.
+
+# ---- Credit limit: unlimited | number | by-product map ----------------------------------------------
+# credit_limit: unlimited
+# credit_limit: 500
+# credit_limit:
+#   BRAND_PROTECTION: 200
+#   DATA_LEAKAGE: 100
+#   TAKEDOWN: 10          # products not listed default to UNLIMITED
+
+# ---- Assets: POST /assets-api/customers/{key}/asset (types: BRAND, DOMAIN, VIP, THIRD_PARTY_PAGE, APP,
+#      TRACKING_TOKEN, BIN, IP). Matched on type+name, so existing ones are skipped. --------------------
+assets: []
+# assets:
+#   - type: BRAND
+#     name: "{name}"
+#     monitoring: [phishing, malware, fake-social-media-profile, similar-domain-name]
+#     properties:
+#       officialWebsite: https://www.infoblox.com
+#       brandSize: enterprise
+#       nameVariations: ["infoblox"]
+#       primaryLocale: ["US:en"]
+#   - type: DOMAIN
+#     name: infoblox.com
+#     monitoring: ["credentials:employee", "credentials:user", "code-secret-leak", "mentions"]
+
+# ---- Safelist: POST /touchpoints/items (group: self | partner | email | other) ----------------------
+safelist: []
+# safelist:
+#   - group: self
+#     items: ["infoblox.com", "*.infoblox.com"]
+
+# ---- Raw requests: anything else Axur asks for (automations, tickets, ...). {key}/{name} substituted.
+requests: []
+# requests:
+#   - method: POST
+#     path: /api/automations-api/automation
+#     json:
+#       customer: "{key}"
+#       name: "Auto-discard test traffic"
+#       matchType: TICKET_DETECTION
+#       priority: 1
+#       conditions: [{field: "metadata.parser.format", comparator: EQUAL, values: ["test"]}]
+#       actions: [{type: DISCARD}]
+#     ok: [200, 201, 409]

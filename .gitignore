@@ -10,3 +10,4 @@ user_email.txt
 user_password.txt
 user_id.txt
 user_credentials.sh
+preload_state.json
