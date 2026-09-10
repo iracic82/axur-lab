@@ -102,6 +102,81 @@ cd axur-lab && instruqt track validate && instruqt track push
 One-time in Instruqt: create the team secret **AXUR_TOKEN** (your Axur API key) — the track only declares it.
 Setup is idempotent: if a tenant with the sandbox's name already exists it is resumed and reused.
 
+## How to preload configuration into each lab tenant
+
+Every sandbox gets its own empty Axur tenant. Whatever each tenant must contain for the lab is applied by
+the **challenge-2 setup script**, which pulls this repo and runs two things in order:
+
+1. `tenant_preload.yml` via `preload_tenant.py` — declarative, for plain API calls.
+2. `preload.d/*` — scripts, for anything that needs logic.
+
+Both target the sandbox's tenant automatically (`tenant_key.txt`, written at track setup) with the partner
+API key. Deploying a change is `git commit && git push`; the next sandbox picks it up. No track push.
+
+### 1. Declarative: edit `tenant_preload.yml`
+
+| Section | What it does | Endpoint |
+|---|---|---|
+| `credit_limit` | `unlimited`, a number, or a per-product map | `PATCH /credit-management-api/customers/{key}/limit/...` |
+| `assets` | list of asset payloads; skipped if an asset with the same type+name exists | `POST /assets-api/customers/{key}/asset` |
+| `safelist` | `{group, items[]}` entries | `POST /touchpoints/items` |
+| `requests` | raw `{method, path, json, params, ok}` for anything else (automations, tickets, ...) | any |
+
+`{key}` and `{name}` inside any string become the tenant key and the tenant name (= sandbox id).
+The file ships with commented examples for each section; uncomment and adapt.
+
+Example — one brand asset and a credit cap per tenant:
+
+```yaml
+credit_limit: 500
+assets:
+  - type: BRAND
+    name: "{name}"
+    monitoring: [phishing, malware, fake-social-media-profile, similar-domain-name]
+    properties:
+      officialWebsite: https://www.infoblox.com
+      nameVariations: ["infoblox"]
+      primaryLocale: ["US:en"]
+```
+
+Asset types and required properties are in the Axur spec (`openapi-axur.yaml`, `POST /assets-api/customers/{customerKey}/asset`):
+BRAND needs `nameVariations`, `primaryLocale` and `officialWebsite` (or logos); DOMAIN needs only `name`.
+
+### 2. Scripts: add a file to `preload.d/`
+
+For steps that need conditions, lookups or several calls, add `NN-name.py` or `NN-name.sh` (run in name
+order after the YAML). Start from `preload.d/00-report.py`. Rules in `preload.d/README.md`: read the tenant
+from `tenant_key.txt`, be idempotent (treat 409 as "already there"), exit 0 unless the lab cannot continue.
+
+### 3. Test before you push
+
+```bash
+# what would be sent, no calls made
+python3 preload_tenant.py --key PRLD --dry-run
+
+# apply for real to a throwaway tenant, run twice (second run must skip everything), then undo
+python3 preload_tenant.py --key PRLD
+python3 preload_tenant.py --key PRLD
+python3 preload_tenant.py --key PRLD --undo          # deactivates created assets, limit -> unlimited
+
+# a preload.d script on its own (repo root, tenant files present)
+echo PRLD > tenant_key.txt && python3 preload.d/00-report.py
+```
+
+`PRLD` (`preload-test`) is a suspended throwaway tenant kept for this; `python3 resume_tenant.py PRLD` if a
+test needs it active. To rehearse the whole challenge-2 script, `instruqt track test axur-lab` runs a real
+sandbox (creates and then suspends a tenant named after the test participant id).
+
+### 4. Deploy and verify
+
+```bash
+git add tenant_preload.yml preload.d && git commit -m "preload: ..." && git push
+```
+
+Start a sandbox and open the challenge-2 setup log in Instruqt: `preload_tenant.py` prints every step it
+applied or skipped, and `00-report.py` prints the tenant's credit limit, assets and enabled monitoring at
+the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI (it tails; Ctrl-C to stop).
+
 ## Endpoints used (all documented, all under `https://api.axur.com/gateway/1.0/api`)
 
 | Call | Path | Notes |
