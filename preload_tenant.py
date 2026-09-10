@@ -142,7 +142,8 @@ def step_assets(api, key, assets, state):
     have = {(a.get("type"), a.get("name")) for a in existing_assets(api, key) if a.get("status") != "INACTIVE"}
     created = state.setdefault("assets", [])
     for asset in assets:
-        ident = (asset.get("type"), asset.get("name"))
+        # TRACKING_TOKEN has no name (backend generates it); identify it by its tokenName property
+        ident = (asset.get("type"), asset.get("name") or (asset.get("properties") or {}).get("tokenName"))
         if ident in have:
             log(f"🏷️  asset {ident[0]} '{ident[1]}' already exists — skip")
             continue
