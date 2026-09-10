@@ -54,16 +54,19 @@ Switch to the **Axur Portal** tab and log in using the credentials below:
 
 ***
 
-
-
-## Scope and delivery model
+## Step 2: Scope and delivery model
 ===
+
+____
 
 This lab is focused on analysis and navigation rather than setup. Participants will not create new monitored assets or build monitoring from scratch. Instead, they will work with preconfigured demo data to understand how to investigate threats, interpret findings, and explain response options.
 
+***
 
-## Lab outcomes
+## Step 3: Lab outcomes
 ===
+
+____
 
 By the end of the lab, participants should be able to:
 	• Navigate the Axur interface confidently across assets, monitoring brand protection, data leakage, executive protection, deep and dark web, threat hunting and CTI workflows
@@ -72,25 +75,25 @@ By the end of the lab, participants should be able to:
 	• Review ticket states and analyze possible response actions such as safelisting, escalation, quarantine, and closure
 	• Demonstrate how Axur supports external threat disruption and monitoring through automation and takedown-oriented workflows
 
+***
 
-
-## Suggested audience
+## Step 4: Suggested audience
 ===
+
+____
 
 - Sales engineers
 - Security specialists
 - Partners
 - Customers in guided workshop settings
 
+***
 
-
-## Prerequisites
+## Step 5: Prerequisites
 ===
+
+____
 
 - Access to the Axur demo environment
 - Browser access
 - Preloaded tenant data with monitored assets already configured
-
-
-
-
