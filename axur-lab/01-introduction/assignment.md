@@ -30,14 +30,13 @@ enhanced_loading: null
 
 Enable participants to analyze how Axur can help mitigate external threats against their environment by navigating existing monitored data, using search and filtering capabilities, and interpreting tickets, incidents, and exposure findings already present in the demo tenant.
 
-***
+
 
 ## Scope and delivery model
 ===
 
 This lab is focused on analysis and navigation rather than setup. Participants will not create new monitored assets or build monitoring from scratch. Instead, they will work with preconfigured demo data to understand how to investigate threats, interpret findings, and explain response options.
 
-***
 
 ## Lab outcomes
 ===
@@ -49,7 +48,7 @@ By the end of the lab, participants should be able to:
 	• Review ticket states and analyze possible response actions such as safelisting, escalation, quarantine, and closure
 	• Demonstrate how Axur supports external threat disruption and monitoring through automation and takedown-oriented workflows
 
-	***
+
 
 ## Suggested audience
 ===
@@ -59,7 +58,7 @@ By the end of the lab, participants should be able to:
 - Partners
 - Customers in guided workshop settings
 
-***
+
 
 ## Prerequisites
 ===
