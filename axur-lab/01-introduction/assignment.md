@@ -30,6 +30,35 @@ enhanced_loading: null
 
 Enable participants to analyze how Axur can help mitigate external threats against their environment by navigating existing monitored data, using search and filtering capabilities, and interpreting tickets, incidents, and exposure findings already present in the demo tenant.
 
+## Step 1: Log in to the Axur Portal
+===
+
+____
+
+Switch to the **Axur Portal** tab and log in using the credentials below:
+
+**Your Tenant Name:**
+```
+[[ Instruqt-Var key="AXUR_TENANT_NAME" hostname="shell" ]]
+```
+
+**Your Tenant Key:**
+```
+[[ Instruqt-Var key="AXUR_TENANT_KEY" hostname="shell" ]]
+```
+
+**Your Login Username:**
+```
+[[ Instruqt-Var key="AXUR_USER_EMAIL" hostname="shell" ]]
+```
+
+**Your Login Password:**
+```
+[[ Instruqt-Var key="AXUR_USER_PASSWORD" hostname="shell" ]]
+```
+
+***
+
 
 
 ## Scope and delivery model
