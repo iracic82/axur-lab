@@ -19,7 +19,8 @@ Minimal template:
 
 ```python
 #!/usr/bin/env python3
-import os, requests
+import os, sys, requests
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # repo root on the path
 from axur_api import AxurTenantAPI          # loads .env for local runs
 
 key = open("tenant_key.txt").read().strip()

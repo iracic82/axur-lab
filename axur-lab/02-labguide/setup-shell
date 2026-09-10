@@ -21,9 +21,11 @@ echo "=== 1/2 declarative preload (tenant_preload.yml) ==="
 python3 preload_tenant.py
 
 echo "=== 2/2 extra preload scripts (preload.d/) ==="
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"   # so preload.d scripts can `from axur_api import ...`
 if [ -d preload.d ]; then
-  for script in $(ls preload.d/* 2>/dev/null | sort); do
-    case "$script" in *.md|*README*) continue ;; esac
+  for script in preload.d/*; do                       # glob is already sorted by name
+    [ -f "$script" ] || continue                       # skip directories such as __pycache__
+    case "$script" in *.md|*README*|*.pyc) continue ;; esac
     echo "--- running $script ---"
     case "$script" in
       *.py) python3 "$script" ;;

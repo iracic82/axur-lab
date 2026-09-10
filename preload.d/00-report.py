@@ -7,7 +7,9 @@ preload is easy to diagnose. Also the template for further preload.d scripts.
 import os
 import sys
 import requests
-from axur_api import AxurTenantAPI  # loads .env for local runs
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repo root -> axur_api importable
+from axur_api import AxurTenantAPI  # noqa: E402  (loads .env for local runs)
 
 key = open("tenant_key.txt").read().strip()
 name = open("tenant_name.txt").read().strip() if os.path.exists("tenant_name.txt") else key
