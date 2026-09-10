@@ -2,19 +2,19 @@
 # challenge-2 setup script for EVERY sandbox tenant. Idempotent: safe to re-run.
 #
 # Placeholders usable in any string: {key} = tenant key (e.g. OSMR), {name} = tenant name (sandbox id).
-# All sections are optional. Everything below is EMPTY on purpose until Axur tells us what to preload;
-# uncomment / fill in the examples as needed.
+# All sections are optional. Everything below is EMPTY on purpose until Axur tells us what to preload.
+#
+# >>> Full catalogue of ready-to-use examples (every asset type, safelist, automation, ticket, EASM seed):
+# >>>     examples/tenant_preload.example.yml
+# >>> Copy entries from there into the sections below, then test with
+# >>>     python3 preload_tenant.py --key PRLD --dry-run
 
 # ---- Credit limit: unlimited | number | by-product map ----------------------------------------------
 # credit_limit: unlimited
 # credit_limit: 500
-# credit_limit:
-#   BRAND_PROTECTION: 200
-#   DATA_LEAKAGE: 100
-#   TAKEDOWN: 10          # products not listed default to UNLIMITED
+# credit_limit: {BRAND_PROTECTION: 200, DATA_LEAKAGE: 100, TAKEDOWN: 10}   # unlisted products = UNLIMITED
 
-# ---- Assets: POST /assets-api/customers/{key}/asset (types: BRAND, DOMAIN, VIP, THIRD_PARTY_PAGE, APP,
-#      TRACKING_TOKEN, BIN, IP). Matched on type+name, so existing ones are skipped. --------------------
+# ---- Assets: POST /assets-api/customers/{key}/asset. Matched on type+name (existing ones skipped). ----
 assets: []
 # assets:
 #   - type: BRAND
@@ -22,12 +22,21 @@ assets: []
 #     monitoring: [phishing, malware, fake-social-media-profile, similar-domain-name]
 #     properties:
 #       officialWebsite: https://www.infoblox.com
-#       brandSize: enterprise
 #       nameVariations: ["infoblox"]
 #       primaryLocale: ["US:en"]
 #   - type: DOMAIN
 #     name: infoblox.com
 #     monitoring: ["credentials:employee", "credentials:user", "code-secret-leak", "mentions"]
+#   - type: VIP
+#     name: "Jane Doe"
+#     monitoring: []
+#   - type: APP
+#     name: com.infoblox.app
+#     monitoring: ["credentials:user"]
+#   - type: BIN
+#     name: "123456"
+#     monitoring: ["credit-card-exposure"]
+#     properties: {incompleteCreditCardEnabled: true}
 
 # ---- Safelist: POST /touchpoints/items (group: self | partner | email | other) ----------------------
 safelist: []
@@ -35,16 +44,16 @@ safelist: []
 #   - group: self
 #     items: ["infoblox.com", "*.infoblox.com"]
 
-# ---- Raw requests: anything else Axur asks for (automations, tickets, ...). {key}/{name} substituted.
+# ---- Raw requests: automations, tickets, EASM seeds, ... ({key}/{name} substituted) -----------------
 requests: []
 # requests:
 #   - method: POST
 #     path: /api/automations-api/automation
 #     json:
 #       customer: "{key}"
-#       name: "Auto-discard test traffic"
-#       matchType: TICKET_DETECTION
+#       name: "Tag stealer-log credentials"
+#       matchType: CREDENTIAL
 #       priority: 1
-#       conditions: [{field: "metadata.parser.format", comparator: EQUAL, values: ["test"]}]
-#       actions: [{type: DISCARD}]
+#       conditions: [{field: metadata.parser.format, comparator: EQUAL, values: ["STEALER LOG"]}]
+#       actions: [{actionType: TAG, arguments: {tags: ["high-risk"]}}]
 #     ok: [200, 201, 409]

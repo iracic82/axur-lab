@@ -142,6 +142,13 @@ assets:
 Asset types and required properties are in the Axur spec (`openapi-axur.yaml`, `POST /assets-api/customers/{customerKey}/asset`):
 BRAND needs `nameVariations`, `primaryLocale` and `officialWebsite` (or logos); DOMAIN needs only `name`.
 
+**Catalogue:** `examples/tenant_preload.example.yml` is a complete, dry-runnable file with one entry per asset
+type (BRAND incl. takedown capability, DOMAIN, VIP, APP, THIRD_PARTY_PAGE, IP, BIN, TRACKING_TOKEN), per-product
+credit limits, safelist groups, an automation, a manual ticket and an EASM discovery seed. Copy from it.
+What was live-verified on tenant PRLD (2026-09-10): BRAND, DOMAIN, VIP, APP, BIN assets and the safelist call.
+Two API rules learned there: a THIRD_PARTY_PAGE name must be a bare domain (paths are rejected), and
+`cti:infrastructure` monitoring (IP / DOMAIN) is only accepted on tenants created with `ctiEnabled: true`.
+
 ### 2. Scripts: add a file to `preload.d/`
 
 For steps that need conditions, lookups or several calls, add `NN-name.py` or `NN-name.sh` (run in name

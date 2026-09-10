@@ -1,0 +1,144 @@
+# Complete, runnable catalogue of preload examples (from the Axur API spec v1.0.81, live-checked 2026-09-10).
+# Copy what you need into tenant_preload.yml. Placeholders: {key} = tenant key, {name} = tenant name.
+# Dry-run the whole file:   python3 preload_tenant.py --key PRLD --config examples/tenant_preload.example.yml --dry-run
+
+# ---------------------------------------------------------------- credits
+# unlimited | a number | per-product map (products not listed default to UNLIMITED)
+credit_limit:
+  BRAND_PROTECTION: 200
+  DEEP_AND_DARK_WEB: 100
+  DATA_LEAKAGE: 100
+  EXECUTIVES_AND_VIPS: 50
+  TAKEDOWN: 10
+  THREAT_HUNTING: 50
+  ONLINE_PIRACY: 50
+  ART_HOURS: 5
+
+# ---------------------------------------------------------------- assets (one per type)
+# Matched on type+name, so re-runs skip existing ones. Monitoring ids per type and required properties
+# come from POST /assets-api/customers/{customerKey}/asset in the spec.
+assets:
+  # BRAND — needs nameVariations + primaryLocale + officialWebsite (or logos). Live-verified.
+  - type: BRAND
+    name: "{name}"
+    monitoring: [phishing, malware, paid-search, fraudulent-brand-use, fake-social-media-profile,
+                 fake-mobile-app, similar-domain-name, unauthorized-distribution, unauthorized-sale,
+                 dw-activity, other-sensitive-data]
+    properties:
+      officialWebsite: https://www.infoblox.com
+      brandSize: enterprise            # enterprise | ...
+      nameVariations: ["infoblox", "info blox"]
+      primaryLocale: ["US:en"]
+      additionalLocale: ["ES:es"]
+      # tins: ["12345678000190"]       # tax ids, optional
+      # appIdsGooglePlay: ["com.infoblox.app"]
+
+  # BRAND with takedown capability enabled at creation (spec example; needs real registration data)
+  # - type: BRAND
+  #   name: "{name} (takedown)"
+  #   monitoring: [phishing, malware]
+  #   properties: {officialWebsite: https://www.infoblox.com, nameVariations: ["infoblox"], primaryLocale: ["US:en"]}
+  #   capabilities:
+  #     takedown:
+  #       enabled: true
+  #       properties:
+  #         country: US
+  #         corporateName: "Infoblox Inc."
+  #         registrationNumber: "900000000"
+  #         registrationOffice: USPTO
+  #         registrationCategory: "42"
+  #         # or, without a trademark registration:
+  #         # noBrandRegistration: true
+  #         # legalExistenceDetails: "Company incorporated in 1999, no trademark registration filed."
+
+  # DOMAIN — credentials / code / mentions / CTI monitoring. Live-verified (credentials:employee, mentions).
+  - type: DOMAIN
+    name: infoblox.com
+    monitoring: ["credentials:user", "credentials:employee", "code-secret-leak", "mentions", "cti:infrastructure"]
+    # properties:
+    #   employeeCredentialUniquenessCriteria: EMAIL
+    #   userCredentialUniquenessCriteria: EMAIL
+
+  # VIP (executive protection). Live-verified.
+  - type: VIP
+    name: "Jane Doe"
+    monitoring: []                      # executive monitoring is configured on the VIP in the UI / properties
+
+  # APP — mobile app id, user-credential monitoring. Live-verified.
+  - type: APP
+    name: com.infoblox.app
+    monitoring: ["credentials:user"]
+
+  # THIRD_PARTY_PAGE — must be a bare domain, NOT a URL path (facebook.com/x is rejected: asset.name.invalid).
+  - type: THIRD_PARTY_PAGE
+    name: partner-portal.example.net
+    monitoring: ["credentials:employee"]
+
+  # IP — cti:infrastructure only works on tenants created with ctiEnabled=true (lab tenants are).
+  - type: IP
+    name: 203.0.113.10
+    monitoring: ["cti:infrastructure"]
+
+  # BIN — first 6 digits of a card range, credit-card exposure. Live-verified.
+  - type: BIN
+    name: "123456"
+    monitoring: ["credit-card-exposure"]
+    properties:
+      incompleteCreditCardEnabled: true
+
+  # TRACKING_TOKEN — no name (backend generates it), needs tokenName.
+  - type: TRACKING_TOKEN
+    monitoring: ["database-exposure"]
+    properties:
+      tokenName: MAIL
+
+# ---------------------------------------------------------------- safelist (POST /touchpoints/items). Live-verified.
+# group: self | partner | email | other
+safelist:
+  - group: self
+    items: ["infoblox.com", "*.infoblox.com", "csp.infoblox.com"]
+  - group: partner
+    items: ["axur.com"]
+
+# ---------------------------------------------------------------- raw requests (anything else)
+# Each entry: method, path (under /gateway/1.0), optional json / params, optional ok: [accepted status codes].
+requests:
+  # Automation (POST /automations-api/automation, Managers): tag credential leaks from stealer logs
+  - method: POST
+    path: /api/automations-api/automation
+    json:
+      customer: "{key}"
+      name: "Tag stealer-log credentials"
+      description: "Preloaded by the lab"
+      matchType: CREDENTIAL
+      priority: 1
+      conditions:
+        - field: metadata.parser.format
+          comparator: EQUAL            # EQUAL | NOT_EQUAL | CONTAINS | NOT_CONTAINS | GREATER_THAN | LESS_THAN | ...
+          values: ["STEALER LOG", "COMBOLIST"]
+      actions:
+        - actionType: TAG
+          arguments: {tags: ["high-risk", "credential-leak"]}
+    ok: [200, 201, 409]
+
+  # Manual ticket (POST /tickets-api/tickets): reference must fit the type (a URL for phishing), assets = asset keys
+  # of this tenant. Asset keys are generated (tenant key + 4 letters of the name), so look them up in a preload.d
+  # script if you need this — see preload.d/README.md.
+  # - method: POST
+  #   path: /api/tickets-api/tickets
+  #   json:
+  #     customer: "{key}"
+  #     type: phishing                 # code-secret-leak | fake-mobile-app | fake-social-media-profile |
+  #     reference: "https://login-infoblox-verify.example/"   # fraudulent-brand-use | malware | paid-search | ...
+  #     assets: [{assetKey: "{key}INFO"}]
+  #   ok: [200, 201, 409]
+
+  # EASM discovery seed (POST /easm/seeds?axur_tenant_key=…): starting points for attack-surface discovery
+  # (domains, IPs, CIDRs, ASNs). Body shape from the spec; adjust after a first dry run against a real tenant.
+  # - method: POST
+  #   path: /api/easm/seeds
+  #   params: {axur_tenant_key: "{key}"}
+  #   json:
+  #     seeds: [{value: "infoblox.com", type: DOMAIN}]
+  #     description: "Preloaded by the lab"
+  #   ok: [200, 201, 409]
