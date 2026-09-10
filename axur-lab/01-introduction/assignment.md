@@ -42,11 +42,6 @@ Switch to the **Axur Portal** tab and log in using the credentials below:
 [[ Instruqt-Var key="AXUR_TENANT_NAME" hostname="shell" ]]
 ```
 
-**Your Tenant Key:**
-```
-[[ Instruqt-Var key="AXUR_TENANT_KEY" hostname="shell" ]]
-```
-
 **Your Login Username:**
 ```
 [[ Instruqt-Var key="AXUR_USER_EMAIL" hostname="shell" ]]
