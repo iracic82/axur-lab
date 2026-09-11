@@ -49,7 +49,7 @@ While this page was loading, a few things happened on your behalf:
 ____
 
 Switch to the **Axur Portal** tab and log in using the credentials below. This is your tenant and your
-login; whatever you do here stays in your sandbox.
+login. Whatever you do here stays in your sandbox.
 
 **Your Tenant Name:**
 ```

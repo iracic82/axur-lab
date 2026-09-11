@@ -187,7 +187,7 @@ Explore Axure Deep and Dark Web option and how it sources brand mentions, leaked
 **Steps**
 1. Navigate to Workspace > Deep and Dark Web
 2. Open the Explore page
-3. Add a search filter - netflix AND (hack OR premium)
+3. Add the search filter `netflix AND (hack OR premium)`
 ![Jul-13-2026_at_15.16.53-image.png](../assets/Jul-13-2026_at_15.16.53-image.png)
 4. Select one of the filtered message
 5. Review the findings and identify what makes a result relevant or irrelevant
@@ -201,7 +201,7 @@ Explore how Axur monitors executives and VIPs for impersonation, targeted threat
 ### Monitoring Impersonations
 **Steps**
 1. Navigate to Workspace > Executives & VIPs
-2. Filter by Asset - Patrick Mahomes and Ticket Type - Personal Information leak
+2. Set the Asset filter to Patrick Mahomes and the Ticket Type filter to Personal Information leak
 ![Screenshot 2026-08-14 at 12.36.06 PM.png](../assets/Screenshot%202026-08-14%20at%2012.36.06%E2%80%AFPM.png)
 3. Open and review one of the open tickets tied to the executive
 ![Screenshot 2026-08-14 at 12.39.01 PM.png](../assets/Screenshot%202026-08-14%20at%2012.39.01%E2%80%AFPM.png)
