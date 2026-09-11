@@ -236,8 +236,29 @@ Reading the data back: `GET /api/tickets-api/tickets?assets=<assetKey>&pageSize=
 filter is rejected; types and AI predictions are under `detection.*`), `GET /api/exposure-api/credentials?customer=<key>`
 and `/credentials/total`.
 
+## Validating what participants do (challenge checks)
+
+Instruqt's **Check** button runs `axur-lab/02-labguide/check-shell` on the `shell` host, which calls
+`check_progress.py --sample-decision`: it reads the tenant back from the Axur API and passes only when the seeded
+"Netflix Golden" ticket has left Potential threats (`current.status` no longer `open`, i.e. Quarantine, Incident or
+Closed/Discarded). Skipping runs `solve-shell`, which writes `/root/lab/challenge2.solved` because Axur has no API
+to move a ticket on a participant's behalf; the check honours that marker.
+
+What the API can verify, for future checks: ticket tab changes (`current.status` = open / quarantine / incident /
+treatment / closed, filterable on `GET /tickets-api/tickets`), ticket history (`GET /tickets-api/ticket-history/{key}`),
+takedown requests, safelist items, EASM seeds, manually created tickets, asset changes. **Not verifiable** (UI only,
+no API): keyword libraries, filtering rules, search bots, CTI monitoring rules, executive profile details.
+
+**Terminal tab: not on the `shell` host.** That container holds `/root/lab/axur.env` with the partner API key, which
+can create and suspend every tenant. Lifecycle and check scripts run there without any tab. If participants ever
+need a terminal, add a separate container without the secret.
+
 ## Open items with Axur
 
+0. **Executive with findings.** The Executives & VIPs chapter can only show findings on Axur's demo executive. Via the
+   API a VIP asset accepts only `monitoring: [executives]`, no properties (`NAME_VARIATIONS` is rejected for VIP), and
+   manual `executive-*` tickets are refused (`invalid ticket operation`). Ask: property keys or an endpoint to set an
+   executive's name variations and photo, or a demo executive with seeded findings that can be attached per tenant.
 1. **User-delete endpoint.** Cleanup leaves each participant's user attached to its suspended tenant. The
    script already has the slot: set `AXUR_USER_DELETE_PATH` (placeholders `{key}`, `{user_id}`) when they
    provide the path; `cleanup-shell` already calls `user_provision.py --delete`.

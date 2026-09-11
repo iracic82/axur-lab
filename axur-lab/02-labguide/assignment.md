@@ -166,7 +166,9 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 
 **Your call**
 
-- Quarantine it, escalate it as an incident, discard it as a false positive, or send it for takedown once authorization is confirmed
+- Quarantine it, escalate it as an incident, or discard it as a false positive. This is the one decision the
+  lab checks: when you press **Check**, the lab reads your tenant back from the Axur API and confirms the
+  sample ticket has left Potential threats. Takedown is not offered on this sample, and please leave it that way
 
 #### An incident of fraudulent brand use
 
@@ -322,9 +324,12 @@ thousand users: a fake profile in their name, a leaked document number, a passwo
 and fake profiles, using facial recognition to spot image abuse across the major social platforms. Executive
 data is stored encrypted, and each detection comes with recommended next steps.
 
-Your tenant has one executive registered, **Alex Rivera**, so you can see how an executive is set up. Findings
-only start once an executive's name variations and photo are on file, which is done in the portal, so the
-tickets below come from Axur's demo executive, Patrick Mahomes, where that tenant is available to you.
+Your tenant has one executive registered, **Alex Rivera**. Open the asset under Monitoring Settings > Assets >
+Executives and look at what protecting a person takes: the full name and its variations, name similarity
+inspection for social profiles, a face photo for facial recognition, and the emails, phone numbers and
+documents whose leaks should raise a ticket. Findings begin once that profile is complete, which is done in
+the portal, so Alex has none yet. To see what executive findings look like, use Axur's demo executive,
+Patrick Mahomes, in the demo tenant where it is available to you.
 
 **Steps**
 

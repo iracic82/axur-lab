@@ -1,0 +1,18 @@
+#!/bin/bash
+# Challenge 2 check: did the participant make the one decision this lab verifies?
+# The seeded "Netflix Golden" fake-profile ticket must have left Potential threats (Quarantine, Incident or
+# Discarded). Verified by reading the tenant back from the Axur API. A skipped challenge (solve-shell) leaves a
+# marker file, because there is no API to move a ticket on the participant's behalf.
+set -euo pipefail
+set +x; source /root/lab/axur.env 2>/dev/null || true; set -x
+cd /root/lab/axur-lab
+
+if [ -f /root/lab/challenge2.solved ]; then
+    echo "challenge marked as solved (skipped)"; exit 0
+fi
+
+if python3 check_progress.py --sample-decision; then
+    exit 0
+fi
+fail-message "Open Workspaces > Brand Protection, filter Ticket Type = Fake social media profile, open the Netflix Golden sample ticket and make your call: send it to Quarantine, escalate it as an Incident, or discard it. Then check again (Axur needs a few seconds to reflect the change)."
+exit 1
