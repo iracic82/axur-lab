@@ -36,10 +36,33 @@ enhanced_loading: null
 Day One on the Desk
 ===
 
-Your badge works, your tenant is live, and three assets have been under watch since before you logged in:
-the **Netflix** brand, the **example.com** domain and the **Microsoft** vendor. What follows is one shift,
+Your badge works, your tenant is live, and four assets have been under watch since before you logged in:
+the **Netflix** brand, the **example.com** domain, the **Microsoft** vendor and the executive **Alex Rivera**.
+What follows is one shift,
 told hour by hour. Each chapter is a situation an analyst meets, what Axur does about it, the clicks to see
 it, and a decision that is yours to make. Nothing you do here can affect anyone else.
+
+***
+
+## Your badge
+
+If the **Axur Portal** tab asks you to sign in again, or you skipped ahead, these are your credentials.
+They are the same ones you picked up on the first page.
+
+**Your Tenant Name:**
+```
+[[ Instruqt-Var key="AXUR_TENANT_NAME" hostname="shell" ]]
+```
+
+**Your Login Username:**
+```
+[[ Instruqt-Var key="AXUR_USER_EMAIL" hostname="shell" ]]
+```
+
+**Your Login Password:**
+```
+[[ Instruqt-Var key="AXUR_USER_PASSWORD" hostname="shell" ]]
+```
 
 ***
 
