@@ -200,6 +200,39 @@ Start a sandbox and open the challenge-1 setup log in Instruqt: `preload_tenant.
 applied or skipped, and `00-report.py` prints the tenant's credit limit, assets and enabled monitoring at
 the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI (it tails; Ctrl-C to stop).
 
+## Open items with Axur
+
+1. **User-delete endpoint.** Cleanup leaves each participant's user attached to its suspended tenant. The
+   script already has the slot: set `AXUR_USER_DELETE_PATH` (placeholders `{key}`, `{user_id}`) when they
+   provide the path; `cleanup-shell` already calls `user_provision.py --delete`.
+2. **Vendor ids for any other vendors** they want in the lab (see below). Microsoft is covered.
+3. **Feedback for them:** the `CUSTOMER_VENDOR` example they sent was incomplete (no `vendorId`), and there is
+   no documented way to look vendor ids up. A small catalogue endpoint or a list in the docs would help.
+
+### The vendor asset, explained
+
+Axur's payload for the Microsoft asset was
+
+```json
+{"type": "CUSTOMER_VENDOR", "name": "Microsoft", "monitoring": ["supply-chain-intel"]}
+```
+
+Sent as-is the API answers `400 asset.missingRequiredProperty` for `VENDOR_ID`. A vendor asset is not free
+text like a brand or a domain: it links to an entry in Axur's own vendor catalogue, so the entry's numeric id
+must be passed as `properties.vendorId`, and the `name` must equal the catalogue name for that id
+(`400 asset.customerVendor.name` otherwise).
+
+The public API has no catalogue search, but that second error is informative: a request with an id and a wrong
+name returns the vendor's real name. Ids 1, 2, 3, ... were probed that way with a dummy name (nothing gets
+created by a rejected request); Microsoft is **30**. The working payload, now in `tenant_preload.yml`:
+
+```json
+{"type": "CUSTOMER_VENDOR", "name": "Microsoft", "monitoring": ["supply-chain-intel"], "properties": {"vendorId": 30}}
+```
+
+The first 50 ids collected during the scan are in `examples/axur_vendor_ids.json` (Infoblox 23, Cisco 8,
+Google 20, Amazon Web Services 3, ...). To find another vendor, probe further ids the same way or ask Axur.
+
 ## Endpoints used (all documented, all under `https://api.axur.com/gateway/1.0/api`)
 
 | Call | Path | Notes |
