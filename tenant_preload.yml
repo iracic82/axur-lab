@@ -32,33 +32,32 @@ assets:
     properties:
       vendorId: 30            # required; Axur vendor-catalogue id, name must match (see examples/axur_vendor_ids.json)
 
+  # Fictional executive for the Executives & VIPs chapter. "executives" is the only monitoring id VIP accepts;
+  # name variations and the face photo are UI-only, so this asset shows the workspace configured, not findings.
+  - type: VIP
+    name: Alex Rivera
+    monitoring: [executives]
+
 # ---- Safelist: POST /touchpoints/items (group: self | partner | email | other) ----------------------
 safelist: []
 
 # ---- Raw requests: automations, tickets, EASM seeds, ... ({key}/{name} substituted) -----------------
-# All entries below were tested live on 2026-09-11 and are OFF until uncommented (see README "Synthetic data").
-requests: []
-# requests:
-#   # EASM: seed the corporate domain so the attack-surface map fills in (discovery runs asynchronously).
-#   - method: POST
-#     path: /api/easm/seeds
-#     params: {axur_tenant_key: "{key}"}
-#     json: {seed_names: ["example.com"], description: "Infoblox Exchange lab"}
-#     ok: [200, 201, 409]
-#   # Curated sample tickets so the guided walkthrough has predictable examples next to the real detections.
-#   # Assets must be given as string asset keys; keys are <tenant key> + first 4 letters of the asset name.
-#   # A repeated reference answers 409, so re-runs are safe. Ask participants NOT to request takedowns on these.
-#   - method: POST
-#     path: /api/tickets-api/tickets
-#     json: {reference: "https://www.facebook.com/netflix.golden.lab.sample", customer: "{key}", type: fake-social-media-profile, assets: ["{key}NETF"]}
-#     ok: [200, 409]
+# Tested live 2026-09-11. Real detections arrive on their own (hundreds of Brand Protection tickets and
+# thousands of credential exposures within minutes), so only what the collectors cannot provide is seeded.
+# ---- EASM seeds: starting points for attack-surface discovery (skipped when already registered) --------
+easm_seeds: ["example.com"]
+
+requests:
+  # One curated sample ticket: the "Netflix Golden" fake profile the Lab Guide walks through. Real detections
+  # are phishing pages and lookalike domains, so without this the fake-profile chapter would have no example.
+  # Assets are string asset keys (<tenant key> + first 4 letters of the asset name). A repeated reference
+  # answers 409, so re-runs are safe. Participants are told not to request takedowns on it.
+  - method: POST
+    path: /api/tickets-api/tickets
+    json: {reference: "https://www.facebook.com/netflix.golden.lab.sample", customer: "{key}", type: fake-social-media-profile, assets: ["{key}NETF"]}
+    ok: [200, 409]
+# Kept for reference (off): a curated phishing ticket. Not needed, the collectors deliver hundreds.
 #   - method: POST
 #     path: /api/tickets-api/tickets
 #     json: {reference: "https://netflix-billing-update.example.net/login", customer: "{key}", type: phishing, assets: ["{key}NETF"]}
 #     ok: [200, 409]
-#   # Executive for the Executives & VIPs chapter (only monitoring id allowed for VIP is "executives");
-#   # name variations and the face photo can only be added in the UI, and a fictional person yields no detections.
-#   - method: POST
-#     path: /api/assets-api/customers/{key}/asset
-#     json: {type: VIP, name: "Alex Rivera", monitoring: [executives]}
-#     ok: [200, 201, 409]

@@ -10,6 +10,7 @@ Same pattern as the Infoblox CSP `sandbox_api.py` / `create_sandbox.py` / `delet
 | `resume_tenant.py` | `python3 resume_tenant.py <KEY>` re-activates a suspended tenant |
 | `preload.d/` | Extra preload scripts (`.py`/`.sh`), run in name order by the challenge-1 setup after the YAML. See `preload.d/README.md`. |
 | `preload_tenant.py` + `tenant_preload.yml` | Per-tenant preload/config driver run by the **challenge-1 setup script**. Declarative YAML: `credit_limit`, `assets`, `safelist`, and a raw `requests` escape hatch; idempotent; `--dry-run` and `--undo`. The YAML holds Axur's lab content (Netflix brand, example.com domain, Microsoft vendor). |
+| `validate_tenant.py` | Pulls the tenant back from the API and checks it against `tenant_preload.yml`: tenant active, every asset ACTIVE with its monitoring, seeded tickets and EASM seeds present (CRITICAL, exit 1), plus INFO on the participant user, real detections, credential exposures, credits and monitoring modules. Runs last in the challenge-1 setup (`--wait 120` polls for the first real detections). |
 | `user_provision.py` | Registers the participant user on the tenant via Axur's event endpoint `POST /api/identity/registration/users/{tenant}` (email `<participant>@USER_DOMAIN`, generated password, `groupKey` manager). Writes `user_email.txt`, `user_password.txt`, `user_id.txt`, `user_credentials.sh`; idempotent on re-run. `--delete` is a no-op until Axur provides a delete endpoint (`AXUR_USER_DELETE_PATH`). Falls back to *pending* mode (exit 0) if the endpoint disappears. |
 | `list_tenants.py` | Read-only listing of key / name / active / suspended. Good first check of the API key. |
 
@@ -212,7 +213,12 @@ the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI 
 | EASM | Empty until a **seed** is added; one API call starts discovery of example.com | needs preload (tested) |
 | Executives & VIPs | Empty. A VIP asset can be created (monitoring id `executives`), but name variations and the face photo are UI-only, and a fictional executive yields no detections | needs a decision |
 
-What the API can seed, all tested live and kept as **commented, ready-to-enable entries** in `tenant_preload.yml`:
+**Enabled in `tenant_preload.yml`** (decision 2026-09-11): the EASM seed for example.com, one curated
+`fake-social-media-profile` ticket ("Netflix Golden") because real detections are only phishing and lookalike
+domains, and the fictional executive **Alex Rivera** as a VIP asset so the Executives workspace is configured.
+A curated phishing ticket is kept commented out; the collectors deliver hundreds on their own.
+
+What the API can seed, all tested live:
 
 - `POST /api/easm/seeds?axur_tenant_key={key}` with `{"seed_names": ["example.com"]}` starts EASM discovery.
 - `POST /api/tickets-api/tickets` creates curated tickets (`phishing`, `fake-social-media-profile`, ...). `assets`

@@ -16,6 +16,7 @@ Usage:
 Config sections (all optional; see tenant_preload.yml for commented examples):
   credit_limit:  unlimited | <number> | {BRAND_PROTECTION: 100, TAKEDOWN: 10, ...}   (by-product)
   assets:        list of asset payloads for POST /assets-api/customers/{key}/asset
+  easm_seeds:    list of domains / IPs / CIDRs for POST /easm/seeds (skipped when already registered)
   safelist:      list of {group, items[]} for POST /touchpoints/items
   requests:      raw escape hatch: list of {method, path, json?, params?, ok?[]} — "{key}"/"{name}"
                  placeholders are substituted anywhere in path / json / params.
@@ -184,6 +185,20 @@ def step_assets(api, key, assets, state):
             log(f"   ✅ assetKey {body['assetKey']}")
 
 
+def step_easm_seeds(api, key, seeds):
+    """POST /easm/seeds?axur_tenant_key=<key> for seeds not already registered (the API answers 500 on duplicates)."""
+    code, body = api.call("POST", "/api/easm/seeds/list", json_body={}, params={"axur_tenant_key": key}, ok=(200, 0))
+    have = {s.get("seed_name") for s in (body.get("results", []) if code == 200 else [])}
+    missing = [s for s in seeds if s not in have]
+    for s in seeds:
+        if s in have:
+            log(f"🌱 EASM seed '{s}' already registered — skip")
+    if missing:
+        log(f"🌱 registering EASM seed(s) {missing}")
+        api.call("POST", "/api/easm/seeds", json_body={"seed_names": missing, "description": "Infoblox Exchange lab"},
+                 params={"axur_tenant_key": key}, ok=(200, 201, 0))
+
+
 def step_safelist(api, key, entries):
     """POST /touchpoints/items with customerKey."""
     for e in entries:
@@ -250,7 +265,7 @@ if __name__ == "__main__":
     cfg = substitute(cfg, {"key": key, "name": name})
 
     log(f"🚀 Preload tenant {key} ({name}) from {args.config}{' [dry-run]' if args.dry_run else ''}")
-    planned = [s for s in ("credit_limit", "assets", "safelist", "requests") if cfg.get(s)]
+    planned = [s for s in ("credit_limit", "assets", "easm_seeds", "safelist", "requests") if cfg.get(s)]
     if not planned:
         log("ℹ️ nothing to preload (all sections empty) — placeholder in place, edit tenant_preload.yml when specs arrive")
         sys.exit(0)
@@ -259,6 +274,8 @@ if __name__ == "__main__":
         step_credit_limit(api, key, cfg["credit_limit"])
     if cfg.get("assets"):
         step_assets(api, key, cfg["assets"], state)
+    if cfg.get("easm_seeds"):
+        step_easm_seeds(api, key, cfg["easm_seeds"])
     if cfg.get("safelist"):
         step_safelist(api, key, cfg["safelist"])
     if cfg.get("requests"):

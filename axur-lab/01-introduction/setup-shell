@@ -35,4 +35,7 @@ if [ -d preload.d ]; then
   done
 fi
 
+echo "=== 3/3 validate the tenant against the lab's expectations (pulled back from the Axur API) ==="
+python3 validate_tenant.py --wait 120
+
 echo "=== Challenge 1 setup complete ==="

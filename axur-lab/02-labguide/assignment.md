@@ -160,7 +160,7 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 1. Navigate to Workspaces > Brand Protection
 ![Jul-13-2026_at_14.46.30-image.png](../assets/Jul-13-2026_at_14.46.30-image.png)
 2. Filter by Ticket Type and select **Fake social media profile**
-3. Open a sample ticket, such as the "Netflix Golden" example
+3. Open the **Netflix Golden** sample ticket. It was placed in your tenant for this exercise, so please do not request a takedown on it
 4. Review the profile details, the logo similarity, the risk level assigned by Axur AI and the attributes on the ticket
 ![Jul-13-2026_at_14.46.56-image.png](../assets/Jul-13-2026_at_14.46.56-image.png)
 
@@ -321,6 +321,10 @@ thousand users: a fake profile in their name, a leaked document number, a passwo
 **Axur's edge.** **Executives & VIPs** watches for personal information leaks, credential and card exposure
 and fake profiles, using facial recognition to spot image abuse across the major social platforms. Executive
 data is stored encrypted, and each detection comes with recommended next steps.
+
+Your tenant has one executive registered, **Alex Rivera**, so you can see how an executive is set up. Findings
+only start once an executive's name variations and photo are on file, which is done in the portal, so the
+tickets below come from Axur's demo executive, Patrick Mahomes, where that tenant is available to you.
 
 **Steps**
 
