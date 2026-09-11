@@ -137,20 +137,48 @@ def existing_assets(api, key):
     return out
 
 
+def reactivate(api, existing, asset, created):
+    """A deactivated asset cannot be re-created (409); adding monitoring reactivates it (per the spec)."""
+    monitoring = asset.get("monitoring") or []
+    if not monitoring:
+        log(f"   ⚠️ {existing['assetKey']} is INACTIVE and the config has no monitoring to add — left inactive")
+        return
+    code, body = api.call("PATCH", f"/api/assets-api/assets/{existing['assetKey']}/monitoring/add",
+                          json_body={"monitoring": monitoring}, ok=(200, 0))
+    if code == 200:
+        created.append({"assetKey": existing["assetKey"], "type": existing.get("type"), "name": existing.get("name")})
+        log(f"   ♻️  reactivated {existing['assetKey']} (status {body.get('status')}) by adding monitoring {monitoring}")
+
+
 def step_assets(api, key, assets, state):
-    """POST /assets-api/customers/{key}/asset for each asset not already present (matched on type+name)."""
-    have = {(a.get("type"), a.get("name")) for a in existing_assets(api, key) if a.get("status") != "INACTIVE"}
+    """
+    POST /assets-api/customers/{key}/asset for each asset not already present (matched on type+name).
+    ACTIVE match -> skip. INACTIVE match (e.g. after --undo) -> reactivate by adding the monitoring.
+    """
+    have = {}
+    for a in existing_assets(api, key):
+        have[(a.get("type"), a.get("name"))] = a
     created = state.setdefault("assets", [])
     for asset in assets:
         # TRACKING_TOKEN has no name (backend generates it); identify it by its tokenName property
         ident = (asset.get("type"), asset.get("name") or (asset.get("properties") or {}).get("tokenName"))
-        if ident in have:
-            log(f"🏷️  asset {ident[0]} '{ident[1]}' already exists — skip")
+        existing = have.get(ident)
+        if existing and existing.get("status") != "INACTIVE":
+            log(f"🏷️  asset {ident[0]} '{ident[1]}' already exists ({existing.get('status')}) — skip")
+            continue
+        if existing:
+            log(f"🏷️  asset {ident[0]} '{ident[1]}' exists but is INACTIVE — reactivating")
+            reactivate(api, existing, asset, created)
             continue
         log(f"🏷️  creating asset {ident[0]} '{ident[1]}' monitoring={asset.get('monitoring', [])}")
         code, body = api.call("POST", f"/api/assets-api/customers/{key}/asset", json_body=asset, ok=(200, 201, 409, 0))
         if code == 409:
-            log("   ⚠️ 409 conflict — treated as already existing")
+            # not in the listing we fetched (or a naming difference): look again and reactivate if it is inactive
+            again = {(a.get("type"), a.get("name")): a for a in existing_assets(api, key)}.get(ident)
+            if again and again.get("status") == "INACTIVE":
+                reactivate(api, again, asset, created)
+            else:
+                log("   ⚠️ 409 conflict — treated as already existing")
         elif code in (200, 201) and body.get("assetKey"):
             created.append({"assetKey": body["assetKey"], "type": body.get("type"), "name": body.get("name")})
             log(f"   ✅ assetKey {body['assetKey']}")
