@@ -3,8 +3,7 @@ slug: introduction
 id: o2fpouyb9kwu
 type: challenge
 title: Your First Shift
-teaser: You are the new external threat analyst. A tenant, a login and four assets
-  under watch are waiting for you.
+teaser: You are the new external threat analyst. A tenant, a login and four assets under watch are waiting for you.
 notes:
 - type: text
   contents: |-
@@ -35,11 +34,12 @@ notes:
 
     You will work one shift, hour by hour:
 
-    - **Morning:** learn what you protect, then teach Axur your language and cut the noise.
-    - **Midday:** the board lights up. Fake profiles, fraudulent brand use, lookalike domains, and
-      the decisions that turn a finding into a takedown.
-    - **Afternoon:** leaked passwords, the dark web, the people at the top, your attack surface, and
-      your supplier's problems that are about to become yours.
+    - **Morning:** learn what you protect, teach Axur your language, cut the noise and put the bots to work.
+    - **Midday:** the board lights up. Fake profiles, lookalike domains, the one call the lab checks, and a
+      leaked password that leads back to an infected laptop.
+    - **Afternoon:** the dark web, the person at the top, your attack surface, what the internet sees, and a
+      supplier whose problems are about to become yours.
+    - **End of shift:** four short debrief questions. Each one is a situation you will meet again.
 
     Nothing you do here affects anyone else, so be curious.
 tabs:
@@ -47,7 +47,7 @@ tabs:
   title: Axur Portal
   type: browser
   hostname: axur
-difficulty: ""
+difficulty: ''
 timelimit: 0
 enhanced_loading: null
 ---
