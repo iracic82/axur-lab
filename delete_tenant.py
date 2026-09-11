@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from axur_api import AxurTenantAPI
 
 # "Delete" for an Axur MSSP tenant = suspend. The public API has no DELETE; suspending disables all
@@ -39,10 +40,36 @@ if not tenant_key:
     print(f"❌ No tenant key: pass it as an argument, run create_tenant.py first, or set INSTRUQT_SANDBOX_ID.", flush=True)
     sys.exit(1)
 
-print(f"🔗 Suspending tenant {tenant_key}", flush=True)
-result = api.suspend_tenant(tenant_key)
+def tenant_state(key):
+    """Current {active, suspended} of the tenant from the documented listing, or None if not visible."""
+    for t in api.list_tenants():
+        if t.get("key") == key:
+            return t
+    return None
 
-if result["status"] == "success":
+
+# Suspend, then VERIFY from the listing and retry if needed. A tenant that is still being provisioned
+# (cleanup can run ~1 min after creation) answers "Tenant is already suspended" and ends up active later.
+ATTEMPTS = int(os.environ.get("AXUR_SUSPEND_RETRIES", "6"))
+DELAY = int(os.environ.get("AXUR_SUSPEND_RETRY_DELAY", "15"))
+suspended = False
+for attempt in range(1, ATTEMPTS + 1):
+    print(f"🔗 Suspending tenant {tenant_key} (attempt {attempt}/{ATTEMPTS})", flush=True)
+    result = api.suspend_tenant(tenant_key)
+    if result["status"] != "success":
+        print(f"⚠️ Suspend call: {result.get('error')}", flush=True)
+    state = tenant_state(tenant_key)
+    if state is None:
+        print("⚠️ Tenant not visible in the listing yet.", flush=True)
+    elif state.get("suspended"):
+        suspended = True
+        break
+    else:
+        print(f"⏳ Listing still shows tenant {tenant_key} active; retrying in {DELAY}s…", flush=True)
+    if attempt < ATTEMPTS:
+        time.sleep(DELAY)
+
+if suspended:
     print(f"⏸️ Tenant {tenant_key} suspended (monitoring and credit consumption stopped).", flush=True)
     for path in (TENANT_KEY_FILE, TENANT_NAME_FILE):
         try:
