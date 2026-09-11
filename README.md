@@ -9,7 +9,7 @@ Same pattern as the Infoblox CSP `sandbox_api.py` / `create_sandbox.py` / `delet
 | `delete_tenant.py` | Reads `tenant_key.txt` (or takes a key argument), **suspends** the tenant, removes the file |
 | `resume_tenant.py` | `python3 resume_tenant.py <KEY>` re-activates a suspended tenant |
 | `preload.d/` | Extra preload scripts (`.py`/`.sh`), run in name order by the challenge-1 setup after the YAML. See `preload.d/README.md`. |
-| `preload_tenant.py` + `tenant_preload.yml` | Per-tenant preload/config driver run by the **challenge-1 setup script**. Declarative YAML: `credit_limit`, `assets`, `safelist`, and a raw `requests` escape hatch; idempotent; `--dry-run` and `--undo`. The YAML is empty until Axur specifies what each lab tenant needs. |
+| `preload_tenant.py` + `tenant_preload.yml` | Per-tenant preload/config driver run by the **challenge-1 setup script**. Declarative YAML: `credit_limit`, `assets`, `safelist`, and a raw `requests` escape hatch; idempotent; `--dry-run` and `--undo`. The YAML holds Axur's lab content (Netflix brand, example.com domain, Microsoft vendor). |
 | `user_provision.py` | Registers the participant user on the tenant via Axur's event endpoint `POST /api/identity/registration/users/{tenant}` (email `<participant>@USER_DOMAIN`, generated password, `groupKey` manager). Writes `user_email.txt`, `user_password.txt`, `user_id.txt`, `user_credentials.sh`; idempotent on re-run. `--delete` is a no-op until Axur provides a delete endpoint (`AXUR_USER_DELETE_PATH`). Falls back to *pending* mode (exit 0) if the endpoint disappears. |
 | `list_tenants.py` | Read-only listing of key / name / active / suspended. Good first check of the API key. |
 
@@ -187,7 +187,7 @@ echo PRLD > tenant_key.txt && python3 preload.d/00-report.py
 ```
 
 `PRLD` (`preload-test`) is a suspended throwaway tenant kept for this; `python3 resume_tenant.py PRLD` if a
-test needs it active. To rehearse the whole challenge-2 script, `instruqt track test axur-lab` runs a real
+test needs it active. To rehearse the whole challenge-1 script, `instruqt track test axur-lab` runs a real
 sandbox (creates and then suspends a tenant named after the test participant id).
 
 ### 4. Deploy and verify

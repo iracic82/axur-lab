@@ -1,6 +1,6 @@
 # preload.d — extra per-tenant preload scripts
 
-Anything that does not fit the declarative `tenant_preload.yml` goes here as a script. The challenge-2
+Anything that does not fit the declarative `tenant_preload.yml` goes here as a script. The challenge-1
 setup script runs every file in this folder **in name order** after `preload_tenant.py`, so prefix
 names with a number: `10-keyword-library.py`, `20-seed-tickets.sh`, ...
 
