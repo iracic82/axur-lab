@@ -44,7 +44,7 @@ behalf when it finds abuse.
 2. Navigate to Settings > Monitoring Settings
 ![Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png](../assets/Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png)
 3. Select Asset Management
-4. Open the **Netflix** brand asset (in the demo environment it is called Demo Netflix)
+4. Open the **Netflix** brand asset
 5. Review the visible metadata, the monitoring attached to it, and any linked coverage areas
 ![Jul-13-2026_at_14.27.38-image.png](../assets/Jul-13-2026_at_14.27.38-image.png)
 
@@ -70,7 +70,7 @@ the cheapest way to raise detection and cut false positives at the same time.
 **Steps**
 
 1. On the same page, open the **Keyword libraries** option
-2. Review an existing brand-related library by clicking its Edit icon (for example "Brand abuse related to Netflix")
+2. If your tenant already has a brand library, open it with the Edit icon. If the list is empty, create one called **Netflix variations** with terms such as netflix, netflx, net-flix, netflix-premium and netflix billing
 ![Jul-13-2026_at_14.35.19-image.png](../assets/Jul-13-2026_at_14.35.19-image.png)
 
 **What to notice**
@@ -95,8 +95,8 @@ so what you open first is worth opening.
 **Steps**
 
 1. On the same page, open **Filtering rules**
-2. Review the filters that already exist
-3. From the drop-down select Detection type **Deep and Dark Web** and Asset name **Netflix**
+2. Review any filters that already exist. A fresh tenant has none, which is normal
+3. Create one: from the drop-down select Detection type **Deep and Dark Web** and Asset name **Netflix**
 ![Jul-13-2026_at_14.42.36-image.png](../assets/Jul-13-2026_at_14.42.36-image.png)
 4. Observe how a rule refines visible findings by threat type, source, asset, or other attributes
 ![Jul-13-2026_at_14.43.12-image.png](../assets/Jul-13-2026_at_14.43.12-image.png)
@@ -123,9 +123,9 @@ further and flags pages that copy the official layout the moment they load.
 
 **Steps**
 
-1. Navigate to **Search Bots** under Searches and open one of the available bots
-2. For the Netflix case, open the bot configured for fake accounts on Facebook
-3. Review the bot configuration and its outputs
+1. Navigate to **Search Bots** under Searches
+2. If bots already exist, open the one that looks for fake accounts on Facebook. If none exist yet, create one for the Netflix asset using your keyword library and Facebook as the source
+3. Review the bot configuration and, once it has run, its outputs
 
 The page defines:
 
