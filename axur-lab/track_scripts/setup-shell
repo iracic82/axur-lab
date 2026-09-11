@@ -41,6 +41,10 @@ cd /root/lab/axur-lab
 echo "=== Creating Axur tenant ==="
 python3 create_tenant.py
 
+# Give Axur time to finish provisioning the new tenant before we touch it (user registration, preload)
+echo "=== Waiting 120s for tenant provisioning ==="
+sleep 120
+
 agent variable set AXUR_TENANT_KEY -- "$(cat tenant_key.txt)"
 agent variable set AXUR_TENANT_NAME -- "$(cat tenant_name.txt)"
 

@@ -19,6 +19,9 @@ echo "=== Deleting Axur user ==="
 python3 user_provision.py --delete || echo "WARNING: user_provision.py --delete failed, continuing..."
 
 echo "=== Suspending Axur tenant ==="
+# Don't rush: a tenant that is still provisioning answers "already suspended" and ends up active.
+# delete_tenant.py additionally verifies the state from the listing and retries.
+sleep 60
 # Uses tenant_key.txt from setup; falls back to a lookup by tenant name (INSTRUQT_SANDBOX_ID).
 python3 delete_tenant.py || echo "WARNING: delete_tenant.py failed, tenant may still be active - check Axur ONE"
 
