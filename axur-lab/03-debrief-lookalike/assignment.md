@@ -15,13 +15,16 @@ notes:
     Four short questions before you clock out. Each one is a situation you will meet again, and each has one
     answer an experienced analyst would give.
 answers:
-- Discard it. An empty page is a false positive, and Quarantine only clutters the queue.
-- Leave it in Quarantine. Axur re-checks quarantined tickets every morning and flags any content change, so the day it becomes a phishing page you will know.
-- Request a takedown now. The registrar will remove a domain that imitates a brand even before it hosts content.
+- Discard it. An empty page is a false positive, and Quarantine only clutters the
+  queue.
+- Leave it in Quarantine. Axur re-checks quarantined tickets every morning and flags
+  any content change, so the day it becomes a phishing page you will know.
+- Request a takedown now. The registrar will remove a domain that imitates a brand
+  even before it hosts content.
 - Escalate it as an Incident so the SOC starts blocking it at the firewall.
 solution:
 - 1
-difficulty: ''
+difficulty: ""
 timelimit: 0
 enhanced_loading: null
 ---
