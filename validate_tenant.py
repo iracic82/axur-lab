@@ -168,14 +168,15 @@ def main():
         ok = code == 200 and any(str((u.get("credentials") or {}).get("email", "")).lower() == email.lower() for u in (users if isinstance(users, list) else []))
         rep.add("INFO", ok, f"participant user registered: {email}", f"HTTP {code}" if code != 200 else "")
 
-    # --- INFO: real detections (poll if asked) ---
+    # --- INFO: real detections (poll if asked); seeded references do not count ---
     if brand_key:
+        seeded_refs = {(r.get("json") or {}).get("reference") for r in want_tickets}
         deadline = time.time() + args.wait
         while True:
-            items = all_tickets(brand_key)
+            items = [x for x in all_tickets(brand_key) if (x.get("ticket") or {}).get("reference") not in seeded_refs]
             if items or time.time() >= deadline:
                 break
-            print(f"   ⏳ no detections yet on {brand_key}; polling…", flush=True); time.sleep(30)
+            print(f"   ⏳ no real detections yet on {brand_key}; polling…", flush=True); time.sleep(30)
         types = {}
         for x in items:
             ty = (x.get("detection") or {}).get("type") or "unknown"; types[ty] = types.get(ty, 0) + 1
