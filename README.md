@@ -10,7 +10,7 @@ Same pattern as the Infoblox CSP `sandbox_api.py` / `create_sandbox.py` / `delet
 | `resume_tenant.py` | `python3 resume_tenant.py <KEY>` re-activates a suspended tenant |
 | `preload.d/` | Extra preload scripts (`.py`/`.sh`), run in name order by the challenge-2 setup after the YAML. See `preload.d/README.md`. |
 | `preload_tenant.py` + `tenant_preload.yml` | Per-tenant preload/config driver run by the **challenge-2 setup script**. Declarative YAML: `credit_limit`, `assets`, `safelist`, and a raw `requests` escape hatch; idempotent; `--dry-run` and `--undo`. The YAML is empty until Axur specifies what each lab tenant needs. |
-| `user_provision.py` | **Placeholder.** Creates the participant user on the tenant (`--delete` removes it); writes `user_email.txt`, `user_password.txt`, `user_id.txt`, `user_credentials.sh`. Until Axur publishes the user endpoint it runs in *pending* mode: credentials are generated, `user_id.txt` = `PENDING`, exit 0. **The calls to it in `setup-shell` / `cleanup-shell` are commented out** until then. |
+| `user_provision.py` | Registers the participant user on the tenant via Axur's event endpoint `POST /api/identity/registration/users/{tenant}` (email `<participant>@USER_DOMAIN`, generated password, `groupKey` manager). Writes `user_email.txt`, `user_password.txt`, `user_id.txt`, `user_credentials.sh`; idempotent on re-run. `--delete` is a no-op until Axur provides a delete endpoint (`AXUR_USER_DELETE_PATH`). Falls back to *pending* mode (exit 0) if the endpoint disappears. |
 | `list_tenants.py` | Read-only listing of key / name / active / suspended. Good first check of the API key. |
 
 ## No login / 2FA needed — use an API key
@@ -54,9 +54,10 @@ deactivated the key is revoked, and it can be revoked from the same tab at any t
 | `AXUR_BILLING_COUNTRY` | `ES` (Spain) | ISO 3166-1 alpha-2 |
 | `AXUR_BASE_URL` | `https://api.axur.com/gateway/1.0` | Override for testing |
 | `USER_DOMAIN` | `infoblox.lab` | `user_provision.py`: login email = `<participant id>@<USER_DOMAIN>` |
-| `AXUR_USER_PERMISSION` | `MANAGER` | `user_provision.py`: permission level requested for the participant |
-| `AXUR_USER_CREATE_PATH` | `/api/customers-api/customer/{key}/user` | `user_provision.py`: **to be confirmed by Axur**; `{key}` = tenant key |
-| `AXUR_USER_DELETE_PATH` | `/api/customers-api/customer/{key}/user/{user_id}` | `user_provision.py`: **to be confirmed by Axur** |
+| `AXUR_USER_GROUP` | `manager` | `user_provision.py`: `groupKey` for the participant (`manager` or `viewer`) |
+| `AXUR_USER_FIRSTNAME` / `AXUR_USER_LASTNAME` | `Lab` / participant id | `user_provision.py`: display name |
+| `AXUR_USER_CREATE_PATH` | `/api/identity/registration/users/{key}` | `user_provision.py`: Axur's event registration endpoint (IE2L sub-tenants only) |
+| `AXUR_USER_DELETE_PATH` | none | `user_provision.py`: set when Axur provides a delete endpoint (`{key}`, `{user_id}`) |
 
 ## Run
 
@@ -82,8 +83,9 @@ The track is pulled into `axur-lab/` (`instruqt track pull axur-lab`). What was 
 - `track_scripts/setup-shell` (same pattern as the other labs): installs deps, `git clone`s this repo
   (https://github.com/iracic82/axur-lab, public so the sandbox can clone anonymously) to `/root/lab/axur-lab`, writes `/root/lab/axur.env` with the
   token and sandbox id (xtrace off so the secret never hits the logs), and runs `create_tenant.py` with
-  `INSTRUQT_SANDBOX_ID` (falls back to `INSTRUQT_PARTICIPANT_ID`) as tenant + brand name. The key and name
-  are exported as agent variables `AXUR_TENANT_KEY` / `AXUR_TENANT_NAME`.
+  `INSTRUQT_SANDBOX_ID` (falls back to `INSTRUQT_PARTICIPANT_ID`) as tenant + brand name, then
+  `user_provision.py` to register the participant's login on that tenant. Agent variables exported:
+  `AXUR_TENANT_KEY`, `AXUR_TENANT_NAME`, `AXUR_USER_EMAIL`, `AXUR_USER_PASSWORD` (shown in challenge 1).
 - `track_scripts/cleanup-shell` sources `axur.env` and runs `delete_tenant.py` (= suspend), using
   `tenant_key.txt` from setup or a lookup by name if that file is gone.
 

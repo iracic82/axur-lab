@@ -13,12 +13,10 @@ cd /root/lab/axur-lab || {
     exit 0
 }
 
-# ==============================================================================
-# DISABLED UNTIL AXUR PROVIDES THE USER API — uncomment together with the block in setup-shell.
-# ==============================================================================
-# echo "=== Deleting Axur user ==="
-# python3 user_provision.py --delete || echo "WARNING: user_provision.py --delete failed, continuing..."
-# ==============================================================================
+echo "=== Deleting Axur user ==="
+# No delete endpoint from Axur yet: this is a no-op until AXUR_USER_DELETE_PATH is set. The user stays
+# on the tenant, which is suspended right after.
+python3 user_provision.py --delete || echo "WARNING: user_provision.py --delete failed, continuing..."
 
 echo "=== Suspending Axur tenant ==="
 # Uses tenant_key.txt from setup; falls back to a lookup by tenant name (INSTRUQT_SANDBOX_ID).
