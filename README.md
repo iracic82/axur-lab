@@ -236,6 +236,23 @@ Reading the data back: `GET /api/tickets-api/tickets?assets=<assetKey>&pageSize=
 filter is rejected; types and AI predictions are under `detection.*`), `GET /api/exposure-api/credentials?customer=<key>`
 and `/credentials/total`.
 
+## Test invite
+
+Current test invite (created 2026-09-11): **https://play.instruqt.com/infoblox/invite/qmefrgcrtv8f**
+
+The Instruqt CLI has no invite command; invites are created through the GraphQL API with the CLI's stored login
+(`~/.config/instruqt/credentials`, field `access_token`; the `api_key` there is rejected with 401):
+
+```python
+mutation = "mutation($invite: TrackInviteInput!) { createTrackInvite(invite: $invite) { id } }"
+invite = {"trackIDs": ["rsqko78gxgac"], "publicTitle": "Axur Lab (testing)", "publicDescription": "<= 380 chars"}
+# POST https://play.instruqt.com/graphql  with  Authorization: Bearer <access_token>
+# -> https://play.instruqt.com/infoblox/invite/<id>
+```
+
+Every play through an invite creates a real Axur tenant (CTI on) and suspends it on stop; the tenant list in
+Axur ONE grows by one per participant.
+
 ## Validating what participants do (challenge checks)
 
 Instruqt's **Check** button runs `axur-lab/02-labguide/check-shell` on the `shell` host, which calls

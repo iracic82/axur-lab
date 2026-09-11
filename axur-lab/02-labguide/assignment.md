@@ -431,4 +431,7 @@ Axur helps Infoblox move earlier in the attack lifecycle by identifying and disr
 they reach users. Combined with Infoblox protection at the DNS layer, it gives organizations a stronger and
 more preemptive way to reduce digital risk.
 
-Your tenant is suspended automatically when this lab ends. Nothing else is required of you.
+Before you clock out, four short questions about the calls you made today. They are the debrief, and each
+one is a situation you will meet again.
+
+Your tenant is suspended automatically when this lab ends.
