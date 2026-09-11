@@ -86,8 +86,12 @@ The track is pulled into `axur-lab/` (`instruqt track pull axur-lab`). What was 
   `INSTRUQT_SANDBOX_ID` (falls back to `INSTRUQT_PARTICIPANT_ID`) as tenant + brand name, then
   `user_provision.py` to register the participant's login on that tenant. Agent variables exported:
   `AXUR_TENANT_KEY`, `AXUR_TENANT_NAME`, `AXUR_USER_EMAIL`, `AXUR_USER_PASSWORD` (shown in challenge 1).
-- `track_scripts/cleanup-shell` sources `axur.env` and runs `delete_tenant.py` (= suspend), using
-  `tenant_key.txt` from setup or a lookup by name if that file is gone.
+- `track_scripts/cleanup-shell` sources `axur.env`, runs `user_provision.py --delete` (no-op until Axur adds a
+  delete endpoint), waits 120 s, then runs `delete_tenant.py` (= suspend), using `tenant_key.txt` from setup or
+  a lookup by name if that file is gone. `delete_tenant.py` **verifies** the suspension from the tenant listing
+  and retries every 60 s for up to 30 min (`AXUR_SUSPEND_RETRIES` / `AXUR_SUSPEND_RETRY_DELAY`): from sandboxes
+  the suspend call has answered `400 Tenant is already suspended` while the tenant stayed active, and the state
+  only became consistent minutes later. Instruqt gives cleanup scripts 55 min, so this fits.
 
 - `02-labguide/setup-shell` (challenge-2 setup) does `git pull` in `/root/lab/axur-lab` and runs
   `preload_tenant.py`, which applies `tenant_preload.yml` to the sandbox's tenant. The same partner API key

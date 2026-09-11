@@ -48,10 +48,12 @@ def tenant_state(key):
     return None
 
 
-# Suspend, then VERIFY from the listing and retry if needed. A tenant that is still being provisioned
-# (cleanup can run ~1 min after creation) answers "Tenant is already suspended" and ends up active later.
-ATTEMPTS = int(os.environ.get("AXUR_SUSPEND_RETRIES", "6"))
-DELAY = int(os.environ.get("AXUR_SUSPEND_RETRY_DELAY", "15"))
+# Suspend, then VERIFY from the listing and retry if needed. Observed 2026-09-11 from Instruqt sandboxes:
+# the suspend call answered HTTP 400 "Tenant is already suspended" while the listing showed the tenant
+# active, and it stayed active; the state resolved by itself within ~25 minutes. Instruqt allows a track
+# cleanup script 55 minutes, so keep retrying for up to 30 minutes (30 x 60 s) by default.
+ATTEMPTS = int(os.environ.get("AXUR_SUSPEND_RETRIES", "30"))
+DELAY = int(os.environ.get("AXUR_SUSPEND_RETRY_DELAY", "60"))
 suspended = False
 for attempt in range(1, ATTEMPTS + 1):
     print(f"🔗 Suspending tenant {tenant_key} (attempt {attempt}/{ATTEMPTS})", flush=True)
