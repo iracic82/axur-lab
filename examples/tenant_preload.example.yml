@@ -92,6 +92,14 @@ assets:
     properties:
       tokenName: MAIL
 
+  # CUSTOMER_VENDOR (Supply Chain Intel) — needs the numeric vendorId from Axur's vendor catalogue and the
+  # name must match the catalogue name exactly. Live-verified (Microsoft = 30). Ids: examples/axur_vendor_ids.json
+  - type: CUSTOMER_VENDOR
+    name: Microsoft
+    monitoring: [supply-chain-intel]
+    properties:
+      vendorId: 30
+
 # ---------------------------------------------------------------- safelist (POST /touchpoints/items). Live-verified.
 # group: self | partner | email | other
 safelist:

@@ -155,6 +155,16 @@ What was live-verified on tenant PRLD (2026-09-10): BRAND, DOMAIN, VIP, APP, BIN
 Two API rules learned there: a THIRD_PARTY_PAGE name must be a bare domain (paths are rejected), and
 `cti:infrastructure` monitoring (IP / DOMAIN) is only accepted on tenants created with `ctiEnabled: true`.
 
+**Vendor assets** (`CUSTOMER_VENDOR`, Supply Chain Intel) need `properties.vendorId`, a number from Axur's
+vendor catalogue, and the asset `name` must match that vendor's catalogue name. The public API has no vendor
+lookup, but a create request with a wrong name returns `asset.customerVendor.name` with the vendor's real name,
+so ids can be discovered by probing (no side effects). The first 50 are in `examples/axur_vendor_ids.json`
+(Microsoft = 30, Infoblox = 23, Cisco = 8, Google = 20, Amazon Web Services = 3, ...).
+
+**Current lab content** (Axur's recommendation, 2026-09-11, in `tenant_preload.yml`): brand *Netflix*
+(phishing, similar-domain-name), domain *example.com* (user/employee credentials, code-secret-leak) and vendor
+*Microsoft* (supply-chain-intel). All three verified live: created ACTIVE, skipped on re-run, removed by `--undo`.
+
 ### 2. Scripts: add a file to `preload.d/`
 
 For steps that need conditions, lookups or several calls, add `NN-name.py` or `NN-name.sh` (run in name
