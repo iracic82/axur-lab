@@ -38,10 +38,23 @@ def get(path, **params):
         return r.status_code, {}
 
 
+def configured_brand_name():
+    """Name of the first BRAND asset in tenant_preload.yml (next to this script), or None."""
+    try:
+        import yaml
+        cfg = yaml.safe_load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "tenant_preload.yml"))) or {}
+        return next((a.get("name") for a in cfg.get("assets", []) or [] if a.get("type") == "BRAND"), None)
+    except Exception:
+        return None
+
+
 def find_sample(key):
     """Return (ticketKey, tab) for the seeded sample ticket, searching every tab of the brand asset."""
     code, body = get("/api/assets-api/assets", customerKey=key, perPage=100)
-    brand = next((a["assetKey"] for a in body.get("assets", []) if a.get("type") == "BRAND" and a.get("name") == "Netflix"), None) if code == 200 else None
+    brands = [a for a in body.get("assets", []) if a.get("type") == "BRAND"] if code == 200 else []
+    # The brand the sample ticket hangs on: the one configured in tenant_preload.yml if present, else the only brand.
+    wanted = configured_brand_name()
+    brand = next((a["assetKey"] for a in brands if a.get("name") == wanted), None) or (brands[0]["assetKey"] if brands else None)
     if not brand:
         return None, None
     for tab in TABS:
