@@ -102,6 +102,8 @@ brands, your own domains, your executives and your vendors.
 - **Axur and Infoblox.** Axur finds and disrupts external threats before they reach users. Infoblox protects
   at the DNS layer. Together they move defence earlier in the attack lifecycle.
 
+![Two layers, one picture](../assets/diag-outside-in.png)
+
 Ask your Infoblox account team what an Axur assessment would show for your own assets.
 
 Your tenant is suspended automatically when this lab ends. Thank you for the shift.

@@ -103,6 +103,8 @@ ____
 Your predecessor left four things under monitoring. You will meet them in **Day One on the Desk**, but here
 is the briefing.
 
+![Your desk: one private tenant, four assets under watch](../assets/diag-your-desk.png)
+
 **The brand: Netflix.** For this exercise your company's brand is Netflix, registered in Axur as the asset
 **Demo Netflix, Inc**, the same name Axur uses in its own demo tenant. It was chosen because it is one of the
 most impersonated brands on the internet, so there is always something to find. Axur is watching it for

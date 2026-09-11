@@ -206,6 +206,8 @@ phishing notification goes out in under four minutes, 86% of requests run fully 
 decision to notification, and the success rate is around 98%, with a stay-down guarantee. Lookalike domains
 do not even wait for you: smart monitoring opens the ticket and quarantines the domain automatically.
 
+![The life of a ticket in Brand Protection](../assets/diag-ticket-lifecycle.png)
+
 #### A fake profile wearing your logo
 
 **Steps**
