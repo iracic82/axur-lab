@@ -10,12 +10,14 @@ notes:
   contents: |-
     # **Infoblox Axur Introductory lab**
 
-    Your environment is being provisioned. You will access your Axur environment through the **Axur Portal** tab.
+    Your environment is being provisioned: a private Axur tenant is being created for you, your analyst
+    account is being registered, and the first assets are being placed under watch. You will access it
+    through the **Axur Portal** tab.
 
     **In this lab you will…**
-    - Explore Axur’s key features and security solutions.
-    - Understand why external threat monitoring is needed.
-    - See how Axur helps detect, investigate, and respond to digital threats.
+    - Step into the role of an external threat analyst with a live tenant of your own.
+    - See what Axur already knows about the brand, domain and vendor you are responsible for.
+    - Learn how findings become tickets, and tickets become takedowns.
 tabs:
 - id: tg0fzhghiigb
   title: Axur Portal
@@ -25,17 +27,29 @@ difficulty: ""
 timelimit: 0
 enhanced_loading: null
 ---
-## Objective
+## Your first shift
 ===
 
-Enable participants to analyze how Axur can help mitigate external threats against their environment by navigating existing monitored data, using search and filtering capabilities, and interpreting tickets, incidents, and exposure findings already present in the demo tenant.
+Welcome aboard. You have just joined the security team as its **external threat analyst**: the person who
+watches what happens *outside* the firewall, where attackers register lookalike domains, clone login pages,
+trade leaked passwords, and impersonate the brand on social media.
 
-## Step 1: Log in to the Axur Portal
+While this page was loading, a few things happened on your behalf:
+
+- A **private Axur tenant** was created for you. It carries your session's name, nobody else can see it,
+  and it is suspended automatically when the lab ends.
+- An **analyst account** with manager rights was registered on that tenant. Its credentials are below.
+- Three assets were placed **under watch**, so Axur's engines were already working before you signed in.
+
+***
+
+## Step 1: Pick up your badge
 ===
 
 ____
 
-Switch to the **Axur Portal** tab and log in using the credentials below:
+Switch to the **Axur Portal** tab and log in using the credentials below. This is your tenant and your
+login; whatever you do here stays in your sandbox.
 
 **Your Tenant Name:**
 ```
@@ -54,21 +68,37 @@ Switch to the **Axur Portal** tab and log in using the credentials below:
 
 ***
 
-## Step 2: Scope and delivery model
+## Step 2: What is already on your desk
 ===
 
 ____
 
-This lab is focused on analysis and navigation rather than setup. Participants will not create new monitored assets or build monitoring from scratch. Instead, they will work with preconfigured demo data to understand how to investigate threats, interpret findings, and explain response options.
+Your predecessor left three things under monitoring. You will meet them in the Lab Guide, but here is the
+briefing.
+
+**The brand: Netflix.** For this exercise your company's brand is Netflix, chosen because it is one of the
+most impersonated brands on the internet, so there is always something to find. Axur is watching it for
+**phishing** pages that copy the login screen and for **lookalike domains** that trade on the name.
+
+**The domain: example.com.** This is the corporate domain. Axur is watching the leak markets and paste sites
+for **employee credentials** and **customer credentials** tied to it, and public code repositories for
+**secrets** committed by mistake.
+
+**The vendor: Microsoft.** Your company depends on it, so its problems become your problems. Axur's
+**Supply Chain Intel** tracks the vendor's exposure, breaches and critical bulletins so you hear about
+them before the incident report does.
+
+Everything else in the portal, from workspaces to keyword libraries to bots, is there for you to explore.
+Nothing in this tenant affects any other participant.
 
 ***
 
-## Step 3: Lab outcomes
+## Step 3: Your mission
 ===
 
 ____
 
-By the end of the lab, participants should be able to:
+By the end of the lab you should be able to:
 
 - Navigate the Axur interface confidently across assets, monitoring brand protection, data leakage, executive protection, deep and dark web, threat hunting and CTI workflows
 - Explain how Axur helps surface external threats such as brand abuse, impersonation, fraudulent domains, leaked credentials and deep/dark web exposure
@@ -78,7 +108,7 @@ By the end of the lab, participants should be able to:
 
 ***
 
-## Step 4: Suggested audience
+## Step 4: Who this lab is for
 ===
 
 ____
@@ -90,11 +120,13 @@ ____
 
 ***
 
-## Step 5: Prerequisites
+## Step 5: Before you start
 ===
 
 ____
 
-- Access to the Axur demo environment
-- Browser access
-- Preloaded tenant data with monitored assets already configured
+- A browser, and the Axur Portal tab on this page
+- The credentials from Step 1
+- Curiosity: the tenant is yours, so click around
+
+When you are ready, move on to the **Lab Guide**.
