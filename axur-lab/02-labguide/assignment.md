@@ -98,7 +98,7 @@ so what you open first is worth opening.
 1. On the same page, open **Filtering rules**
 2. Create your first rule: from the drop-down select Detection type **Deep and Dark Web** and Asset name **Netflix**
 ![Jul-13-2026_at_14.42.36-image.png](../assets/Jul-13-2026_at_14.42.36-image.png)
-4. Observe how a rule refines visible findings by threat type, source, asset, or other attributes
+3. Observe how a rule refines visible findings by threat type, source, asset, or other attributes
 ![Jul-13-2026_at_14.43.12-image.png](../assets/Jul-13-2026_at_14.43.12-image.png)
 
 **Your call**
