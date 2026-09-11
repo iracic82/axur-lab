@@ -70,7 +70,8 @@ the cheapest way to raise detection and cut false positives at the same time.
 **Steps**
 
 1. On the same page, open the **Keyword libraries** option
-2. If your tenant already has a brand library, open it with the Edit icon. If the list is empty, create one called **Netflix variations** with terms such as netflix, netflx, net-flix, netflix-premium and netflix billing
+2. Create a library called **Netflix variations** and give it the terms an impersonator would use: netflix, netflx, net-flix, netflix-premium, netflix billing
+3. Open it with the Edit icon and see how each term becomes a search the bots will run
 ![Jul-13-2026_at_14.35.19-image.png](../assets/Jul-13-2026_at_14.35.19-image.png)
 
 **What to notice**
@@ -95,8 +96,7 @@ so what you open first is worth opening.
 **Steps**
 
 1. On the same page, open **Filtering rules**
-2. Review any filters that already exist. A fresh tenant has none, which is normal
-3. Create one: from the drop-down select Detection type **Deep and Dark Web** and Asset name **Netflix**
+2. Create your first rule: from the drop-down select Detection type **Deep and Dark Web** and Asset name **Netflix**
 ![Jul-13-2026_at_14.42.36-image.png](../assets/Jul-13-2026_at_14.42.36-image.png)
 4. Observe how a rule refines visible findings by threat type, source, asset, or other attributes
 ![Jul-13-2026_at_14.43.12-image.png](../assets/Jul-13-2026_at_14.43.12-image.png)
@@ -124,8 +124,8 @@ further and flags pages that copy the official layout the moment they load.
 **Steps**
 
 1. Navigate to **Search Bots** under Searches
-2. If bots already exist, open the one that looks for fake accounts on Facebook. If none exist yet, create one for the Netflix asset using your keyword library and Facebook as the source
-3. Review the bot configuration and, once it has run, its outputs
+2. Create a bot that hunts fake accounts on Facebook for the Netflix asset, using the keyword library you just built
+3. Open it and review the configuration, then come back later in the shift to see what it brought in
 
 The page defines:
 
@@ -332,7 +332,7 @@ profile you give it, and that profile is your job in this chapter.
 2. Add the **name variations** an impersonator might use, for example "Alex J. Rivera", "A. Rivera" and "Alexandra Rivera"
 3. Enable **name similarity inspection**, so profiles whose name is 80% or more similar are caught even without a photo
 4. Note the remaining fields: a **face photo** for facial recognition, and the emails, phone numbers and documents whose leaks should raise a ticket. A real onboarding would fill these in, or send the executive a SafeShare form to fill them in themselves
-5. Save, then open Workspace > Executives & VIPs. Alex has no findings yet: Axur's collectors need time, and a person who does not exist leaves no trace on the internet
+5. Save, then open Workspace > Executives & VIPs. This is where Alex's findings will land once the profile is complete and the collectors have run
 
 **What findings look like.** The screens below come from Axur's demo executive, Patrick Mahomes, a public figure
 with a complete profile. This is what lands in the workspace once collection runs: the executive filter, a
