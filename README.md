@@ -200,6 +200,36 @@ Start a sandbox and open the challenge-1 setup log in Instruqt: `preload_tenant.
 applied or skipped, and `00-report.py` prints the tenant's credit limit, assets and enabled monitoring at
 the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI (it tails; Ctrl-C to stop).
 
+## Synthetic data: what is possible and what makes sense (explored 2026-09-11)
+
+**Most of the lab is fed by real data within minutes, so little needs seeding.** Measured on fresh lab tenants:
+
+| Workspace | What a new tenant contains | Source of the data |
+|---|---|---|
+| Brand Protection | **500 to 700 real tickets within ~10 min** of the Netflix asset going live: phishing pages (urlscan, html-links), lookalike domains (certificate-transparency `ctlog`), threat-hunting hits, passive DNS, Facebook ads. Each carries Axur's AI predictions (login form present, payment requested, language, colours) | Axur collectors, automatic |
+| Data Leakage | **9,745 credential exposures** on example.com the moment the domain asset exists (historical breaches, employee/customer split, stealer logs) | Axur leak index, automatic |
+| Deep & Dark Web, CTI, Supply Chain Intel | Explore searches, bulletins and the Microsoft vendor report are global datasets | Axur, automatic |
+| EASM | Empty until a **seed** is added; one API call starts discovery of example.com | needs preload (tested) |
+| Executives & VIPs | Empty. A VIP asset can be created (monitoring id `executives`), but name variations and the face photo are UI-only, and a fictional executive yields no detections | needs a decision |
+
+What the API can seed, all tested live and kept as **commented, ready-to-enable entries** in `tenant_preload.yml`:
+
+- `POST /api/easm/seeds?axur_tenant_key={key}` with `{"seed_names": ["example.com"]}` starts EASM discovery.
+- `POST /api/tickets-api/tickets` creates curated tickets (`phishing`, `fake-social-media-profile`, ...). `assets`
+  must be an **array of string asset keys** (objects give a 500). A repeated reference answers 409, so re-runs are
+  safe. Useful to guarantee a predictable example (e.g. the "Netflix Golden" profile the guide mentions) beside the
+  hundreds of real ones. Participants should not request takedowns on seeded tickets.
+- `POST /api/assets-api/customers/{key}/asset` with `type: VIP, monitoring: [executives]` adds an executive.
+- `POST /api/touchpoints/items` adds safelist entries (works). Automations need a `status` precondition for
+  `CREDENTIAL` match types (not enabled).
+
+Not seedable through the API: credential leaks, dark web content, executive detections, CTI bulletins. Those come
+from Axur's own collection, which is the point of the demo.
+
+Reading the data back: `GET /api/tickets-api/tickets?assets=<assetKey>&pageSize=200&include=fields` (the `customer`
+filter is rejected; types and AI predictions are under `detection.*`), `GET /api/exposure-api/credentials?customer=<key>`
+and `/credentials/total`.
+
 ## Open items with Axur
 
 1. **User-delete endpoint.** Cleanup leaves each participant's user attached to its suspended tenant. The

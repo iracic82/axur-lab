@@ -36,4 +36,29 @@ assets:
 safelist: []
 
 # ---- Raw requests: automations, tickets, EASM seeds, ... ({key}/{name} substituted) -----------------
+# All entries below were tested live on 2026-09-11 and are OFF until uncommented (see README "Synthetic data").
 requests: []
+# requests:
+#   # EASM: seed the corporate domain so the attack-surface map fills in (discovery runs asynchronously).
+#   - method: POST
+#     path: /api/easm/seeds
+#     params: {axur_tenant_key: "{key}"}
+#     json: {seed_names: ["example.com"], description: "Infoblox Exchange lab"}
+#     ok: [200, 201, 409]
+#   # Curated sample tickets so the guided walkthrough has predictable examples next to the real detections.
+#   # Assets must be given as string asset keys; keys are <tenant key> + first 4 letters of the asset name.
+#   # A repeated reference answers 409, so re-runs are safe. Ask participants NOT to request takedowns on these.
+#   - method: POST
+#     path: /api/tickets-api/tickets
+#     json: {reference: "https://www.facebook.com/netflix.golden.lab.sample", customer: "{key}", type: fake-social-media-profile, assets: ["{key}NETF"]}
+#     ok: [200, 409]
+#   - method: POST
+#     path: /api/tickets-api/tickets
+#     json: {reference: "https://netflix-billing-update.example.net/login", customer: "{key}", type: phishing, assets: ["{key}NETF"]}
+#     ok: [200, 409]
+#   # Executive for the Executives & VIPs chapter (only monitoring id allowed for VIP is "executives");
+#   # name variations and the face photo can only be added in the UI, and a fictional person yields no detections.
+#   - method: POST
+#     path: /api/assets-api/customers/{key}/asset
+#     json: {type: VIP, name: "Alex Rivera", monitoring: [executives]}
+#     ok: [200, 201, 409]

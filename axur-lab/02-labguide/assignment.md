@@ -141,8 +141,10 @@ The page defines:
 
 ____
 
-**The situation.** Mid-morning, and **Brand Protection** has findings for Netflix: a profile wearing the logo,
-a page selling something it should not, a domain one letter away from the real one.
+**The situation.** Mid-morning, and **Brand Protection** has findings for Netflix. Not one or two: within
+minutes of the asset going live, Axur's collectors typically surface several hundred, from cloned login pages
+on free hosting to casino sites trading on the name and domains one letter away from the real one. Most of the
+pages carry a working login form, and a good share ask for payment.
 
 **Axur's edge.** Every finding is a **ticket** with a lifecycle you control. A new ticket can be parked in
 **Quarantine**, where Axur re-checks it every morning and flags any change, escalated as an **Incident**,
