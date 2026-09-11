@@ -103,10 +103,11 @@ ____
 Your predecessor left four things under monitoring. You will meet them in **Day One on the Desk**, but here
 is the briefing.
 
-**The brand: Netflix.** For this exercise your company's brand is Netflix, chosen because it is one of the
+**The brand: Netflix.** For this exercise your company's brand is Netflix, registered in Axur as the asset
+**Demo Netflix, Inc**, the same name Axur uses in its own demo tenant. It was chosen because it is one of the
 most impersonated brands on the internet, so there is always something to find. Axur is watching it for
-**phishing** pages that copy the login screen and for **lookalike domains** that trade on the name. Within
-minutes of the asset going live, usually before you finish reading this page, its collectors surface several
+**phishing** pages that copy the login screen, **lookalike domains** that trade on the name, **fake social
+media profiles** and **fraudulent brand use** in ads and pages. Within minutes of the asset going live, usually before you finish reading this page, its collectors surface several
 hundred of them, most with a working login form. When one needs to go, the first notification can go out in under four minutes, and most takedowns run
 without a human touching them.
 

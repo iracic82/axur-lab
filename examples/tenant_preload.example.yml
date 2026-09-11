@@ -130,8 +130,8 @@ requests:
     ok: [200, 201, 409]
 
   # Manual ticket (POST /tickets-api/tickets): reference must fit the type (a URL for phishing), assets = asset keys
-  # of this tenant. Asset keys are generated (tenant key + 4 letters of the name), so look them up in a preload.d
-  # script if you need this — see preload.d/README.md.
+  # of this tenant. Write them as "{asset:<asset name>}" and preload_tenant.py resolves the real key from the tenant
+  # after the assets step (an unknown name skips the request with a warning).
   # - method: POST
   #   path: /api/tickets-api/tickets
   #   json:

@@ -38,9 +38,14 @@ Day One on the Desk
 
 Your badge works, your tenant is live, and four assets have been under watch since before you logged in:
 the **Netflix** brand, the **example.com** domain, the **Microsoft** vendor and the executive **Alex Rivera**.
-What follows is one shift,
-told hour by hour. Each chapter is a situation an analyst meets, what Axur does about it, the clicks to see
-it, and a decision that is yours to make. Nothing you do here can affect anyone else.
+What follows is one shift, told hour by hour. Each chapter is a situation an analyst meets, what Axur does
+about it, the clicks to see it, and a decision that is yours to make. Nothing you do here can affect anyone
+else.
+
+**About the screens in this guide.** They were taken in Axur's demo tenant, **Infoblox Sales**, where the
+brand is registered as **Demo Netflix, Inc**. Your tenant uses the same asset name and the same screens. Only
+the tenant name in the top bar, the ticket counts and the dates differ. Where a screen shows something that
+takes time to appear in a fresh tenant, the text says so.
 
 ***
 
@@ -86,14 +91,14 @@ behalf when it finds abuse.
 2. Navigate to Settings > Monitoring Settings
 ![Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png](../assets/Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png)
 3. Select Asset Management
-4. Open the **Netflix** brand asset
+4. Open the **Demo Netflix, Inc** brand asset. Its brand name and variation is **Netflix**, which is what the collectors match
 5. Review the visible metadata, the monitoring attached to it, and any linked coverage areas
 ![Jul-13-2026_at_14.27.38-image.png](../assets/Jul-13-2026_at_14.27.38-image.png)
 
 **What to notice**
 
 1. Which fields describe the asset (website, country, language, logos)
-2. Which threat types are enabled under Brand Protection. Yours starts with phishing and lookalike domains
+2. Which threat types are enabled under Brand Protection. Yours starts with phishing, lookalike domains, fake social media profiles and fraudulent brand use
 3. Whether Takedown Authorization is configured. Some platforms only act on a signed authorization that carries the brand logo
 
 ***
@@ -115,6 +120,8 @@ the cheapest way to raise detection and cut false positives at the same time.
 2. Create a library called **Netflix variations** and give it the terms an impersonator would use: netflix, netflx, net-flix, netflix-premium, netflix billing
 3. Open it with the Edit icon and see how each term becomes a search the bots will run
 ![Jul-13-2026_at_14.35.19-image.png](../assets/Jul-13-2026_at_14.35.19-image.png)
+
+The library in the screen is one from the demo tenant, **Keywords for Youtube**. Yours is **Netflix variations**, built the same way.
 
 **What to notice**
 
@@ -142,6 +149,8 @@ so what you open first is worth opening.
 ![Jul-13-2026_at_14.42.36-image.png](../assets/Jul-13-2026_at_14.42.36-image.png)
 3. Observe how a rule refines visible findings by threat type, source, asset, or other attributes
 ![Jul-13-2026_at_14.43.12-image.png](../assets/Jul-13-2026_at_14.43.12-image.png)
+
+The rule in the screen was built by Axur in the demo tenant. Note the **monitored query** it generates from the brand and its variations, and the results per day it expects. Your rule shows the same once saved.
 
 **Your call**
 
@@ -176,6 +185,8 @@ The page defines:
 - what it searches for
 ![Jul-13-2026_at_14.40.31-image.png](../assets/Jul-13-2026_at_14.40.31-image.png)
 
+In the demo screen the asset's monitoring was switched off, hence the yellow warning. In your tenant fake social media profile monitoring is active on **Demo Netflix, Inc**, so your bot runs at its next slot.
+
 ***
 
 ## 10:00  The board lights up
@@ -202,7 +213,7 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 1. Navigate to Workspaces > Brand Protection
 ![Jul-13-2026_at_14.46.30-image.png](../assets/Jul-13-2026_at_14.46.30-image.png)
 2. Filter by Ticket Type and select **Fake social media profile**
-3. Open the **Netflix Golden** sample ticket. It was placed in your tenant for this exercise, so please do not request a takedown on it
+3. Open the sample ticket whose reference is **facebook.com/netflix.golden.lab.sample**. It stands for the Netflix Golden profile in the screen below and was placed in your tenant for this exercise, so please do not request a takedown on it
 4. Review the profile details, the logo similarity, the risk level assigned by Axur AI and the attributes on the ticket
 ![Jul-13-2026_at_14.46.56-image.png](../assets/Jul-13-2026_at_14.46.56-image.png)
 
@@ -216,8 +227,8 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 
 **Steps**
 
-1. Navigate to the **Incidents** tab
-2. Open a ticket of type Fraudulent brand use
+1. Filter by Ticket Type and select **Fraudulent brand use**. In your tenant these sit in the **Open** tab until you escalate one. The demo screen shows the **Incidents** tab after that
+2. Open one ticket. If the filter comes back empty, the collectors have not reached that source yet, so take a phishing ticket instead
 ![Jul-13-2026_at_14.50.44-image.png](../assets/Jul-13-2026_at_14.50.44-image.png)
 3. Review the evidence and the current status
 4. Walk through the possible actions:
@@ -250,7 +261,7 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 
 1. Navigate to the **Closed** tickets tab
 2. Filter the ticket type to Phishing
-3. Open a phishing example tied to the Netflix asset
+3. Open a phishing example tied to the Demo Netflix, Inc asset. If the tab is still empty, Axur's AI has not revisited any of today's findings yet, so come back later in the shift
 4. Review the timeline, the evidence, the disposition and the final resolution
 ![Screenshot%202026-08-13%20at%2010.58.33%E2%80%AFPM.png](../assets/Screenshot%202026-08-13%20at%2010.58.33%E2%80%AFPM.png)
 
@@ -276,7 +287,7 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 **Steps**
 
 1. From the Treatment drop-down select **Takedown**
-2. Select the phishing ticket for the Netflix asset
+2. Select a phishing ticket for the Demo Netflix, Inc asset. Nothing in your tenant has been sent for takedown yet, so this view fills only after you request one. The screens below show a finished takedown from the demo tenant, and the events history that got it there
 3. Observe how completed takedowns are documented
 ![Jul-13-2026_at_15.10.22-image.png](../assets/Jul-13-2026_at_15.10.22-image.png)
 4. Note what "solved" means operationally

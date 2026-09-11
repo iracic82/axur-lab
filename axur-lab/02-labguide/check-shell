@@ -14,5 +14,5 @@ fi
 if python3 check_progress.py --sample-decision; then
     exit 0
 fi
-fail-message "Open Workspaces > Brand Protection, filter Ticket Type = Fake social media profile, open the Netflix Golden sample ticket and make your call: send it to Quarantine, escalate it as an Incident, or discard it. Then check again (Axur needs a few seconds to reflect the change)."
+fail-message "Open Workspaces > Brand Protection, filter Ticket Type = Fake social media profile, open the sample ticket with reference facebook.com/netflix.golden.lab.sample (the Netflix Golden profile) and make your call: send it to Quarantine, escalate it as an Incident, or discard it. Then check again (Axur needs a few seconds to reflect the change)."
 exit 1

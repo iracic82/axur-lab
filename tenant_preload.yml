@@ -14,9 +14,10 @@
 
 # ---- Assets: matched on type+name, existing ones are skipped -----------------------------------------
 assets:
+  # Named exactly as in Axur's demo tenant so the guide's screenshots match what participants see.
   - type: BRAND
-    name: Netflix
-    monitoring: [phishing, similar-domain-name]
+    name: "Demo Netflix, Inc"
+    monitoring: [phishing, similar-domain-name, fake-social-media-profile, fraudulent-brand-use]
     properties:
       officialWebsite: https://netflix.com
       nameVariations: [Netflix]
@@ -50,14 +51,15 @@ easm_seeds: ["example.com"]
 requests:
   # One curated sample ticket: the "Netflix Golden" fake profile the Lab Guide walks through. Real detections
   # are phishing pages and lookalike domains, so without this the fake-profile chapter would have no example.
-  # Assets are string asset keys (<tenant key> + first 4 letters of the asset name). A repeated reference
-  # answers 409, so re-runs are safe. Participants are told not to request takedowns on it.
+  # Assets are string asset keys; "{asset:<name>}" is resolved from the tenant after the assets step, so the key
+  # never has to be guessed. A repeated reference answers 409, so re-runs are safe. Participants are told not to
+  # request takedowns on it.
   - method: POST
     path: /api/tickets-api/tickets
-    json: {reference: "https://www.facebook.com/netflix.golden.lab.sample", customer: "{key}", type: fake-social-media-profile, assets: ["{key}NETF"]}
+    json: {reference: "https://www.facebook.com/netflix.golden.lab.sample", customer: "{key}", type: fake-social-media-profile, assets: ["{asset:Demo Netflix, Inc}"]}
     ok: [200, 409]
 # Kept for reference (off): a curated phishing ticket. Not needed, the collectors deliver hundreds.
 #   - method: POST
 #     path: /api/tickets-api/tickets
-#     json: {reference: "https://netflix-billing-update.example.net/login", customer: "{key}", type: phishing, assets: ["{key}NETF"]}
+#     json: {reference: "https://netflix-billing-update.example.net/login", customer: "{key}", type: phishing, assets: ["{asset:Demo Netflix, Inc}"]}
 #     ok: [200, 409]

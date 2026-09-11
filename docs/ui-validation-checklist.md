@@ -13,11 +13,11 @@ Invite: https://play.instruqt.com/infoblox/invite/qmefrgcrtv8f  ·  Tick each li
 - [ ] After login the tenant shown is the participant's own (name = sandbox id), not IE2L.
 
 ## Challenge 2, Day One on the Desk (menu paths and screenshots)
-- [ ] 08:00  Settings > Monitoring Settings > Asset Management lists Netflix, example.com, Microsoft, Alex Rivera; the Netflix asset shows monitoring phishing + similar domains. Screenshots 1 and 2 still match the current UI.
+- [ ] 08:00  Settings > Monitoring Settings > Asset Management lists Demo Netflix, Inc, example.com, Microsoft, Alex Rivera; the brand asset shows monitoring phishing, similar domains, fake social media profiles and fraudulent brand use. Screenshots 1 and 2 still match the current UI.
 - [ ] 08:30  Keyword libraries page exists at that path; creating a library works as described. Screenshot 3 matches.
 - [ ] 09:00  Filtering rules page: creating the Deep & Dark Web / Netflix rule works. Screenshots 4 and 5 match.
 - [ ] 09:30  Search Bots under Searches: creating a bot with the library and Facebook works. Screenshot 6 matches.
-- [ ] 10:00  Brand Protection shows hundreds of tickets. Filter Ticket Type = Fake social media profile shows the **Netflix Golden** sample; it has a snapshot and AI fields. Quarantine / Incident / Discard actions exist. Takedown is NOT offered on the sample.
+- [ ] 10:00  Brand Protection shows hundreds of tickets. Filter Ticket Type = Fake social media profile shows the sample with reference facebook.com/netflix.golden.lab.sample (the **Netflix Golden** profile); it has a snapshot and AI fields. Quarantine / Incident / Discard actions exist. Takedown is NOT offered on the sample.
 - [ ] 10:00  After moving the sample ticket, the **Check** button passes within a few seconds. Before moving it, Check fails with the hint text.
 - [ ] 10:00  Incidents, Quarantine and Closed tabs exist; Closed shows a resolution column (Discarded/Resolved/...). Screenshots 7 to 13 match.
 - [ ] 11:30  Data Leakage shows credentials for example.com; Employee/Customer switch and Leak Format (Table, Stealer Log) exist. Screenshots 14 to 17 match.

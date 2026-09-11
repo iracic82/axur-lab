@@ -214,8 +214,8 @@ the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI 
 | Executives & VIPs | Empty. A VIP asset can be created (monitoring id `executives`), but name variations and the face photo are UI-only, and a fictional executive yields no detections | needs a decision |
 
 **Enabled in `tenant_preload.yml`** (decision 2026-09-11): the EASM seed for example.com, one curated
-`fake-social-media-profile` ticket ("Netflix Golden") because real detections are only phishing and lookalike
-domains, and the fictional executive **Alex Rivera** as a VIP asset so the Executives workspace is configured.
+`fake-social-media-profile` ticket ("Netflix Golden", reference facebook.com/netflix.golden.lab.sample) so the
+fake-profile chapter has a predictable example from minute one, and the fictional executive **Alex Rivera** as a VIP asset so the Executives workspace is configured.
 A curated phishing ticket is kept commented out; the collectors deliver hundreds on their own.
 
 What the API can seed, all tested live:

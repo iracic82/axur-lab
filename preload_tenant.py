@@ -18,7 +18,7 @@ Config sections (all optional; see tenant_preload.yml for commented examples):
   assets:        list of asset payloads for POST /assets-api/customers/{key}/asset
   easm_seeds:    list of domains / IPs / CIDRs for POST /easm/seeds (skipped when already registered)
   safelist:      list of {group, items[]} for POST /touchpoints/items
-  requests:      raw escape hatch: list of {method, path, json?, params?, ok?[]} — "{key}"/"{name}"
+  requests:      raw escape hatch: list of {method, path, json?, params?, ok?[]} — "{key}"/"{name}"/"{asset:<asset name>}"
                  placeholders are substituted anywhere in path / json / params.
 
 Environment:
@@ -208,10 +208,20 @@ def step_safelist(api, key, entries):
                  ok=(200, 201, 204, 409, 0))
 
 
+def asset_placeholders(api, key):
+    """{asset:<name>} -> asset key, read back from the tenant so nobody has to guess how Axur derives keys."""
+    return {f"asset:{a.get('name')}": a.get("assetKey") for a in existing_assets(api, key) if a.get("assetKey")}
+
+
 def step_requests(api, key, name, reqs):
     """Raw escape hatch: whatever Axur asks us to preload that has no dedicated step yet."""
+    mapping = {"key": key, "name": name}
+    if any("{asset:" in json.dumps(r) for r in reqs):
+        mapping.update(asset_placeholders(api, key))
     for r in reqs:
-        r = substitute(r, {"key": key, "name": name})
+        r = substitute(r, mapping)
+        if "{asset:" in json.dumps(r):
+            log(f"⚠️ unresolved asset placeholder in request {r['path']} (asset not found in tenant) — skipping"); continue
         ok = tuple(r.get("ok", [200, 201, 202, 204]))
         log(f"🔧 {r['method'].upper()} {r['path']}")
         api.call(r["method"].upper(), r["path"], json_body=r.get("json"), params=r.get("params"), ok=ok + (0,))

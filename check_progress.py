@@ -72,7 +72,7 @@ def main():
     if args.sample_decision:
         tk, tab = find_sample(key)
         if not tk:
-            print("FAIL: the Netflix Golden sample ticket was not found on this tenant.", flush=True); sys.exit(1)
+            print("FAIL: the Netflix Golden sample ticket (reference facebook.com/netflix.golden.lab.sample) was not found on this tenant.", flush=True); sys.exit(1)
         code, hist = get(f"/api/tickets-api/ticket-history/{tk}")
         actions = [a.get("type") for a in (hist.get("actions", []) if code == 200 else [])]
         if tab == "open":
