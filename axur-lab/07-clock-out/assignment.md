@@ -1,5 +1,6 @@
 ---
 slug: clock-out
+id: viqxxgubxvuy
 type: challenge
 title: Clock out
 teaser: The reasoning behind the four debrief calls, and what to take home.
@@ -12,11 +13,13 @@ notes:
 
     Then the shift is over. Your tenant is suspended automatically when the lab ends.
 tabs:
-- title: Axur Portal
+- id: b16xxjg5tq3t
+  title: Axur Portal
   type: browser
   hostname: axur
-difficulty: ''
+difficulty: ""
 timelimit: 0
+enhanced_loading: null
 ---
 Clock out
 ===
