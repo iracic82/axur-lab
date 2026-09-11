@@ -1,12 +1,12 @@
 #!/bin/bash
-# Challenge 2 (Lab Guide) setup: preload / configure this sandbox's Axur tenant.
+# Challenge 1 (Introduction) setup: preload / configure this sandbox's Axur tenant.
 #   1. tenant_preload.yml  -> applied by preload_tenant.py (declarative: credit limit, assets, safelist, raw requests)
 #   2. preload.d/*         -> any extra executable scripts in the repo, run in name order (10-foo.py, 20-bar.sh, ...)
 # Both come from the repo via `git pull`, so adding preload content is a commit + push — no track push.
 # Everything runs in /root/lab/axur-lab with tenant_key.txt / tenant_name.txt and AXUR_TOKEN available.
 set -euxo pipefail
 
-echo "=== Axur Lab - Challenge 2 setup: preload tenant configuration ==="
+echo "=== Axur Lab - Challenge 1 setup: preload tenant configuration ==="
 
 set +x
 source /root/lab/axur.env
@@ -35,4 +35,4 @@ if [ -d preload.d ]; then
   done
 fi
 
-echo "=== Challenge 2 setup complete ==="
+echo "=== Challenge 1 setup complete ==="

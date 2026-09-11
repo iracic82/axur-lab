@@ -1,5 +1,5 @@
 # Per-tenant preload for the Axur Instruqt lab — executed by preload_tenant.py from the
-# challenge-2 setup script for EVERY sandbox tenant. Idempotent: safe to re-run.
+# challenge-1 setup script for EVERY sandbox tenant. Idempotent: safe to re-run.
 #
 # Content below = Axur's recommendation for the Infoblox Exchange lab (received 2026-09-11):
 #   Brand  Netflix   — phishing + similar-domain-name

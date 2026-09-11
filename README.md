@@ -8,8 +8,8 @@ Same pattern as the Infoblox CSP `sandbox_api.py` / `create_sandbox.py` / `delet
 | `create_tenant.py` | Creates a tenant named after `INSTRUQT_SANDBOX_ID`, retries transient errors, writes `tenant_key.txt` |
 | `delete_tenant.py` | Reads `tenant_key.txt` (or takes a key argument), **suspends** the tenant, removes the file |
 | `resume_tenant.py` | `python3 resume_tenant.py <KEY>` re-activates a suspended tenant |
-| `preload.d/` | Extra preload scripts (`.py`/`.sh`), run in name order by the challenge-2 setup after the YAML. See `preload.d/README.md`. |
-| `preload_tenant.py` + `tenant_preload.yml` | Per-tenant preload/config driver run by the **challenge-2 setup script**. Declarative YAML: `credit_limit`, `assets`, `safelist`, and a raw `requests` escape hatch; idempotent; `--dry-run` and `--undo`. The YAML is empty until Axur specifies what each lab tenant needs. |
+| `preload.d/` | Extra preload scripts (`.py`/`.sh`), run in name order by the challenge-1 setup after the YAML. See `preload.d/README.md`. |
+| `preload_tenant.py` + `tenant_preload.yml` | Per-tenant preload/config driver run by the **challenge-1 setup script**. Declarative YAML: `credit_limit`, `assets`, `safelist`, and a raw `requests` escape hatch; idempotent; `--dry-run` and `--undo`. The YAML is empty until Axur specifies what each lab tenant needs. |
 | `user_provision.py` | Registers the participant user on the tenant via Axur's event endpoint `POST /api/identity/registration/users/{tenant}` (email `<participant>@USER_DOMAIN`, generated password, `groupKey` manager). Writes `user_email.txt`, `user_password.txt`, `user_id.txt`, `user_credentials.sh`; idempotent on re-run. `--delete` is a no-op until Axur provides a delete endpoint (`AXUR_USER_DELETE_PATH`). Falls back to *pending* mode (exit 0) if the endpoint disappears. |
 | `list_tenants.py` | Read-only listing of key / name / active / suspended. Good first check of the API key. |
 
@@ -93,7 +93,7 @@ The track is pulled into `axur-lab/` (`instruqt track pull axur-lab`). What was 
   the suspend call has answered `400 Tenant is already suspended` while the tenant stayed active, and the state
   only became consistent minutes later. Instruqt gives cleanup scripts 55 min, so this fits.
 
-- `02-labguide/setup-shell` (challenge-2 setup) does `git pull` in `/root/lab/axur-lab` and runs
+- `01-introduction/setup-shell` (challenge-1 setup) does `git pull` in `/root/lab/axur-lab` and runs
   `preload_tenant.py`, which applies `tenant_preload.yml` to the sandbox's tenant. The same partner API key
   is used for every tenant (per-tenant endpoints take the `customerKey`); no per-tenant keys exist.
   Because of the `git pull`, changing what is preloaded is a commit + push of the YAML — no track push.
@@ -111,7 +111,7 @@ Setup is idempotent: if a tenant with the sandbox's name already exists it is re
 ## How to preload configuration into each lab tenant
 
 Every sandbox gets its own empty Axur tenant. Whatever each tenant must contain for the lab is applied by
-the **challenge-2 setup script**, which pulls this repo and runs two things in order:
+the **challenge-1 setup script**, which pulls this repo and runs two things in order:
 
 1. `tenant_preload.yml` via `preload_tenant.py` — declarative, for plain API calls.
 2. `preload.d/*` — scripts, for anything that needs logic.
@@ -196,7 +196,7 @@ sandbox (creates and then suspends a tenant named after the test participant id)
 git add tenant_preload.yml preload.d && git commit -m "preload: ..." && git push
 ```
 
-Start a sandbox and open the challenge-2 setup log in Instruqt: `preload_tenant.py` prints every step it
+Start a sandbox and open the challenge-1 setup log in Instruqt: `preload_tenant.py` prints every step it
 applied or skipped, and `00-report.py` prints the tenant's credit limit, assets and enabled monitoring at
 the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI (it tails; Ctrl-C to stop).
 

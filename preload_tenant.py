@@ -3,7 +3,7 @@
 Per-tenant preload / configuration driver for the Axur Instruqt lab.
 
 Runs the steps declared in tenant_preload.yml against ONE tenant, idempotently, so it can be
-re-run safely (challenge restarts, retries). Meant for the challenge-2 setup script; when Axur
+re-run safely (challenge restarts, retries). Meant for the challenge-1 setup script; when Axur
 tells us what each lab tenant must contain, we edit the YAML — not this script.
 
 Usage:
