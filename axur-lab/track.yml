@@ -37,7 +37,7 @@ developers:
 - ssingh3@infoblox.com
 show_timer: true
 skipping_enabled: true
-idle_timeout: 7200
+idle_timeout: 14400
 timelimit: 14400
 lab_config:
   sidebar_enabled: true
@@ -46,5 +46,5 @@ lab_config:
   loadingMessages: true
   override_challenge_layout: false
   hideStopButton: false
-checksum: "16422900720461739608"
+checksum: "9847521084705499778"
 enhanced_loading: false
