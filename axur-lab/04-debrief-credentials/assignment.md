@@ -1,17 +1,23 @@
 ---
 slug: debrief-credentials
+id: qv6etzkyo7nh
 type: quiz
 title: 'Debrief 2 of 4: two leaks, one afternoon'
 teaser: Which leak do you escalate first?
 answers:
 - Record A. Employee credentials are always more dangerous than customer credentials.
-- Record B. A stealer log from yesterday means active malware on a real machine and a fresh credential for your own login page, while Record A is an old, already-known leak.
-- Neither. Credentials found on the dark web cannot be acted on until the user reports a problem.
-- Both equally. Every credential exposure must be treated as an incident within the hour.
+- Record B. A stealer log from yesterday means active malware on a real machine and
+  a fresh credential for your own login page, while Record A is an old, already-known
+  leak.
+- Neither. Credentials found on the dark web cannot be acted on until the user reports
+  a problem.
+- Both equally. Every credential exposure must be treated as an incident within the
+  hour.
 solution:
 - 1
-difficulty: ''
+difficulty: ""
 timelimit: 0
+enhanced_loading: null
 ---
 Debrief 2 of 4
 ===

@@ -1,17 +1,22 @@
 ---
 slug: debrief-lookalike
+id: 0fws3ivdrnyw
 type: quiz
 title: 'Debrief 1 of 4: the domain that is not there yet'
 teaser: A lookalike domain, but nothing on it. What do you do?
 answers:
-- Discard it. An empty page is a false positive, and Quarantine only clutters the queue.
-- Leave it in Quarantine. Axur re-checks quarantined tickets every morning and flags any content change, so the day it becomes a phishing page you will know.
-- Request a takedown now. The registrar will remove a domain that imitates a brand even before it hosts content.
+- Discard it. An empty page is a false positive, and Quarantine only clutters the
+  queue.
+- Leave it in Quarantine. Axur re-checks quarantined tickets every morning and flags
+  any content change, so the day it becomes a phishing page you will know.
+- Request a takedown now. The registrar will remove a domain that imitates a brand
+  even before it hosts content.
 - Escalate it as an Incident so the SOC starts blocking it at the firewall.
 solution:
 - 1
-difficulty: ''
+difficulty: ""
 timelimit: 0
+enhanced_loading: null
 ---
 Debrief 1 of 4
 ===
