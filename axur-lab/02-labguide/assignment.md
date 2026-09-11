@@ -3,14 +3,32 @@ slug: labguide
 id: uxm0jprdba1f
 type: challenge
 title: Day One on the Desk
-teaser: Work a full shift as the analyst. Tune the monitoring, triage what lights
-  up, chase leaked passwords, listen in the dark, and protect the people at the top.
+teaser: Work a full shift as the analyst. Tune the monitoring, triage what lights up, chase leaked passwords, listen in the dark, and protect the people at the top.
+notes:
+- type: text
+  contents: |-
+    # Clocking in
+
+    It is 08:00. Your badge worked, your tenant is live, and while you were reading the briefing Axur's collectors
+    were already busy: by now there are usually a few hundred findings waiting for the Netflix brand alone.
+
+    This challenge is one full shift, told hour by hour. Every chapter is a place in the portal, what an analyst
+    does there, and a decision that is yours.
+- type: text
+  contents: |-
+    # One decision is checked
+
+    At 10:00 you will meet a fake profile called **Netflix Golden**. It was placed in your tenant for this
+    exercise. Quarantine it, escalate it or discard it, then press **Check**: the lab reads your tenant back from
+    the Axur API and confirms the ticket has left Potential threats.
+
+    Everything else is yours to explore. Nothing you do can affect anyone else.
 tabs:
 - id: 8xk2pbuykb1r
   title: Axur Portal
   type: browser
   hostname: axur
-difficulty: ""
+difficulty: ''
 timelimit: 0
 enhanced_loading: null
 ---
