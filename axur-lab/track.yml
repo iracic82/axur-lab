@@ -1,7 +1,24 @@
 slug: axur-lab
 id: rsqko78gxgac
 title: Axur Lab
-description: ""
+teaser: Spend a day as an external threat analyst with your own Axur tenant: tune the monitoring, triage brand abuse, chase leaked passwords, listen on the dark web and check on a supplier.
+description: |-
+  **One shift as an external threat analyst, on a tenant that is yours alone.**
+
+  When the lab starts, Axur builds your workplace: a private tenant, an analyst login with manager rights,
+  and three assets already under watch. The brand is Netflix, one of the most impersonated names on the
+  internet. The corporate domain is example.com, watched for leaked credentials and secrets in public code.
+  The vendor is Microsoft, tracked by Supply Chain Intel.
+
+  Then you work the day, hour by hour: tune keyword libraries, filters and search bots, triage what
+  Brand Protection surfaces, follow a leaked password back to an infected laptop, listen in the deep and
+  dark web, protect an executive, map your attack surface and check on your supplier. Every chapter ends
+  with a decision that is yours to make: quarantine, escalate, discard or take it down.
+
+  You will leave able to navigate Axur with confidence, explain how it surfaces external threats, and
+  show how it fits with Infoblox protection at the DNS layer. Built for sales engineers, security
+  specialists, partners and guided customer workshops. About two hours. Your tenant is suspended
+  automatically when you finish.
 icon: ./assets/Infoblox-logo-for-email.png
 tags:
 - threat-intel

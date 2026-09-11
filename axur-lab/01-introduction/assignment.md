@@ -8,16 +8,39 @@ teaser: You are the new external threat analyst. A tenant, a login and three ass
 notes:
 - type: text
   contents: |-
-    # **Infoblox Axur Introductory lab**
+    # Your first shift starts in a few minutes
 
-    Your environment is being provisioned: a private Axur tenant is being created for you, your analyst
-    account is being registered, and the first assets are being placed under watch. You will access it
-    through the **Axur Portal** tab.
+    Somewhere on the internet, right now, someone is registering a domain that looks almost like the
+    brand you are about to protect. Someone else is pasting a list of stolen passwords into a forum.
+    A fake profile is choosing a logo.
 
-    **In this lab you will…**
-    - Step into the role of an external threat analyst with a live tenant of your own.
-    - See what Axur already knows about the brand, domain and vendor you are responsible for.
-    - Learn how findings become tickets, and tickets become takedowns.
+    You are the new external threat analyst. Your job is to see all of that before it reaches a
+    customer. Axur is the platform you will do it with.
+- type: text
+  contents: |-
+    # What is happening while you wait
+
+    Behind this screen, your workplace is being built:
+
+    - A **private Axur tenant** is being created, named after this session. It is yours alone.
+    - Your **analyst account** is being registered on it, with manager rights.
+    - Three assets are being placed **under watch**: the brand, the corporate domain and a key vendor.
+
+    It takes about three minutes. When the lab opens, your credentials will be on the first page and
+    the Axur Portal will be one tab away.
+- type: text
+  contents: |-
+    # The day ahead
+
+    You will work one shift, hour by hour:
+
+    - **Morning:** learn what you protect, then teach Axur your language and cut the noise.
+    - **Midday:** the board lights up. Fake profiles, fraudulent brand use, lookalike domains, and
+      the decisions that turn a finding into a takedown.
+    - **Afternoon:** leaked passwords, the dark web, the people at the top, your attack surface, and
+      your supplier's problems that are about to become yours.
+
+    Nothing you do here affects anyone else, so be curious.
 tabs:
 - id: tg0fzhghiigb
   title: Axur Portal
