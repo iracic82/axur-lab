@@ -233,6 +233,27 @@ created by a rejected request); Microsoft is **30**. The working payload, now in
 The first 50 ids collected during the scan are in `examples/axur_vendor_ids.json` (Infoblox 23, Cisco 8,
 Google 20, Amazon Web Services 3, ...). To find another vendor, probe further ids the same way or ask Axur.
 
+## Lab story: sources for the product claims
+
+The challenge texts (`axur-lab/01-introduction`, `axur-lab/02-labguide`) describe what Axur does in Axur's own
+terms. Every claim traces to one of these, checked 2026-09-11:
+
+| Claim in the story | Source |
+|---|---|
+| Ticket lifecycle: Quarantine (re-checked daily 06:00, auto-discard after 6 months), Incident, Discard, Takedown; evidence raises removal odds | [Actions within a ticket](https://help.axur.com/en/articles/9005224-actions-within-a-ticket) |
+| Closed tickets end as Discarded, Resolved, Unresolved or Interrupted | [Work lists and Export](https://help.axur.com/en/articles/7967405-work-lists-and-export) |
+| AI severity classification with flame icons; OnePixel real-time clone detection | [Phishing](https://help.axur.com/en/articles/7988780-phishing), [Sorting and prioritization](https://help.axur.com/en/articles/7967591-sorting-and-prioritization-of-tickets) |
+| Lookalike domains: ticket opened and quarantined automatically | [Smart Monitoring of Similar Domains](https://help.axur.com/en/articles/11566976-smart-monitoring-of-similar-domains) |
+| Takedown: ~98% success, first phishing notification < 4 min, 86% fully automated, stay-down guarantee, authorization document with brand logo | [How Takedown works](https://help.axur.com/en/articles/9345675-how-takedown-works-the-role-of-entities-and-the-time-it-takes-to-resolve-an-incident), [Takedown authorization](https://help.axur.com/en/articles/8058239-takedown-authorization-document-and-other-documents-required-for-takedown), [axur.com/takedown](https://www.axur.com/en-us/takedown/), [axur.com/brand-protection](https://www.axur.com/en-us/brand-protection/) |
+| Brand exposure level assigned at registration | [Understand what brand exposure level means](https://help.axur.com/en/articles/10962984-understand-what-brand-exposure-level-means) |
+| Employee vs customer credentials, stealer logs with machine context, code secrets, breach mentions | [Mentions in data breach](https://help.axur.com/en/articles/12996239-mentions-in-data-breach), [Code secret exposure](https://help.axur.com/en/articles/8992985-code-secret-exposure), [Infiltrated accounts](https://help.axur.com/en/articles/8043746-infiltrated-accounts) |
+| Deep & Dark Web: 3,000+ channels incl. WhatsApp/Telegram/Discord; Explore with quotes/operators; ticket from a result | [axur.com/technical-information](https://www.axur.com/en-us/technical-information/), [Explore](https://help.axur.com/en/articles/8043835-explore-open-searches-in-deep-dark-web) |
+| Executives & VIPs: personal info, credentials, cards, fake profiles via facial recognition (7-day Face Match), encrypted storage | [Monitoring for Executives and VIPs](https://help.axur.com/en/articles/10495379-monitoring-for-executives-and-vips-personalized-security) |
+| CTI monitoring rules (technologies, industry, geography, actors, risk level), default rules, follow to get alerts; risk score triage | [Cyber Threat Intel](https://help.axur.com/en/articles/8950599-cyber-threat-intel-cti), [Risk Score](https://help.axur.com/en/articles/16165330-risk-score-understanding-and-using-threat-prioritization) |
+| EASM: seeds → hosts, subdomains, IPs, ports, certificates; risk score from CVSS + EPSS + context | [EASM](https://help.axur.com/en/articles/16162907-external-attack-surface-management-easm) |
+| Supply Chain Intel vendor report tabs, AI summary, critical bulletins, trend indicators, PDF export | [Supply Chain Intel](https://help.axur.com/en/articles/16007279-supply-chain-intel) |
+| Workspace names and taglines | Axur ONE workspace menu (screenshot, 2026-09-11) |
+
 ## Endpoints used (all documented, all under `https://api.axur.com/gateway/1.0/api`)
 
 | Call | Path | Notes |

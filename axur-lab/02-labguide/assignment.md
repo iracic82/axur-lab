@@ -17,10 +17,10 @@ enhanced_loading: null
 Day One on the Desk
 ===
 
-Your badge works, your tenant is live, and three assets have been under watch since before you logged in.
-What follows is one shift, told hour by hour. Every chapter is a place in the Axur portal, a thing an analyst
-does there, and a decision you get to make. Take your time, click around, and remember that nothing you do
-here can affect anyone else.
+Your badge works, your tenant is live, and three assets have been under watch since before you logged in:
+the **Netflix** brand, the **example.com** domain and the **Microsoft** vendor. What follows is one shift,
+told hour by hour. Each chapter is a situation an analyst meets, what Axur does about it, the clicks to see
+it, and a decision that is yours to make. Nothing you do here can affect anyone else.
 
 ***
 
@@ -29,10 +29,14 @@ here can affect anyone else.
 
 ____
 
-Every alert Axur will ever raise for you traces back to an **asset**: the brand, the domain, the vendor.
-An asset that is well described, with its official website, its name variations, its languages and its
-logos, gives the detection engines something precise to compare the internet against. A vague asset produces
-noise. Start the day by reading the file on the brand you are responsible for.
+**The situation.** A takedown request, a phishing alert, a lookalike domain: all of it traces back to how well
+the brand is described. Axur compares the internet against the asset file, so a precise file means precise
+detections and a vague one means noise.
+
+**Axur's edge.** During registration the platform assigns the brand an automatic **exposure level** from its
+web traffic, which sets the right coverage. Add the official website, name variations, locales and logos and
+the engines have something exact to match. Enable **Takedown Authorization** and the platform can act on your
+behalf when it finds abuse.
 
 **Steps**
 
@@ -47,9 +51,8 @@ noise. Start the day by reading the file on the brand you are responsible for.
 **What to notice**
 
 1. Which fields describe the asset (website, country, language, logos)
-2. How a well defined asset improves detection and cuts false positives
-3. Which threat types are enabled under Brand Protection. Yours starts with phishing and lookalike domains
-4. Whether **Takedown Authorization** is configured. With it, the Takedown action becomes available on applicable tickets, and Axur can act on your behalf
+2. Which threat types are enabled under Brand Protection. Yours starts with phishing and lookalike domains
+3. Whether Takedown Authorization is configured. Some platforms only act on a signed authorization that carries the brand logo
 
 ***
 
@@ -58,8 +61,11 @@ noise. Start the day by reading the file on the brand you are responsible for.
 
 ____
 
-Attackers rarely spell the brand the way marketing does. **Keyword libraries** hold the variations, typos and
-slogans that the search bots look for, so the quality of this list decides what the bots bring back.
+**The situation.** Attackers never spell the brand the way marketing does. "Netflx", "netflix-billing",
+"NetflixPremium": the variations are where the fraud lives.
+
+**Axur's edge.** **Keyword libraries** hold those variations and feed the search bots, so tuning this list is
+the cheapest way to raise detection and cut false positives at the same time.
 
 **Steps**
 
@@ -79,8 +85,12 @@ slogans that the search bots look for, so the quality of this list decides what 
 
 ____
 
-An analyst who reads everything reads nothing. **Filtering rules** narrow what reaches the queue by threat
-type, source, asset or other attributes, so the first ticket you open is worth opening.
+**The situation.** An analyst who reads everything reads nothing. Somewhere in the stream is the one finding
+that matters today.
+
+**Axur's edge.** **Filtering rules** narrow what reaches the queue by threat type, source, asset or other
+attributes, and the platform's AI already ranks tickets by severity, marking the urgent ones with flame icons,
+so what you open first is worth opening.
 
 **Steps**
 
@@ -105,8 +115,11 @@ Which filters would help most for:
 
 ____
 
-You cannot search the internet by hand. **Search bots** do it on a schedule, combining an asset, a keyword
-library and a set of sources, and turn what they find into detections.
+**The situation.** You cannot search the internet by hand, and the fraud does not keep office hours.
+
+**Axur's edge.** **Search bots** run on a schedule, combining an asset, a keyword library and a set of sources,
+and turn what they find into detections. On the brand's own website, a discreet **OnePixel** script goes
+further and flags pages that copy the official layout the moment they load.
 
 **Steps**
 
@@ -128,10 +141,15 @@ The page defines:
 
 ____
 
-Mid-morning, and **Brand Protection** has findings. This is the workspace where impersonation, phishing,
-fraudulent websites and fake profiles land as **tickets**. Every ticket moves through a lifecycle. It starts as
-new, can be parked in **quarantine** while you investigate, escalated as an **incident**, **discarded** as a
-false positive, or sent for **takedown** when authorization allows. Your job this hour is to make those calls.
+**The situation.** Mid-morning, and **Brand Protection** has findings for Netflix: a profile wearing the logo,
+a page selling something it should not, a domain one letter away from the real one.
+
+**Axur's edge.** Every finding is a **ticket** with a lifecycle you control. A new ticket can be parked in
+**Quarantine**, where Axur re-checks it every morning and flags any change, escalated as an **Incident**,
+**Discarded** as a false positive, or sent for **Takedown**. Takedowns are what Axur is known for: the first
+phishing notification goes out in under four minutes, 86% of requests run fully automated from detection to
+decision to notification, and the success rate is around 98%, with a stay-down guarantee. Lookalike domains
+do not even wait for you: smart monitoring opens the ticket and quarantines the domain automatically.
 
 #### A fake profile wearing your logo
 
@@ -176,6 +194,10 @@ false positive, or sent for **takedown** when authorization allows. Your job thi
 ![Jul-13-2026_at_14.53.07-image.png](../assets/Jul-13-2026_at_14.53.07-image.png)
 4. Look for signals such as branding overlap, impersonation patterns, hosting behavior, or campaign context
 
+**What to notice**
+
+- These landed here without anyone's help. Quarantine is re-checked daily, and a domain that turns hostile is flagged for reassessment
+
 #### The ones that are already closed
 
 **Steps**
@@ -188,7 +210,7 @@ false positive, or sent for **takedown** when authorization allows. Your job thi
 
 **What to notice**
 
-- How the original detection was investigated and validated
+- Closed tickets carry one of four outcomes: Discarded, Resolved, Unresolved or Interrupted
 - Which evidence and workflow actions led to the resolution
 - How a closed ticket tells a customer the story of visibility, analyst judgement and measurable remediation
 
@@ -216,7 +238,7 @@ false positive, or sent for **takedown** when authorization allows. Your job thi
 
 **Your call**
 
-- Which evidence or actions led to closure
+- Which evidence or actions led to closure. The more evidence on a ticket, from screenshots to HTML, the higher the odds of removal
 
 ***
 
@@ -225,10 +247,14 @@ false positive, or sent for **takedown** when authorization allows. Your job thi
 
 ____
 
-Your second asset is the corporate domain, example.com, and the **Data Leakage** workspace is where its
-troubles surface: credentials in combolists, records scraped from breached sites, and passwords stolen straight
-from infected laptops by info-stealer malware. Employee leaks and customer leaks are different problems, so
-Axur keeps them apart.
+**The situation.** Your second asset is the corporate domain, example.com. Somewhere a combolist carries an
+employee's password, and somewhere a laptop infected with an info-stealer has been quietly uploading every
+saved login, including the one to your VPN.
+
+**Axur's edge.** **Data Leakage** separates what a business must treat differently: **employee credentials**,
+which are a route into your systems, and **customer credentials**, which are account takeover waiting to
+happen. Stealer logs come with the infected machine's context, so you can tell an old breach from active
+malware. Secrets committed to public code are caught as well.
 
 **Steps**
 
@@ -263,9 +289,12 @@ Axur keeps them apart.
 
 ____
 
-After lunch you go where the conversations happen. The **Deep and Dark Web** workspace collects brand
-mentions, leaked data, illicit discussions and other intelligence from forums, markets and messaging channels.
-The skill here is separating a real threat from chatter.
+**The situation.** After lunch you go where the conversations happen: forums, marketplaces and closed chat
+groups where Netflix accounts are traded and "premium" hacks are advertised.
+
+**Axur's edge.** The **Deep and Dark Web** workspace monitors more than three thousand channels, from restricted
+forums and onion sites to WhatsApp, Telegram and Discord groups. **Explore** lets you search all of it with
+exact phrases and operators, and a relevant result becomes a ticket with one click.
 
 **Steps**
 
@@ -284,9 +313,12 @@ The skill here is separating a real threat from chatter.
 
 ____
 
-Not every target is a brand. Executives and public figures are impersonated, doxxed and phished because one
-compromised leader is worth more to an attacker than a thousand users. The **Executives & VIPs** workspace
-watches for fake profiles, targeted threats and exposed personal information.
+**The situation.** Not every target is a brand. One compromised executive is worth more to an attacker than a
+thousand users: a fake profile in their name, a leaked document number, a password reused from a breach.
+
+**Axur's edge.** **Executives & VIPs** watches for personal information leaks, credential and card exposure
+and fake profiles, using facial recognition to spot image abuse across the major social platforms. Executive
+data is stored encrypted, and each detection comes with recommended next steps.
 
 **Steps**
 
@@ -305,16 +337,19 @@ watches for fake profiles, targeted threats and exposed personal information.
 
 ____
 
-**Cyber Threat Intel** aggregates and analyzes intelligence sources and turns them into contextual insights
-and bulletins: vulnerabilities, threat actors, campaigns and indicators of compromise. It serves the analyst
-in an investigation and the executive who needs a one-page picture of the threat landscape.
+**The situation.** A new campaign is exploiting a product you run. You would like to know before it is news.
+
+**Axur's edge.** **Cyber Threat Intel** aggregates intelligence sources into bulletins on vulnerabilities,
+threat actors, campaigns and indicators, with a risk score that lets you triage from the top. **Monitoring
+rules** turn that into alerts that apply to you: combine your technologies, industry, geography, threat actors
+and risk level, then follow the rule to start receiving them.
 ![Screenshot%202026-08-17%20at%201.54.14%E2%80%AFPM.png](../assets/Screenshot%202026-08-17%20at%201.54.14%E2%80%AFPM.png)
 
 **Monitoring rules**
 
-You can create monitoring rules based on technologies, malware, threat actors, geography, industry and risk
-level, so the intelligence that reaches you is the intelligence that applies to you. For example, threats
-aimed at a specific location in a specific industry:
+The platform ships with default rules to copy from: threats to my technologies, threats aimed at specific
+industries and locations, and specific threat actor activity. For example, threats aimed at a location in an
+industry:
 ![Screenshot%202026-08-17%20at%201.58.45%E2%80%AFPM.png](../assets/Screenshot%202026-08-17%20at%201.58.45%E2%80%AFPM.png)
 
 ***
@@ -324,8 +359,12 @@ aimed at a specific location in a specific industry:
 
 ____
 
-**External Attack Surface Management** maps your company the way an attacker would: hosts, IPs, technology
-stack, open ports, certificates, and the exposures that come with them.
+**The situation.** Every attacker starts with reconnaissance. Do it first.
+
+**Axur's edge.** **External Attack Surface Management** starts from a seed such as example.com and expands
+outward through related domains, hosts, IPs, services, open ports and certificates. Each asset gets a risk
+score that blends CVSS, exploitability and context such as production relevance and brand similarity, so the
+list sorts itself by what to fix first.
 
 **Steps**
 
@@ -342,17 +381,21 @@ stack, open ports, certificates, and the exposures that come with them.
 
 ____
 
-Your third asset is not yours at all. Microsoft is a vendor, and **Supply Chain Intel** exists because a
-breach, a leaked corporate credential or a critical bulletin at a supplier becomes your incident the moment
-you depend on them. Axur keeps a vendor profile with its exposure, its threat landscape and its history, so
-you hear about it before the incident report does.
+**The situation.** Your third asset is not yours at all. Microsoft is a vendor, and a ransomware announcement
+or a leaked corporate credential at a supplier becomes your incident the moment you depend on them.
+
+**Axur's edge.** **Supply Chain Intel** keeps a living report per vendor: an AI summary of its posture,
+security bulletins with the categories you care about flagged as critical, its attack surface, leaked employee
+and customer credentials, and dark web mentions, each with week-over-week or month-over-month trend
+indicators. A ransomware group naming a supplier often shows up here before mainstream news, and the whole
+report exports to PDF for the people who need it.
 
 **Steps**
 
-1. Navigate to the Supply Chain Intel area and open the **Microsoft** vendor
-2. Read the overview: the vendor's main domain, corporate name and last update
-3. Browse the sections Axur maintains for a vendor: dark web mentions, corporate credentials, external attack surface, threat landscape and indicators
-4. Open the history and look for critical bulletins
+1. Open the **Supply Chain Intel** workspace and select the **Microsoft** vendor
+2. Read the **Overview**: main domain, corporate name and last update
+3. Open **Threat Landscape** and read the AI summary, then filter the bulletins with **Only critical**
+4. Browse **Attack Surface**, **Employee Credentials**, **Customer Credentials** and **Dark Web**, and note the trend indicators
 
 **Your call**
 
@@ -365,9 +408,9 @@ you hear about it before the incident report does.
 
 ____
 
-In one day you tuned what Axur listens for, triaged what it found, followed a leaked password back to an
-infected laptop, listened to the underground, protected a person rather than a logo, mapped your own attack
-surface and checked on a supplier. That is the external half of the picture.
+In one day you tuned what Axur listens for, watched it rank the findings, sent a takedown, followed a leaked
+password back to an infected laptop, listened to the underground, protected a person rather than a logo,
+mapped your own attack surface and checked on a supplier. That is the external half of the picture.
 
 Axur helps Infoblox move earlier in the attack lifecycle by identifying and disrupting external threats before
 they reach users. Combined with Infoblox protection at the DNS layer, it gives organizations a stronger and

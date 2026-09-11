@@ -101,15 +101,17 @@ briefing.
 
 **The brand: Netflix.** For this exercise your company's brand is Netflix, chosen because it is one of the
 most impersonated brands on the internet, so there is always something to find. Axur is watching it for
-**phishing** pages that copy the login screen and for **lookalike domains** that trade on the name.
+**phishing** pages that copy the login screen and for **lookalike domains** that trade on the name. When it
+finds one, the first notification can go out in under four minutes, and most takedowns run without a human
+touching them.
 
-**The domain: example.com.** This is the corporate domain. Axur is watching the leak markets and paste sites
-for **employee credentials** and **customer credentials** tied to it, and public code repositories for
-**secrets** committed by mistake.
+**The domain: example.com.** This is the corporate domain. Axur is watching leak markets, paste sites and
+info-stealer logs for **employee credentials** and **customer credentials** tied to it, and public code
+repositories for **secrets** committed by mistake.
 
 **The vendor: Microsoft.** Your company depends on it, so its problems become your problems. Axur's
-**Supply Chain Intel** tracks the vendor's exposure, breaches and critical bulletins so you hear about
-them before the incident report does.
+**Supply Chain Intel** keeps a living report on the vendor: bulletins, breaches, leaked credentials and dark
+web mentions, so you hear about them before the incident report does.
 
 Everything else in the portal, from workspaces to keyword libraries to bots, is there for you to explore.
 Nothing in this tenant affects any other participant.
