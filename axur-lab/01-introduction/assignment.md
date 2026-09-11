@@ -3,7 +3,7 @@ slug: introduction
 id: o2fpouyb9kwu
 type: challenge
 title: Your First Shift
-teaser: You are the new external threat analyst. A tenant, a login and three assets
+teaser: You are the new external threat analyst. A tenant, a login and four assets
   under watch are waiting for you.
 notes:
 - type: text
@@ -24,7 +24,8 @@ notes:
 
     - A **private Axur tenant** is being created, named after this session. It is yours alone.
     - Your **analyst account** is being registered on it, with manager rights.
-    - Three assets are being placed **under watch**: the brand, the corporate domain and a key vendor.
+    - Four assets are being placed **under watch**: the brand, the corporate domain, a key vendor and an executive.
+    - The setup then reads everything back from Axur and checks it before letting you in.
 
     It takes about three minutes. When the lab opens, your credentials will be on the first page and
     the Axur Portal will be one tab away.
@@ -62,7 +63,9 @@ While this page was loading, a few things happened on your behalf:
 - A **private Axur tenant** was created for you. It carries your session's name, nobody else can see it,
   and it is suspended automatically when the lab ends.
 - An **analyst account** with manager rights was registered on that tenant. Its credentials are below.
-- Three assets were placed **under watch**, so Axur's engines were already working before you signed in.
+- Four assets were placed **under watch**, so Axur's engines were already working before you signed in.
+- The setup read all of it back from Axur and checked it against what this lab expects. If you are reading
+  this, the checks passed.
 
 ***
 
@@ -96,8 +99,8 @@ login. Whatever you do here stays in your sandbox.
 
 ____
 
-Your predecessor left three things under monitoring. You will meet them in the Lab Guide, but here is the
-briefing.
+Your predecessor left four things under monitoring. You will meet them in **Day One on the Desk**, but here
+is the briefing.
 
 **The brand: Netflix.** For this exercise your company's brand is Netflix, chosen because it is one of the
 most impersonated brands on the internet, so there is always something to find. Axur is watching it for
@@ -113,6 +116,13 @@ repositories for **secrets** committed by mistake.
 **The vendor: Microsoft.** Your company depends on it, so its problems become your problems. Axur's
 **Supply Chain Intel** keeps a living report on the vendor: bulletins, breaches, leaked credentials and dark
 web mentions, so you hear about them before the incident report does.
+
+**The executive: Alex Rivera.** Not every target is a logo. Alex is registered in **Executives & VIPs** so you
+can see how a person is protected: fake profiles, leaked personal data, exposed credentials and cards. For
+an executive, findings begin once their name variations and a photo are on file, which is done in the portal.
+
+One more thing on the desk: among the real findings in Brand Protection there is a single sample ticket,
+placed there for one exercise. The guide points it out when you get there.
 
 Everything else in the portal, from workspaces to keyword libraries to bots, is there for you to explore.
 Nothing in this tenant affects any other participant.
