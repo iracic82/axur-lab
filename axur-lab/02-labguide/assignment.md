@@ -318,28 +318,32 @@ exact phrases and operators, and a relevant result becomes a ticket with one cli
 ____
 
 **The situation.** Not every target is a brand. One compromised executive is worth more to an attacker than a
-thousand users: a fake profile in their name, a leaked document number, a password reused from a breach.
+thousand users: a fake profile in their name, a leaked document number, a password reused from a breach. Your
+company has just asked you to put its new CEO, **Alex Rivera**, under protection.
 
-**Axur's edge.** **Executives & VIPs** watches for personal information leaks, credential and card exposure
-and fake profiles, using facial recognition to spot image abuse across the major social platforms. Executive
-data is stored encrypted, and each detection comes with recommended next steps.
-
-Your tenant has one executive registered, **Alex Rivera**. Open the asset under Monitoring Settings > Assets >
-Executives and look at what protecting a person takes: the full name and its variations, name similarity
-inspection for social profiles, a face photo for facial recognition, and the emails, phone numbers and
-documents whose leaks should raise a ticket. Findings begin once that profile is complete, which is done in
-the portal, so Alex has none yet. To see what executive findings look like, use Axur's demo executive,
-Patrick Mahomes, in the demo tenant where it is available to you.
+**Axur's edge.** **Executives & VIPs** watches for personal information leaks, credential and card exposure and
+fake profiles, using facial recognition to spot image abuse across the major social platforms. Executive data
+is stored encrypted, and each detection comes with recommended next steps. Protection is only as good as the
+profile you give it, and that profile is your job in this chapter.
 
 **Steps**
 
-1. Navigate to Workspace > Executives & VIPs
-2. Set the Asset filter to Patrick Mahomes and the Ticket Type filter to Personal Information leak
+1. Navigate to Settings > Monitoring Settings > Assets > **Executives** and open **Alex Rivera**
+2. Add the **name variations** an impersonator might use, for example "Alex J. Rivera", "A. Rivera" and "Alexandra Rivera"
+3. Enable **name similarity inspection**, so profiles whose name is 80% or more similar are caught even without a photo
+4. Note the remaining fields: a **face photo** for facial recognition, and the emails, phone numbers and documents whose leaks should raise a ticket. A real onboarding would fill these in, or send the executive a SafeShare form to fill them in themselves
+5. Save, then open Workspace > Executives & VIPs. Alex has no findings yet: Axur's collectors need time, and a person who does not exist leaves no trace on the internet
+
+**What findings look like.** The screens below come from Axur's demo executive, Patrick Mahomes, a public figure
+with a complete profile. This is what lands in the workspace once collection runs: the executive filter, a
+personal-information-leak ticket, and the recommended actions on it.
 ![Screenshot%202026-08-14%20at%2012.36.06%E2%80%AFPM.png](../assets/Screenshot%202026-08-14%20at%2012.36.06%E2%80%AFPM.png)
-3. Open and review one of the open tickets tied to the executive
 ![Screenshot%202026-08-14%20at%2012.39.01%E2%80%AFPM.png](../assets/Screenshot%202026-08-14%20at%2012.39.01%E2%80%AFPM.png)
-4. Review the recommended actions to understand the next steps that mitigate the threat
 ![Screenshot%202026-08-14%20at%2012.40.59%E2%80%AFPM.png](../assets/Screenshot%202026-08-14%20at%2012.40.59%E2%80%AFPM.png)
+
+**Your call**
+
+- Which three fields on Alex's profile would you insist the real CEO fills in first, and why
 
 ***
 
