@@ -166,4 +166,23 @@ ____
 - The credentials from Step 1
 - Curiosity: the tenant is yours, so click around
 
+***
+
+## Key takeaways
+===
+
+____
+
+Three things worth remembering from this page, whether you run a security team or a managed service:
+
+- **Onboarding is an API call.** Your tenant, your analyst account, four assets and their monitoring were
+  created and verified by script in about three minutes. No tickets, no waiting for a console. For a service
+  provider that means one customer, one tenant, one run.
+- **The watch starts immediately.** Nothing was imported. From the moment the brand was registered, Axur's
+  collectors started comparing the internet against it, and the first findings are usually waiting before
+  your first login.
+- **Four assets cover the whole outside.** A brand, a domain, a vendor and a person cover the threats that
+  never touch your network: fraud against your customers, leaked passwords, supplier incidents and attacks on
+  the people at the top.
+
 When you are ready, clock in. The next challenge is **Day One on the Desk**.

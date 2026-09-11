@@ -31,5 +31,8 @@ Invite: https://play.instruqt.com/infoblox/invite/qmefrgcrtv8f  ·  Tick each li
 ## Debrief (challenges 3 to 6)
 - [ ] Each quiz shows the question and four answers; the marked answer is accepted, others rejected.
 
+## Clock out (challenge 7)
+- [ ] The four explanations match the accepted quiz answers. "What to take home" reads well for a prospect.
+
 ## End
 - [ ] Stopping the lab: within ~3 minutes the tenant shows as suspended in Tenants management (admin, after re-login).

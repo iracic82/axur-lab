@@ -473,7 +473,40 @@ Axur helps Infoblox move earlier in the attack lifecycle by identifying and disr
 they reach users. Combined with Infoblox protection at the DNS layer, it gives organizations a stronger and
 more preemptive way to reduce digital risk.
 
+***
+
+## Key takeaways
+===
+
+____
+
+One shift, ten use cases. This is what to carry back to your own organisation:
+
+- **Brand Protection.** A brand registered at 08:00 had several hundred findings by 10:00: cloned login
+  pages, lookalike domains and sites trading on the name. Axur finds the fraud before your customers report it.
+- **Signal over noise.** Libraries, rules and automations mean you decide the policy once and the platform
+  applies it to every new finding. Analysts read what matters.
+- **Takedown.** One click starts it, and Axur runs the notification chain with hosting providers, registrars
+  and platforms until the content is gone. Pages that die on their own are closed by the AI, so nobody
+  chases ghosts.
+- **Credential exposure.** Leaked passwords arrive with their source. A 2017 combolist and yesterday's stealer
+  log are different emergencies, and the stealer log tells you which machine is infected.
+- **Deep and Dark Web.** Forums, marketplaces and closed chat groups searched for you. You read the
+  conversation without going in.
+- **Executive protection.** Attackers target people, not logos. One VIP asset covers fake profiles, exposed
+  documents and reused passwords for the names that matter.
+- **Threat Intelligence.** Campaigns, actors and exploited products in context, so a vulnerability in
+  something you run is known to you before it is news.
+- **Attack surface.** From one seed, Axur maps what you expose to the internet the way an attacker doing
+  reconnaissance would see it.
+- **Supply Chain Intel.** Your vendor's ransomware announcement or leaked credential is your incident. Axur
+  tells you before the mainstream news does.
+- **API first.** Everything this lab did to your tenant, from creation to the Check button, went through the
+  public API. Provisioning, configuration and validation are scripts, which is what a managed service or a
+  large security team needs.
+
 Before you clock out, four short questions about the calls you made today. They are the debrief, and each
-one is a situation you will meet again.
+one is a situation you will meet again. The answers, and the reasoning behind them, wait for you after the
+last question.
 
 Your tenant is suspended automatically when this lab ends.
