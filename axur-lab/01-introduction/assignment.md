@@ -3,8 +3,8 @@ slug: introduction
 id: o2fpouyb9kwu
 type: challenge
 title: Your First Shift
-teaser: You are the new external threat analyst. A tenant, a login and three assets under
-  watch are waiting for you.
+teaser: You are the new external threat analyst. A tenant, a login and three assets
+  under watch are waiting for you.
 notes:
 - type: text
   contents: |-
