@@ -2,9 +2,9 @@
 slug: introduction
 id: o2fpouyb9kwu
 type: challenge
-title: Introduction
-teaser: Explore Infoblox Axur’s key features and solutions. Learn how its capabilities
-  support external threat detection, investigation, and response.
+title: Your First Shift
+teaser: You are the new external threat analyst. A tenant, a login and three assets under
+  watch are waiting for you.
 notes:
 - type: text
   contents: |-
@@ -129,4 +129,4 @@ ____
 - The credentials from Step 1
 - Curiosity: the tenant is yours, so click around
 
-When you are ready, move on to the **Lab Guide**.
+When you are ready, clock in. The next challenge is **Day One on the Desk**.

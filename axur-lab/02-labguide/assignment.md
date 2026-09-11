@@ -2,8 +2,9 @@
 slug: labguide
 id: uxm0jprdba1f
 type: challenge
-title: Lab Guide
-teaser: ' Explore the deployed Axur lab environment'
+title: Day One on the Desk
+teaser: Work a full shift as the analyst. Tune the monitoring, triage what lights up,
+  chase leaked passwords, listen in the dark, and protect the people at the top.
 tabs:
 - id: 8xk2pbuykb1r
   title: Axur Portal
@@ -13,222 +14,363 @@ difficulty: ""
 timelimit: 0
 enhanced_loading: null
 ---
-Lab Guide
+Day One on the Desk
 ===
 
-## Asset Overview
-### Goal
-Understand the importance of creating and defining assets to be monitored.
+Your badge works, your tenant is live, and three assets have been under watch since before you logged in.
+What follows is one shift, told hour by hour. Every chapter is a place in the Axur portal, a thing an analyst
+does there, and a decision you get to make. Take your time, click around, and remember that nothing you do
+here can affect anyone else.
 
-### Steps
+***
+
+## 08:00  Know what you protect
+===
+
+____
+
+Every alert Axur will ever raise for you traces back to an **asset**: the brand, the domain, the vendor.
+An asset that is well described, with its official website, its name variations, its languages and its
+logos, gives the detection engines something precise to compare the internet against. A vague asset produces
+noise. Start the day by reading the file on the brand you are responsible for.
+
+**Steps**
+
 1. Open the **Axur Portal** tab and sign in to Axur ONE
 2. Navigate to Settings > Monitoring Settings
-![Screenshot 2026-07-13 at 2.25.19 PM.png](../assets/Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png)
+![Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png](../assets/Screenshot%202026-07-13%20at%202.25.19%E2%80%AFPM.png)
 3. Select Asset Management
-4. Select one of the pre-configured Asset. (Demo Netflix)
-5. Review the visible metadata, associated monitoring context, and any linked coverage areas
+4. Open the **Netflix** brand asset (in the demo environment it is called Demo Netflix)
+5. Review the visible metadata, the monitoring attached to it, and any linked coverage areas
 ![Jul-13-2026_at_14.27.38-image.png](../assets/Jul-13-2026_at_14.27.38-image.png)
 
-### What participants should observe
-1. Which asset fields are visible (Note the configured website, country, language, and logos)
-2. How a well defined asset can improve the monitoring and detection of asset.
-3. Identify which threat types are enabled under brand protection.
-4. Confirm whether Takedown Authorization is configured (Enabling it makes the Takedown action available for applicable tickets)
+**What to notice**
 
+1. Which fields describe the asset (website, country, language, logos)
+2. How a well defined asset improves detection and cuts false positives
+3. Which threat types are enabled under Brand Protection. Yours starts with phishing and lookalike domains
+4. Whether **Takedown Authorization** is configured. With it, the Takedown action becomes available on applicable tickets, and Axur can act on your behalf
 
-## Keyword Libraries
-### Goal
-Understand how configuring relevant brand keywords and variations can support brand protection and detection coverage while reducing irrelevant results.
+***
 
-### Steps
-1. On the same page, Navigate to the keyword libraries option
-2. Review any existing brand-related keyword libraries by clicking on the Edit icon. (Brand abuse related to Netflix)
+## 08:30  Teach the system your language
+===
 
+____
+
+Attackers rarely spell the brand the way marketing does. **Keyword libraries** hold the variations, typos and
+slogans that the search bots look for, so the quality of this list decides what the bots bring back.
+
+**Steps**
+
+1. On the same page, open the **Keyword libraries** option
+2. Review an existing brand-related library by clicking its Edit icon (for example "Brand abuse related to Netflix")
 ![Jul-13-2026_at_14.35.19-image.png](../assets/Jul-13-2026_at_14.35.19-image.png)
 
-### What participants should observe
-1. How keywords and keyword lists influence search bot queries
-2. Why keyword quality affects monitoring relevance and false positives
+**What to notice**
 
-## Filtering Rules
-### Goal
-Understand how to reduce noise and focus investigations. It is critical in a real-world analyst workflows because it improves prioritization and accelerates triage.
+1. How keywords and keyword lists drive search bot queries
+2. Why keyword quality decides monitoring relevance and the false positive rate
 
-### Steps
-1. On the same page, Navigate to Filtering rules
-2. Review what filters already exist in the demo environment
-3. From the drop-down select Detection type as Deep and Dark Web and Asset name as Netflix
+***
+
+## 09:00  Cut the noise
+===
+
+____
+
+An analyst who reads everything reads nothing. **Filtering rules** narrow what reaches the queue by threat
+type, source, asset or other attributes, so the first ticket you open is worth opening.
+
+**Steps**
+
+1. On the same page, open **Filtering rules**
+2. Review the filters that already exist
+3. From the drop-down select Detection type **Deep and Dark Web** and Asset name **Netflix**
 ![Jul-13-2026_at_14.42.36-image.png](../assets/Jul-13-2026_at_14.42.36-image.png)
-4. Observe how rules can refine visible findings by threat type, source, asset, or other relevant attributes
+4. Observe how a rule refines visible findings by threat type, source, asset, or other attributes
 ![Jul-13-2026_at_14.43.12-image.png](../assets/Jul-13-2026_at_14.43.12-image.png)
 
-### Participant exercise
-Identify which filters would be most useful for:
-	• fake social profiles
-	• fraudulent brand use
+**Your call**
 
-## Search Bots
-### Goal
-Configure search bots to regularly scan relevant sources using defined keywords and filters to identify brand threats.
+Which filters would help most for:
 
-### Steps
-1. Navigate to Search Bots under Searches and open one of the available bots
-2. For the Netflix use case, select the Fake accounts on Facebook bot configured
-3. Review the bot configuration and outputs.
+- fake social profiles
+- fraudulent brand use
 
-### This page defines:
+***
+
+## 09:30  Put the bots to work
+===
+
+____
+
+You cannot search the internet by hand. **Search bots** do it on a schedule, combining an asset, a keyword
+library and a set of sources, and turn what they find into detections.
+
+**Steps**
+
+1. Navigate to **Search Bots** under Searches and open one of the available bots
+2. For the Netflix case, open the bot configured for fake accounts on Facebook
+3. Review the bot configuration and its outputs
+
+The page defines:
+
 - which asset it applies to
 - which keyword library it uses
 - what it searches for
 ![Jul-13-2026_at_14.40.31-image.png](../assets/Jul-13-2026_at_14.40.31-image.png)
 
-## Brand Protection
-### Goal
-Explore how Brand Protection detects impersonation, phishing, fraudulent websites, fake social profiles, and other misuse of the brand across external channels. How these findings can be investigated and progressed toward remediation or takedown.
+***
 
-### Ticket Types
-#### Fake Social Media Profiles
-**Steps**
-1. Navigate to Workspaces > Brand Protection
-![Jul-13-2026_at_14.46.30-image.png](../assets/Jul-13-2026_at_14.46.30-image.png)
-2. Filter by Ticket Type and select Fake social media profile
-3. Open one sample ticket such as the seeded "Netflix Golden" example
-4. Review the profile details, logo similarity, the risk level determined by Axur AI and the associated attributes shown in the ticket.
-![Jul-13-2026_at_14.46.56-image.png](../assets/Jul-13-2026_at_14.46.56-image.png)
-
-**Participants Task**
-- Decide whether the ticket should be quarantined, escalated as an incident, discarded as a false positive, or sent for takedown after confirming authorization.
-
-#### Fraudulent brand use in Incidents
-**Steps**
-1. Navigate to the Incidents tab
-2. Open a ticket of type Fraudulent brand use
-![Jul-13-2026_at_14.50.44-image.png](../assets/Jul-13-2026_at_14.50.44-image.png)
-3. Review the evidence and current status
-4. Walk through possible actions:
-- Request for a takedown
-- move to quarantine
-- If it appears as a false positive move it to discard
-
-**Participant exercise**
-- Investigate one ticket and determine the next action for it.
-
-#### Similar domain name in Quarantine state
-**Steps**
-1. Navigate to the Quarantine tab
-2. Open similar domains findings
-3. Review how domain lookalikes are presented
-![Jul-13-2026_at_14.53.07-image.png](../assets/Jul-13-2026_at_14.53.07-image.png)
-4. Look for signals such as branding overlap, impersonation patterns, hosting behavior, or campaign context.
-
-#### Closed Tickets
-**Steps**
-1. Navigate to the closed tickets tab
-2. Filter the ticket type to Phishing
-3. Open one of the Phishing example associated with the Netflix asset
-4. Review the ticket timeline, evidence, disposition, and final resolution
-![Screenshot 2026-08-13 at 10.58.33 PM.png](../assets/Screenshot%202026-08-13%20at%2010.58.33%E2%80%AFPM.png)
-
-**What the participant should observe**
-- How the original detection was investigated and validated.
-- Which evidence and workflow actions led to the final resolution.
-- How the closed ticket can be used in a customer conversation to demonstrate visibility, analyst decision-making, and measurable remediation outcomes.
-
-#### Discarded Tickets
-**steps**
-1. From the Resolution drop-down select Discarded as an option
-2. The reasons for discard can include:
-3. ad is no longer available
-4. content is no longer visible to users
-5. the AI hit the content and saw it was inactive, then discarded it automatically
-
-#### Takedown request for resolution
-1. From the Treatment drop-down select the Takedown option
-2. Select the Phishing ticket for the asset Netflix
-3. Observe how completed workflows are documented
-![Jul-13-2026_at_15.10.22-image.png](../assets/Jul-13-2026_at_15.10.22-image.png)
-4. What “solved” appears to mean operationally
-![Jul-13-2026_at_15.10.42-image.png](../assets/Jul-13-2026_at_15.10.42-image.png)
-
-**Participants Exercise**
-- Observe Which evidence or actions led to closure
-
-## Data Leakage
-### Goal
-This section demonstrates how Axur identifies leaked credentials, sensitive information, and other data exposures associated with an asset.
-Participants should assess the exposure’s relevance and understand how it can support investigation, risk reduction, and remediation.
-
-### Exposed Credentials
-**Steps**
-1. Navigate to Workspaces > Data Leakage
-![Jul-13-2026_at_15.12.59-image.png](../assets/Jul-13-2026_at_15.12.59-image.png)
-2. Open the credentials tab (if not already opened)
-3. Observe that the filter is applied to status as New or in Treatment
-4. Click on the Leak Format to select the format in which leak occured. select Table Format (Structured credential records, usually organized into fields such as username/email, password, and URL)
-5. Select the Employee radio button to observe the employee credential leakage.
-6. Similarly select the Customer radio button to observe customer credentials leakage while accessing sites related to the asset you are observing for this protection.
-![Jul-13-2026_at_15.13.56-image.png](../assets/Jul-13-2026_at_15.13.56-image.png)
-6. To review an exposed credentials record, select an entry and it will provide details of the leakage
-7. Walk through the available details, such as:
-- Source of the exposure
-- Group or community where it was found
-- File name
-- Username, URL, and other available metadata
-![Jul-13-2026_at_15.14.22-image.png](../assets/Jul-13-2026_at_15.14.22-image.png)
-8. Select the leak format as Stealer Log and select on of the users from the list
-9. Review the infected-machine context, original file or package information, malware details and related exposure evidence.
-![Screenshot 2026-08-14 at 11.42.45 AM.png](../assets/Screenshot%202026-08-14%20at%2011.42.45%E2%80%AFAM.png)
-
-## Deep and Dark Web
-### Goal
-Explore Axure Deep and Dark Web option and how it sources brand mentions, leaked credentials, illicit discussions, and other threat intelligence relevant to an asset.
-
-### Explore Page
-**Steps**
-1. Navigate to Workspace > Deep and Dark Web
-2. Open the Explore page
-3. Add the search filter `netflix AND (hack OR premium)`
-![Jul-13-2026_at_15.16.53-image.png](../assets/Jul-13-2026_at_15.16.53-image.png)
-4. Select one of the filtered message
-5. Review the findings and identify what makes a result relevant or irrelevant
-6. Make a decision if it needs to be made a Ticket
-![Uploading Jul-13-2026_at_15.17.14-image.png...]()
-
-## Executives and VIPs
-### Goal
-Explore how Axur monitors executives and VIPs for impersonation, targeted threats, fraudulent profiles, and exposed personal information. See how an executive compromise risk is often higher impact than general user exposure.
-
-### Monitoring Impersonations
-**Steps**
-1. Navigate to Workspace > Executives & VIPs
-2. Set the Asset filter to Patrick Mahomes and the Ticket Type filter to Personal Information leak
-![Screenshot 2026-08-14 at 12.36.06 PM.png](../assets/Screenshot%202026-08-14%20at%2012.36.06%E2%80%AFPM.png)
-3. Open and review one of the open tickets tied to the executive
-![Screenshot 2026-08-14 at 12.39.01 PM.png](../assets/Screenshot%202026-08-14%20at%2012.39.01%E2%80%AFPM.png)
-4. Review the recommended actions to understand the potential next steps to mitigate the threat
-![Screenshot 2026-08-14 at 12.40.59 PM.png](../assets/Screenshot%202026-08-14%20at%2012.40.59%E2%80%AFPM.png)
-
-## Cyber Threat Intel (CTI)
-### Goal
-Explore how CTI and external attack surface data can support both operational investigations and executive reporting. It aggregates and analyzes cyber-intelligence sources, then provides contextualized insights and bulletins covering threats such as vulnerabilities, threat actors and indicators of compromise.
-![Screenshot 2026-08-17 at 1.54.14 PM.png](../assets/Screenshot%202026-08-17%20at%201.54.14%E2%80%AFPM.png)
-
-### Monitoring Rules
-You can create monitoring rules based on technologies, malware, threat actors, geography, industry, and risk level. This helps security teams prioritize relevant threats, investigate proactively, and turn intelligence into informed defensive action.
-
-Threats targeted at a specific location in a specific industry:
-
-![Screenshot 2026-08-17 at 1.58.45 PM.png](../assets/Screenshot%202026-08-17%20at%201.58.45%E2%80%AFPM.png)
-
-## External attack surface management (EASM)
-**Steps**
-1. Navigate to Workspace > External attack surface management (EASM)
-2. The homepage provides a summary of the assets being monitored and affected
-3. Select any of the monitored assets to review existing hosts, IPs, technology stack and open port entries.
-4. The same section will also list out the Exposures associated with the selected asset for further investigation
-![Screenshot 2026-08-17 at 2.07.09 PM.png](../assets/Screenshot%202026-08-17%20at%202.07.09%E2%80%AFPM.png)
-
-Outcome of this lab
+## 10:00  The board lights up
 ===
 
-In summary, Axur helps Infoblox move earlier in the attack lifecycle by identifying and disrupting external threats before they reach users. Combined with Infoblox protection at the DNS layer, it gives organizations a stronger and more preemptive way to reduce digital risk
+____
+
+Mid-morning, and **Brand Protection** has findings. This is the workspace where impersonation, phishing,
+fraudulent websites and fake profiles land as **tickets**. Every ticket moves through a lifecycle. It starts as
+new, can be parked in **quarantine** while you investigate, escalated as an **incident**, **discarded** as a
+false positive, or sent for **takedown** when authorization allows. Your job this hour is to make those calls.
+
+#### A fake profile wearing your logo
+
+**Steps**
+
+1. Navigate to Workspaces > Brand Protection
+![Jul-13-2026_at_14.46.30-image.png](../assets/Jul-13-2026_at_14.46.30-image.png)
+2. Filter by Ticket Type and select **Fake social media profile**
+3. Open a sample ticket, such as the "Netflix Golden" example
+4. Review the profile details, the logo similarity, the risk level assigned by Axur AI and the attributes on the ticket
+![Jul-13-2026_at_14.46.56-image.png](../assets/Jul-13-2026_at_14.46.56-image.png)
+
+**Your call**
+
+- Quarantine it, escalate it as an incident, discard it as a false positive, or send it for takedown once authorization is confirmed
+
+#### An incident of fraudulent brand use
+
+**Steps**
+
+1. Navigate to the **Incidents** tab
+2. Open a ticket of type Fraudulent brand use
+![Jul-13-2026_at_14.50.44-image.png](../assets/Jul-13-2026_at_14.50.44-image.png)
+3. Review the evidence and the current status
+4. Walk through the possible actions:
+
+- request a takedown
+- move it to quarantine
+- if it looks like a false positive, discard it
+
+**Your call**
+
+- Investigate one ticket and decide its next action
+
+#### Lookalike domains in quarantine
+
+**Steps**
+
+1. Navigate to the **Quarantine** tab
+2. Open the similar domain findings
+3. Review how domain lookalikes are presented
+![Jul-13-2026_at_14.53.07-image.png](../assets/Jul-13-2026_at_14.53.07-image.png)
+4. Look for signals such as branding overlap, impersonation patterns, hosting behavior, or campaign context
+
+#### The ones that are already closed
+
+**Steps**
+
+1. Navigate to the **Closed** tickets tab
+2. Filter the ticket type to Phishing
+3. Open a phishing example tied to the Netflix asset
+4. Review the timeline, the evidence, the disposition and the final resolution
+![Screenshot%202026-08-13%20at%2010.58.33%E2%80%AFPM.png](../assets/Screenshot%202026-08-13%20at%2010.58.33%E2%80%AFPM.png)
+
+**What to notice**
+
+- How the original detection was investigated and validated
+- Which evidence and workflow actions led to the resolution
+- How a closed ticket tells a customer the story of visibility, analyst judgement and measurable remediation
+
+#### Discarded tickets
+
+**Steps**
+
+1. From the Resolution drop-down select **Discarded**
+2. Typical reasons for a discard:
+
+- the ad is no longer available
+- the content is no longer visible to users
+- the AI revisited the content, found it inactive, and discarded it automatically
+
+#### Takedown as the resolution
+
+**Steps**
+
+1. From the Treatment drop-down select **Takedown**
+2. Select the phishing ticket for the Netflix asset
+3. Observe how completed takedowns are documented
+![Jul-13-2026_at_15.10.22-image.png](../assets/Jul-13-2026_at_15.10.22-image.png)
+4. Note what "solved" means operationally
+![Jul-13-2026_at_15.10.42-image.png](../assets/Jul-13-2026_at_15.10.42-image.png)
+
+**Your call**
+
+- Which evidence or actions led to closure
+
+***
+
+## 11:30  Someone is selling your passwords
+===
+
+____
+
+Your second asset is the corporate domain, example.com, and the **Data Leakage** workspace is where its
+troubles surface: credentials in combolists, records scraped from breached sites, and passwords stolen straight
+from infected laptops by info-stealer malware. Employee leaks and customer leaks are different problems, so
+Axur keeps them apart.
+
+**Steps**
+
+1. Navigate to Workspaces > Data Leakage
+![Jul-13-2026_at_15.12.59-image.png](../assets/Jul-13-2026_at_15.12.59-image.png)
+2. Open the credentials tab (if not already open)
+3. Notice that the filter is set to status New or In treatment
+4. Click Leak Format and select **Table Format** (structured credential records with fields such as username or email, password, and URL)
+5. Select the **Employee** radio button to see leaked employee credentials
+6. Select the **Customer** radio button to see customer credentials captured on sites related to the asset
+![Jul-13-2026_at_15.13.56-image.png](../assets/Jul-13-2026_at_15.13.56-image.png)
+7. Open a record to see the details of the leak
+8. Walk through what is available:
+
+- the source of the exposure
+- the group or community where it was found
+- the file name
+- the username, URL and other metadata
+![Jul-13-2026_at_15.14.22-image.png](../assets/Jul-13-2026_at_15.14.22-image.png)
+9. Set the leak format to **Stealer Log** and open one of the users in the list
+10. Review the infected machine context, the original file or package, the malware details and the related evidence
+![Screenshot%202026-08-14%20at%2011.42.45%E2%80%AFAM.png](../assets/Screenshot%202026-08-14%20at%2011.42.45%E2%80%AFAM.png)
+
+**Your call**
+
+- Which of these leaks would you escalate first, and who in the company needs to know today
+
+***
+
+## 13:00  Listening in the dark
+===
+
+____
+
+After lunch you go where the conversations happen. The **Deep and Dark Web** workspace collects brand
+mentions, leaked data, illicit discussions and other intelligence from forums, markets and messaging channels.
+The skill here is separating a real threat from chatter.
+
+**Steps**
+
+1. Navigate to Workspace > Deep and Dark Web
+2. Open the **Explore** page
+3. Add the search filter `netflix AND (hack OR premium)`
+![Jul-13-2026_at_15.16.53-image.png](../assets/Jul-13-2026_at_15.16.53-image.png)
+4. Select one of the filtered messages
+5. Review the finding and decide what makes a result relevant or irrelevant
+6. Decide whether it deserves to become a ticket
+
+***
+
+## 14:00  The name on the door
+===
+
+____
+
+Not every target is a brand. Executives and public figures are impersonated, doxxed and phished because one
+compromised leader is worth more to an attacker than a thousand users. The **Executives & VIPs** workspace
+watches for fake profiles, targeted threats and exposed personal information.
+
+**Steps**
+
+1. Navigate to Workspace > Executives & VIPs
+2. Set the Asset filter to Patrick Mahomes and the Ticket Type filter to Personal Information leak
+![Screenshot%202026-08-14%20at%2012.36.06%E2%80%AFPM.png](../assets/Screenshot%202026-08-14%20at%2012.36.06%E2%80%AFPM.png)
+3. Open and review one of the open tickets tied to the executive
+![Screenshot%202026-08-14%20at%2012.39.01%E2%80%AFPM.png](../assets/Screenshot%202026-08-14%20at%2012.39.01%E2%80%AFPM.png)
+4. Review the recommended actions to understand the next steps that mitigate the threat
+![Screenshot%202026-08-14%20at%2012.40.59%E2%80%AFPM.png](../assets/Screenshot%202026-08-14%20at%2012.40.59%E2%80%AFPM.png)
+
+***
+
+## 15:00  Beyond your perimeter
+===
+
+____
+
+**Cyber Threat Intel** aggregates and analyzes intelligence sources and turns them into contextual insights
+and bulletins: vulnerabilities, threat actors, campaigns and indicators of compromise. It serves the analyst
+in an investigation and the executive who needs a one-page picture of the threat landscape.
+![Screenshot%202026-08-17%20at%201.54.14%E2%80%AFPM.png](../assets/Screenshot%202026-08-17%20at%201.54.14%E2%80%AFPM.png)
+
+**Monitoring rules**
+
+You can create monitoring rules based on technologies, malware, threat actors, geography, industry and risk
+level, so the intelligence that reaches you is the intelligence that applies to you. For example, threats
+aimed at a specific location in a specific industry:
+![Screenshot%202026-08-17%20at%201.58.45%E2%80%AFPM.png](../assets/Screenshot%202026-08-17%20at%201.58.45%E2%80%AFPM.png)
+
+***
+
+## 15:30  What the internet sees
+===
+
+____
+
+**External Attack Surface Management** maps your company the way an attacker would: hosts, IPs, technology
+stack, open ports, certificates, and the exposures that come with them.
+
+**Steps**
+
+1. Navigate to Workspace > External attack surface management (EASM)
+2. The home page summarizes the assets being monitored and the ones affected
+3. Select a monitored asset to review its hosts, IPs, technology stack and open port entries
+4. The same section lists the exposures associated with the selected asset for further investigation
+![Screenshot%202026-08-17%20at%202.07.09%E2%80%AFPM.png](../assets/Screenshot%202026-08-17%20at%202.07.09%E2%80%AFPM.png)
+
+***
+
+## 16:00  Your vendor's problem is your problem
+===
+
+____
+
+Your third asset is not yours at all. Microsoft is a vendor, and **Supply Chain Intel** exists because a
+breach, a leaked corporate credential or a critical bulletin at a supplier becomes your incident the moment
+you depend on them. Axur keeps a vendor profile with its exposure, its threat landscape and its history, so
+you hear about it before the incident report does.
+
+**Steps**
+
+1. Navigate to the Supply Chain Intel area and open the **Microsoft** vendor
+2. Read the overview: the vendor's main domain, corporate name and last update
+3. Browse the sections Axur maintains for a vendor: dark web mentions, corporate credentials, external attack surface, threat landscape and indicators
+4. Open the history and look for critical bulletins
+
+**Your call**
+
+- Which of these would you raise with the team that owns the Microsoft relationship, and how urgently
+
+***
+
+## 17:00  End of shift
+===
+
+____
+
+In one day you tuned what Axur listens for, triaged what it found, followed a leaked password back to an
+infected laptop, listened to the underground, protected a person rather than a logo, mapped your own attack
+surface and checked on a supplier. That is the external half of the picture.
+
+Axur helps Infoblox move earlier in the attack lifecycle by identifying and disrupting external threats before
+they reach users. Combined with Infoblox protection at the DNS layer, it gives organizations a stronger and
+more preemptive way to reduce digital risk.
+
+Your tenant is suspended automatically when this lab ends. Nothing else is required of you.
