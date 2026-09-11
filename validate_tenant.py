@@ -140,6 +140,8 @@ def main():
         if ident[0] == "DOMAIN" and not domain_key: domain_key = have.get("assetKey")
 
     # --- seeded requests: tickets and EASM seeds ---
+    # "{asset:<name>}" placeholders resolve to the tenant's real asset keys, exactly as preload_tenant.py does.
+    cfg = substitute(cfg, {f"asset:{a.get('name')}": a.get("assetKey") for a in assets if a.get("assetKey")})
     want_tickets = [r for r in cfg.get("requests", []) or [] if r.get("path", "").endswith("/tickets-api/tickets")]
     want_seeds = [r for r in cfg.get("requests", []) or [] if r.get("path", "").endswith("/easm/seeds")]
     if cfg.get("easm_seeds"):
