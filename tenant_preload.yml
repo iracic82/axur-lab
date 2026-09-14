@@ -48,6 +48,25 @@ safelist: []
 # ---- EASM seeds: starting points for attack-surface discovery (skipped when already registered) --------
 easm_seeds: ["example.com"]
 
+# ---- EASM monitoring policy, sent with the seed. A seed created without one is never monitored (verified
+# 2026-09-14), and a policy cannot be attached afterwards. Mirrors the portal's Monitoring setup: everything on
+# except port scanning, which sends traffic to the target and is not needed in a lab. -------------------------
+easm_policy:
+  vulnerabilities: {enabled: true, cvss_min_threshold: 0, epss_min_threshold: 0.0, include_unscored: true, cisa_kev: false}
+  open_ports: {enabled: false, scan_type: standard, scanning_ip_mode: DYNAMIC_IPS, custom_port_ranges: [], exclude_ports: []}
+  dns_hygiene:
+    dangling_cnames: {enabled: true, alert_on_non_existent: true, alert_on_orphaned: true}
+    dmarc_records: {enabled: true, alert_on_missing: true, alert_on_weak: true}
+    spf_records: {enabled: true, alert_on_missing: true, alert_on_weak: true}
+    lame_delegation: {enabled: true}
+    zone_transfers: {enabled: true}
+    expiring_domains: {enabled: true, alert_on_expired: true, alert_on_expiring_soon: true, days_until_expiration: 30}
+  certificates:
+    expiring: {enabled: true, days_until_expiration: 30}
+    self_signed: {enabled: true}
+    weak_encryption: {enabled: true}
+    wildcard: {enabled: true}
+
 requests:
   # One curated sample ticket: the "Netflix Golden" fake profile the Lab Guide walks through. Real detections
   # are phishing pages and lookalike domains, so without this the fake-profile chapter would have no example.

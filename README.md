@@ -220,7 +220,7 @@ A curated phishing ticket is kept commented out; the collectors deliver hundreds
 
 What the API can seed, all tested live:
 
-- `POST /api/easm/seeds?axur_tenant_key={key}` with `{"seed_names": ["example.com"]}` registers the seed; `POST /api/easm/seeds/scan` with the seed ids queues discovery for Axur's next scheduled cycle (409 if one is already queued).
+- `POST /api/easm/seeds?axur_tenant_key={key}` with `{"seed_names": ["example.com"], "policy": {...}}` registers the seed **with its monitoring policy** (`easm_policy` in the YAML). Verified 2026-09-14: a seed created without a policy has no monitoring at all (`GET /api/easm/seeds/{id}/policy` answers "record not found"), the account policy does not exist until a seed is created with one, and a policy cannot be attached to an existing seed, so the preload removes and re-creates such seeds. `POST /api/easm/seeds/scan` with the seed ids queues discovery for Axur's next scheduled cycle (409 if one is already queued).
 - `POST /api/tickets-api/tickets` creates curated tickets (`phishing`, `fake-social-media-profile`, ...). `assets`
   must be an **array of string asset keys** (objects give a 500). A repeated reference answers 409, so re-runs are
   safe. Useful to guarantee a predictable example (e.g. the "Netflix Golden" profile the guide mentions) beside the

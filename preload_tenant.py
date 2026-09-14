@@ -16,7 +16,8 @@ Usage:
 Config sections (all optional; see tenant_preload.yml for commented examples):
   credit_limit:  unlimited | <number> | {BRAND_PROTECTION: 100, TAKEDOWN: 10, ...}   (by-product)
   assets:        list of asset payloads for POST /assets-api/customers/{key}/asset
-  easm_seeds:    list of domains / IPs / CIDRs for POST /easm/seeds (skipped when already registered)
+  easm_seeds:    list of domains / IPs / CIDRs for POST /easm/seeds (skipped when already registered with a policy)
+  easm_policy:   EASM monitoring policy sent with the seed (default: everything on except port scanning)
   safelist:      list of {group, items[]} for POST /touchpoints/items
   requests:      raw escape hatch: list of {method, path, json?, params?, ok?[]} — "{key}"/"{name}"/"{asset:<asset name>}"
                  placeholders are substituted anywhere in path / json / params.
@@ -185,17 +186,50 @@ def step_assets(api, key, assets, state):
             log(f"   ✅ assetKey {body['assetKey']}")
 
 
-def step_easm_seeds(api, key, seeds):
-    """POST /easm/seeds?axur_tenant_key=<key> for seeds not already registered (the API answers 500 on duplicates)."""
+# EASM monitoring policy applied when a seed is created. Verified 2026-09-14: a seed registered without a policy has no
+# monitoring at all (GET /easm/seeds/{id}/policy -> "record not found"), the account policy does not exist until a seed is
+# created with one, and a policy cannot be attached to an existing seed afterwards. Mirrors the portal's Monitoring
+# setup: everything on except port scanning, which generates traffic against the target and is not needed in a lab.
+DEFAULT_EASM_POLICY = {
+    "vulnerabilities": {"enabled": True, "cvss_min_threshold": 0, "epss_min_threshold": 0.0, "include_unscored": True, "cisa_kev": False},
+    "open_ports": {"enabled": False, "scan_type": "standard", "scanning_ip_mode": "DYNAMIC_IPS", "custom_port_ranges": [], "exclude_ports": []},
+    "dns_hygiene": {
+        "dangling_cnames": {"enabled": True, "alert_on_non_existent": True, "alert_on_orphaned": True},
+        "dmarc_records": {"enabled": True, "alert_on_missing": True, "alert_on_weak": True},
+        "spf_records": {"enabled": True, "alert_on_missing": True, "alert_on_weak": True},
+        "lame_delegation": {"enabled": True},
+        "zone_transfers": {"enabled": True},
+        "expiring_domains": {"enabled": True, "alert_on_expired": True, "alert_on_expiring_soon": True, "days_until_expiration": 30},
+    },
+    "certificates": {"expiring": {"enabled": True, "days_until_expiration": 30}, "self_signed": {"enabled": True},
+                     "weak_encryption": {"enabled": True}, "wildcard": {"enabled": True}},
+}
+
+
+def seed_has_policy(api, key, seed_id):
+    code, _ = api.call("GET", f"/api/easm/seeds/{seed_id}/policy", params={"axur_tenant_key": key}, ok=(200, 404, 500, 0))
+    return code == 200
+
+
+def step_easm_seeds(api, key, seeds, policy=None):
+    """Register EASM seeds together with their monitoring policy, re-creating any seed that has none, then queue discovery."""
+    policy = policy or DEFAULT_EASM_POLICY
     code, body = api.call("POST", "/api/easm/seeds/list", json_body={}, params={"axur_tenant_key": key}, ok=(200, 0))
-    have = {s.get("seed_name") for s in (body.get("results", []) if code == 200 else [])}
-    missing = [s for s in seeds if s not in have]
+    have = {s.get("seed_name"): s for s in (body.get("results", []) if code == 200 else [])}
+    to_create = [s for s in seeds if s not in have]
     for s in seeds:
-        if s in have:
-            log(f"🌱 EASM seed '{s}' already registered — skip")
-    if missing:
-        log(f"🌱 registering EASM seed(s) {missing}")
-        api.call("POST", "/api/easm/seeds", json_body={"seed_names": missing, "description": "Infoblox Exchange lab"},
+        if s not in have:
+            continue
+        sid = have[s].get("id")
+        if api.dry_run or seed_has_policy(api, key, sid):
+            log(f"🌱 EASM seed '{s}' already registered with a monitoring policy — skip")
+        else:
+            log(f"🌱 EASM seed '{s}' has no monitoring policy (never scanned) — re-creating it with one")
+            api.call("POST", "/api/easm/seeds/remove", json_body={"ids": [sid]}, params={"axur_tenant_key": key}, ok=(200, 204, 0))
+            to_create.append(s)
+    if to_create:
+        log(f"🌱 registering EASM seed(s) {to_create} with monitoring policy")
+        api.call("POST", "/api/easm/seeds", json_body={"seed_names": to_create, "description": "Infoblox Exchange lab", "policy": policy},
                  params={"axur_tenant_key": key}, ok=(200, 201, 0))
     # Queue discovery right away. Axur processes it "in the next scheduled cycle" (observed: a day or more), so this
     # only moves the tenant up the queue; 409 means a run is already queued.
@@ -292,7 +326,7 @@ if __name__ == "__main__":
     if cfg.get("assets"):
         step_assets(api, key, cfg["assets"], state)
     if cfg.get("easm_seeds"):
-        step_easm_seeds(api, key, cfg["easm_seeds"])
+        step_easm_seeds(api, key, cfg["easm_seeds"], cfg.get("easm_policy"))
     if cfg.get("safelist"):
         step_safelist(api, key, cfg["safelist"])
     if cfg.get("requests"):

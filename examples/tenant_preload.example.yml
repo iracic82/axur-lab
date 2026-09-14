@@ -132,6 +132,8 @@ requests:
   # Manual ticket (POST /tickets-api/tickets): reference must fit the type (a URL for phishing), assets = asset keys
   # of this tenant. Write them as "{asset:<asset name>}" and preload_tenant.py resolves the real key from the tenant
   # after the assets step (an unknown name skips the request with a warning).
+  # EASM seeds go in `easm_seeds:` and their monitoring policy in `easm_policy:` (see tenant_preload.yml). A seed
+  # created without a policy is never scanned, so do not create seeds through this raw section.
   # - method: POST
   #   path: /api/tickets-api/tickets
   #   json:

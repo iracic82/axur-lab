@@ -11,7 +11,7 @@ Checks (CRITICAL ones fail the run with exit 1; INFO ones only report):
   CRITICAL  tenant exists, is active and not suspended
   CRITICAL  every asset in tenant_preload.yml exists and is ACTIVE, with the configured monitoring attached
   CRITICAL  every seeded ticket in tenant_preload.yml (requests to /tickets-api/tickets) exists on its asset
-  CRITICAL  every EASM seed in tenant_preload.yml (requests to /easm/seeds) is registered
+  CRITICAL  every EASM seed in tenant_preload.yml (requests to /easm/seeds) is registered and carries a monitoring policy
   INFO      participant user registered on the tenant (user_email.txt, if present)
   INFO      real Brand Protection tickets already collected on the brand asset (count, by type)
   INFO      credential exposures on the domain asset (total)
@@ -158,10 +158,15 @@ def main():
             rep.add("CRITICAL", found, f"seeded ticket exists: {ref}")
     if want_seeds:
         code, body = post("/api/easm/seeds/list", {}, params={"axur_tenant_key": key})
-        have_seeds = {s.get("seed_name") for s in (body.get("results", []) if code == 200 else [])}
+        seed_ids = {s.get("seed_name"): s.get("id") for s in (body.get("results", []) if code == 200 else [])}
+        have_seeds = set(seed_ids)
         for r in want_seeds:
             for sn in (r.get("json") or {}).get("seed_names") or []:
                 rep.add("CRITICAL", sn in have_seeds, f"EASM seed registered: {sn}", f"HTTP {code}" if code != 200 else "")
+                if sn in have_seeds:
+                    # A seed without a monitoring policy is never scanned, so the policy is part of the contract.
+                    pcode, _ = get(f"/api/easm/seeds/{seed_ids[sn]}/policy", axur_tenant_key=key)
+                    rep.add("CRITICAL", pcode == 200, f"EASM seed monitoring policy set: {sn}", "" if pcode == 200 else f"HTTP {pcode}")
 
     # --- INFO: participant user ---
     if os.path.exists("user_email.txt"):
