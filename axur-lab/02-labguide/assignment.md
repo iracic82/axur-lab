@@ -3,7 +3,8 @@ slug: labguide
 id: uxm0jprdba1f
 type: challenge
 title: Day One on the Desk
-teaser: Work a full shift as the analyst. Tune the monitoring, triage what lights up, chase leaked passwords, listen in the dark, and protect the people at the top.
+teaser: Work a full shift as the analyst. Tune the monitoring, triage what lights
+  up, chase leaked passwords, listen in the dark, and protect the people at the top.
 notes:
 - type: text
   contents: |-
@@ -28,7 +29,7 @@ tabs:
   title: Axur Portal
   type: browser
   hostname: axur
-difficulty: ''
+difficulty: ""
 timelimit: 0
 enhanced_loading: null
 ---

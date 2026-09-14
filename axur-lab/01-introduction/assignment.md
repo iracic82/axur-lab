@@ -3,7 +3,8 @@ slug: introduction
 id: o2fpouyb9kwu
 type: challenge
 title: Your First Shift
-teaser: You are the new external threat analyst. A tenant, a login and four assets under watch are waiting for you.
+teaser: You are the new external threat analyst. A tenant, a login and four assets
+  under watch are waiting for you.
 notes:
 - type: text
   contents: |-
@@ -47,7 +48,7 @@ tabs:
   title: Axur Portal
   type: browser
   hostname: axur
-difficulty: ''
+difficulty: ""
 timelimit: 0
 enhanced_loading: null
 ---

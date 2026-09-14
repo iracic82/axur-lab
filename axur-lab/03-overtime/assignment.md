@@ -1,8 +1,10 @@
 ---
 slug: overtime
+id: it5hl75fkmab
 type: challenge
 title: Overtime
-teaser: Optional. Tune libraries, rules and bots, listen in the dark web, protect an executive, read the threat landscape and queue your attack surface.
+teaser: Optional. Tune libraries, rules and bots, listen in the dark web, protect
+  an executive, read the threat landscape and queue your attack surface.
 notes:
 - type: text
   contents: |-
@@ -13,11 +15,13 @@ notes:
 
     Short on time? Press **Next** when the page opens and go straight to the debrief.
 tabs:
-- title: Axur Portal
+- id: aq3facmfkawm
+  title: Axur Portal
   type: browser
   hostname: axur
-difficulty: ''
+difficulty: ""
 timelimit: 0
+enhanced_loading: null
 ---
 Overtime
 ===
