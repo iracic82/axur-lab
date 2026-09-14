@@ -2,7 +2,7 @@
 slug: overtime
 id: it5hl75fkmab
 type: challenge
-title: Overtime
+title: Overtime (Optional)
 teaser: Optional. Tune libraries, rules and bots, listen in the dark web, protect
   an executive, read the threat landscape and queue your attack surface.
 notes:
