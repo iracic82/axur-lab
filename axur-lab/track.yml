@@ -8,19 +8,21 @@ description: |-
   **One shift as an external threat analyst, on a tenant that is yours alone.**
 
   When the lab starts, Axur builds your workplace: a private tenant, an analyst login with manager rights,
-  and three assets already under watch. The brand is Netflix, one of the most impersonated names on the
+  and four assets already under watch. The brand is Netflix, one of the most impersonated names on the
   internet. The corporate domain is example.com, watched for leaked credentials and secrets in public code.
-  The vendor is Microsoft, tracked by Supply Chain Intel.
+  The vendor is Microsoft, tracked by Supply Chain Intel. The executive is Alex Rivera, registered in
+  Executives & VIPs.
 
-  Then you work the day, hour by hour: tune keyword libraries, filters and search bots, triage what
-  Brand Protection surfaces, follow a leaked password back to an infected laptop, listen in the deep and
-  dark web, protect an executive, map your attack surface and check on your supplier. Every chapter ends
-  with a decision that is yours to make: quarantine, escalate, discard or take it down.
+  Then you work the shift, hour by hour: triage what Brand Protection surfaces within minutes, make the one
+  call the lab checks, follow a leaked password to the forum it was traded in, and check on your supplier
+  before the news does. An optional Overtime adds keyword libraries, filters and search bots, the deep and
+  dark web, executive protection, threat intelligence and your attack surface. Every chapter ends with a
+  decision that is yours to make: quarantine, escalate, discard or take it down.
 
   You will leave able to navigate Axur with confidence, explain how it surfaces external threats, and
   show how it fits with Infoblox protection at the DNS layer. Built for sales engineers, security
-  specialists, partners and guided customer workshops. About two hours. Your tenant is suspended
-  automatically when you finish.
+  specialists, partners and guided customer workshops. About an hour for the shift and the debrief, and
+  45 minutes more with Overtime. Your tenant is suspended automatically when you finish.
 icon: ./assets/Infoblox-logo-for-email.png
 tags:
 - threat-intel

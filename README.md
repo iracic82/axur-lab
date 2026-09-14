@@ -309,7 +309,7 @@ Google 20, Amazon Web Services 3, ...). To find another vendor, probe further id
 
 ## Lab story: sources for the product claims
 
-The challenge texts (`axur-lab/01-introduction`, `axur-lab/02-labguide`, the debrief quizzes and `axur-lab/07-clock-out`) describe what Axur does in Axur's own
+The challenge texts (`axur-lab/01-introduction`, `axur-lab/02-labguide`, the optional `axur-lab/03-overtime`, the debrief quizzes and `axur-lab/08-clock-out`) describe what Axur does in Axur's own
 terms. Every claim traces to one of these, checked 2026-09-11:
 
 | Claim in the story | Source |

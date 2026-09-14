@@ -9,22 +9,19 @@ notes:
   contents: |-
     # End of shift
 
-    You tuned what Axur listens for, watched it rank the findings, followed a leaked password back to an infected
-    laptop, listened to the underground, put a person under protection and checked on a supplier.
+    You watched the board fill within minutes, made your call on a fake profile, followed a leaked password to
+    its source and checked on a supplier before the news did.
 
     Four short questions before you clock out. Each one is a situation you will meet again, and each has one
     answer an experienced analyst would give.
 answers:
-- Discard it. An empty page is a false positive, and Quarantine only clutters the
-  queue.
-- Send it to Quarantine. Axur re-checks quarantined tickets every morning and flags
-  any content change, so the day it becomes a phishing page you will know.
-- Request a takedown now. The registrar will remove a domain that imitates a brand
-  even before it hosts content.
+- Discard it. An empty page is a false positive, and Quarantine only clutters the queue.
+- Send it to Quarantine. Axur re-checks quarantined tickets every morning and flags any content change, so the day it becomes a phishing page you will know.
+- Request a takedown now. The registrar will remove a domain that imitates a brand even before it hosts content.
 - Escalate it as an Incident so the SOC starts blocking it at the firewall.
 solution:
 - 1
-difficulty: ""
+difficulty: ''
 timelimit: 0
 enhanced_loading: null
 ---

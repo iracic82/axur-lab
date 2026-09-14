@@ -3,8 +3,7 @@ slug: introduction
 id: o2fpouyb9kwu
 type: challenge
 title: Your First Shift
-teaser: You are the new external threat analyst. A tenant, a login and four assets
-  under watch are waiting for you.
+teaser: You are the new external threat analyst. A tenant, a login and four assets under watch are waiting for you.
 notes:
 - type: text
   contents: |-
@@ -35,11 +34,11 @@ notes:
 
     You will work one shift, hour by hour:
 
-    - **Morning:** learn what you protect, teach Axur your language, cut the noise and put the bots to work.
-    - **Midday:** the board lights up. Fake profiles, lookalike domains, the one call the lab checks, and a
-      leaked password that leads back to an infected laptop.
-    - **Afternoon:** the dark web, the person at the top, your attack surface, what the internet sees, and a
-      supplier whose problems are about to become yours.
+    - **Morning:** learn what you protect, then watch the board light up and make the one call the lab checks.
+    - **Midday:** a leaked password, and the forum it was traded in.
+    - **Afternoon:** a supplier whose problems are about to become yours.
+    - **Overtime, optional:** tune libraries, rules and bots, listen in the dark web, protect the person at the
+      top, read the threat landscape and queue your attack surface.
     - **End of shift:** four short debrief questions. Each one is a situation you will meet again.
 
     Nothing you do here affects anyone else, so be curious.
@@ -48,7 +47,7 @@ tabs:
   title: Axur Portal
   type: browser
   hostname: axur
-difficulty: ""
+difficulty: ''
 timelimit: 0
 enhanced_loading: null
 ---
@@ -100,7 +99,7 @@ login. Whatever you do here stays in your sandbox.
 
 ____
 
-Your predecessor left four things under monitoring. You will meet them in **Day One on the Desk**, but here
+Your predecessor left four things under monitoring. You will meet the first three in **Day One on the Desk** and the executive in **Overtime**, but here
 is the briefing.
 
 ![Your desk: one private tenant, four assets under watch](../assets/diag-your-desk.png)
