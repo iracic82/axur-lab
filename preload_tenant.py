@@ -197,6 +197,13 @@ def step_easm_seeds(api, key, seeds):
         log(f"🌱 registering EASM seed(s) {missing}")
         api.call("POST", "/api/easm/seeds", json_body={"seed_names": missing, "description": "Infoblox Exchange lab"},
                  params={"axur_tenant_key": key}, ok=(200, 201, 0))
+    # Queue discovery right away. Axur processes it "in the next scheduled cycle" (observed: a day or more), so this
+    # only moves the tenant up the queue; 409 means a run is already queued.
+    code, body = api.call("POST", "/api/easm/seeds/list", json_body={}, params={"axur_tenant_key": key}, ok=(200, 0))
+    ids = [r.get("id") for r in (body.get("results", []) if code == 200 else []) if r.get("seed_name") in seeds and r.get("id")]
+    if ids:
+        log(f"🌱 queueing EASM discovery for {len(ids)} seed(s)")
+        api.call("POST", "/api/easm/seeds/scan", json_body={"ids": ids}, params={"axur_tenant_key": key}, ok=(200, 202, 409, 0))
 
 
 def step_safelist(api, key, entries):

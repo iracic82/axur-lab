@@ -210,7 +210,7 @@ the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI 
 | Brand Protection | **500 to 700 real tickets within ~10 min** of the Netflix asset going live: phishing pages (urlscan, html-links), lookalike domains (certificate-transparency `ctlog`), threat-hunting hits, passive DNS, Facebook ads. Each carries Axur's AI predictions (login form present, payment requested, language, colours) | Axur collectors, automatic |
 | Data Leakage | **9,745 credential exposures** on example.com the moment the domain asset exists (historical breaches, employee/customer split, stealer logs) | Axur leak index, automatic |
 | Deep & Dark Web, CTI, Supply Chain Intel | Explore searches, bulletins and the Microsoft vendor report are global datasets | Axur, automatic |
-| EASM | Empty until a **seed** is added; one API call starts discovery of example.com | needs preload (tested) |
+| EASM | Empty until a **seed** is added. The preload registers example.com and queues discovery (`POST /easm/seeds/scan`), but Axur runs discovery in scheduled cycles: measured 2026-09-14, the first cycle came more than a day after seeding, so a lab session shows 0 assets. The guide says so and shows the finished result from the demo tenant | preload (tested), slow by design |
 | Executives & VIPs | Empty. A VIP asset can be created (monitoring id `executives`), but name variations and the face photo are UI-only, and a fictional executive yields no detections | needs a decision |
 
 **Enabled in `tenant_preload.yml`** (decision 2026-09-11): the EASM seed for example.com, one curated
@@ -220,7 +220,7 @@ A curated phishing ticket is kept commented out; the collectors deliver hundreds
 
 What the API can seed, all tested live:
 
-- `POST /api/easm/seeds?axur_tenant_key={key}` with `{"seed_names": ["example.com"]}` starts EASM discovery.
+- `POST /api/easm/seeds?axur_tenant_key={key}` with `{"seed_names": ["example.com"]}` registers the seed; `POST /api/easm/seeds/scan` with the seed ids queues discovery for Axur's next scheduled cycle (409 if one is already queued).
 - `POST /api/tickets-api/tickets` creates curated tickets (`phishing`, `fake-social-media-profile`, ...). `assets`
   must be an **array of string asset keys** (objects give a 500). A repeated reference answers 409, so re-runs are
   safe. Useful to guarantee a predictable example (e.g. the "Netflix Golden" profile the guide mentions) beside the

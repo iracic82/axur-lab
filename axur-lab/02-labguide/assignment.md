@@ -438,10 +438,15 @@ list sorts itself by what to fix first.
 **Steps**
 
 1. Navigate to Workspace > External attack surface management (EASM)
-2. The home page summarizes the assets being monitored and the ones affected
-3. Select a monitored asset to review its hosts, IPs, technology stack and open port entries
-4. The same section lists the exposures associated with the selected asset for further investigation
+2. Open **Asset management**. The seed **example.com** was registered when your tenant was built, and discovery was queued at the same time. Axur runs discovery in scheduled cycles, and in the lab tenants the first cycle took more than a day, so during this shift the home page most likely still shows 0 assets. That is the queue, not a fault
+3. Click **Discover now** to see the confirmation that a run is queued. Nothing else is needed from you
+4. The screen below is what discovery produces for example.com once it has run: the host, its IP, tags such as dmarc and spf, open ports, certificates, the tech stack, and the exposures found on it, each with severity, ease of exploitation and an owner
 ![Screenshot%202026-08-17%20at%202.07.09%E2%80%AFPM.png](../assets/Screenshot%202026-08-17%20at%202.07.09%E2%80%AFPM.png)
+
+**What to notice**
+
+- The two exposures in the screen are real for example.com: a DMARC misconfiguration and an expired domain, each scored on severity and effort
+- If your session runs long enough for discovery to complete, the same view appears in your tenant with no further setup
 
 ***
 

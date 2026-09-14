@@ -24,7 +24,7 @@ Invite: https://play.instruqt.com/infoblox/invite/qmefrgcrtv8f  ·  Tick each li
 - [ ] 13:00  Deep & Dark Web > Explore accepts `netflix AND (hack OR premium)` and returns results. Screenshot 18 matches.
 - [ ] 14:00  Executives > Alex Rivera: "Alex James Rivera" is accepted, "Alex J. Rivera" refused, variations autosave; the similar-name option under fake social media profile exists (confirm its exact label). Screenshots 19 to 21 are labelled as demo-executive examples.
 - [ ] 15:00  CTI workspace opens; monitoring rules page reachable. Screenshots 22 and 23 match.
-- [ ] 15:30  EASM shows the example.com seed and, after discovery ran, hosts/IPs. Note how long discovery took. Screenshot 24 matches.
+- [ ] 15:30  EASM shows the example.com seed with 0 assets (discovery queued; measured: first cycle more than a day after seeding). Discover now shows the queued message. Screenshot 24 is captioned as the finished result.
 - [ ] 16:00  Supply Chain Intel shows Microsoft with the tabs Overview, Threat Landscape (Only critical toggle), Attack Surface, Employee/Customer Credentials, Dark Web.
 - [ ] 17:00  The handover to the debrief reads well.
 
