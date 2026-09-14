@@ -15,7 +15,9 @@ git clone https://github.com/iracic82/axur-lab.git /root/lab/axur-lab
 # --- Set Instruqt agent variables ---
 # Use -- to prevent values starting with - from being interpreted as flags
 agent variable set Sandbox_ID -- "${INSTRUQT_PARTICIPANT_ID}"
-agent variable set User_Email -- "${INSTRUQT_USER_EMAIL}"
+# INSTRUQT_USER_EMAIL is only set for logged-in participants who share their email; anonymous invite
+# participants have none, and with set -u an unguarded reference aborts the whole setup.
+agent variable set User_Email -- "${INSTRUQT_USER_EMAIL:-anonymous}"
 
 # --- Environment file (sourced by cleanup and by interactive shells) ---
 # xtrace is off in this block so the AXUR_TOKEN secret never reaches the Instruqt logs.
@@ -26,7 +28,7 @@ if [ -z "${AXUR_TOKEN:-}" ]; then
 fi
 cat > /root/lab/axur.env << ENVEOF
 export AXUR_TOKEN=${AXUR_TOKEN}
-export INSTRUQT_EMAIL=${INSTRUQT_USER_EMAIL}
+export INSTRUQT_EMAIL=${INSTRUQT_USER_EMAIL:-}
 export INSTRUQT_PARTICIPANT_ID=${INSTRUQT_PARTICIPANT_ID}
 export INSTRUQT_SANDBOX_ID=${INSTRUQT_SANDBOX_ID:-${INSTRUQT_PARTICIPANT_ID}}
 export AXUR_CTI_ENABLED=true
