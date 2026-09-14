@@ -14,15 +14,15 @@ Invite: https://play.instruqt.com/infoblox/invite/qmefrgcrtv8f  ·  Tick each li
 
 ## Challenge 2, Day One on the Desk (menu paths and screenshots)
 - [ ] 08:00  Settings > Monitoring Settings > Asset Management lists Demo Netflix, Inc, example.com, Microsoft, Alex Rivera; the brand asset shows monitoring phishing, similar domains, fake social media profiles and fraudulent brand use. Screenshots 1 and 2 still match the current UI.
-- [ ] 08:30  Keyword libraries page exists at that path; creating a library works as described. Screenshot 3 matches.
-- [ ] 09:00  Filtering rules page: creating the Deep & Dark Web / Netflix rule works. Screenshots 4 and 5 match.
-- [ ] 09:30  Search Bots under Searches: creating a bot with the library and Facebook works. Screenshot 6 matches.
-- [ ] 10:00  Brand Protection shows hundreds of tickets. Filter Ticket Type = Fake social media profile shows the sample with reference facebook.com/netflix.golden.lab.sample (the **Netflix Golden** profile); it has a snapshot and AI fields. Quarantine / Incident / Discard actions exist. Takedown is NOT offered on the sample.
+- [ ] 08:30  Keyword libraries: an empty library for Demo Netflix, Inc already exists (per tester feedback 2026-09-13); editing it or adding one works. Screenshot 3 is captioned as the demo library.
+- [ ] 09:00  Filtering rules: rules exist for every detection type except Deep & Dark Web; Add rule with Detection type, Brand, Source and Monitored query (the query in the text is accepted) saves. Screenshots 4 and 5 match.
+- [ ] 09:30  Search bots > Add bot: the six steps in the text match the wizard (source, asset, what to search for, searches generated, title, Save bot). No monitoring warning on Demo Netflix, Inc.
+- [ ] 10:00  Brand Protection shows hundreds of tickets. Search ticket = `golden` finds the sample with reference facebook.com/netflix.golden.lab.sample (the **Netflix Golden** profile; the Fake social media profile filter alone lists 1,000+ real profiles); it has a snapshot and AI fields. Quarantine / Incident / Discard actions exist. Takedown is NOT offered on the sample.
 - [ ] 10:00  After moving the sample ticket, the **Check** button passes within a few seconds. Before moving it, Check fails with the hint text.
-- [ ] 10:00  Incidents, Quarantine and Closed tabs exist; Closed shows a resolution column (Discarded/Resolved/...). Screenshots 7 to 13 match.
-- [ ] 11:30  Data Leakage shows credentials for example.com; Employee/Customer switch and Leak Format (Table, Stealer Log) exist. Screenshots 14 to 17 match.
+- [ ] 10:00  Similar domain name tickets sit in Open (none auto-quarantined); Send to Quarantine works on one. Closed tickets appear after 15 to 20 minutes. Screenshots 7 to 13 match.
+- [ ] 11:30  Data Leakage: Add filter > Leak format > Combolist returns thousands of example.com records; Stealer log returns none (expected, captioned as demo). Screenshots 14 to 17 match.
 - [ ] 13:00  Deep & Dark Web > Explore accepts `netflix AND (hack OR premium)` and returns results. Screenshot 18 matches.
-- [ ] 14:00  Settings > Monitoring Settings > Assets > Executives shows Alex Rivera; name variations and name similarity inspection can be saved. Screenshots 19 to 21 are labelled as demo-executive examples.
+- [ ] 14:00  Executives > Alex Rivera: "Alex James Rivera" is accepted, "Alex J. Rivera" refused, variations autosave; the similar-name option under fake social media profile exists (confirm its exact label). Screenshots 19 to 21 are labelled as demo-executive examples.
 - [ ] 15:00  CTI workspace opens; monitoring rules page reachable. Screenshots 22 and 23 match.
 - [ ] 15:30  EASM shows the example.com seed and, after discovery ran, hosts/IPs. Note how long discovery took. Screenshot 24 matches.
 - [ ] 16:00  Supply Chain Intel shows Microsoft with the tabs Overview, Threat Landscape (Only critical toggle), Attack Surface, Employee/Customer Credentials, Dark Web.

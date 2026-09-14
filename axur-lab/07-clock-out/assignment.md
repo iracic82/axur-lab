@@ -34,7 +34,7 @@ working with Axur.
 
 ____
 
-**The call: leave it in Quarantine.** An empty lookalike domain is not a false positive. It is a phishing
+**The call: send it to Quarantine.** An empty lookalike domain is not a false positive. It is a phishing
 page that has not been built yet. Quarantine keeps it under Axur's daily re-check, so the day content
 appears the ticket comes back with the change flagged. Discarding it means finding it again from scratch. A
 takedown needs evidence of abuse, and an Incident is for a threat that is already live.

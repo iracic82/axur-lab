@@ -116,12 +116,12 @@ the cheapest way to raise detection and cut false positives at the same time.
 
 **Steps**
 
-1. On the same page, open the **Keyword libraries** option
-2. Create a library called **Netflix variations** and give it the terms an impersonator would use: netflix, netflx, net-flix, netflix-premium, netflix billing
-3. Open it with the Edit icon and see how each term becomes a search the bots will run
+1. On the same page, open **Keyword libraries**. Axur already created an empty library for **Demo Netflix, Inc**
+2. Open it with the Edit icon, or click **Add Library** and call your own **Netflix variations**. Give it the terms an impersonator would use: netflix, netflx, net-flix, netflix-premium, netflix billing
+3. Save. Every term becomes a search the bots will run, so more terms mean more collections and tickets, and fewer terms mean fewer
 ![Jul-13-2026_at_14.35.19-image.png](../assets/Jul-13-2026_at_14.35.19-image.png)
 
-The library in the screen is one from the demo tenant, **Keywords for Youtube**. Yours is **Netflix variations**, built the same way.
+The screen shows the edit form on a demo library called **Keywords for Youtube**. Yours works the same way.
 
 **What to notice**
 
@@ -144,13 +144,19 @@ so what you open first is worth opening.
 
 **Steps**
 
-1. On the same page, open **Filtering rules**
-2. Create your first rule: from the drop-down select Detection type **Deep and Dark Web** and Asset name **Netflix**
+1. On the same page, open **Filtering rules**. Axur pre-built a rule for each detection type of Demo Netflix, Inc, except one: there is no rule yet for Deep and Dark Web. That one is yours to write
 ![Jul-13-2026_at_14.42.36-image.png](../assets/Jul-13-2026_at_14.42.36-image.png)
-3. Observe how a rule refines visible findings by threat type, source, asset, or other attributes
+2. Click **Add rule**. Detection type **Deep & Dark Web**, Brand **Netflix**, Source **Forums & Markets**
+3. In **Monitored query**, paste the query below. It matches the brand and its spellings in the content, the description or the address of a post
+4. Read the line under the query: the average results per day this rule would have produced over the last 15 days. **Simulate in Threat Hunting** shows them before you commit. Then **Save**
+
+```
+(content=(Netflix OR "Net-flix" OR "Net_flix" OR "Net.Flix") OR description=(Netflix OR "Net-flix" OR "Net_flix" OR "Net.Flix") OR uri=(Netflix OR "Net-flix" OR "Net_flix" OR "Net.Flix"))
+```
+
 ![Jul-13-2026_at_14.43.12-image.png](../assets/Jul-13-2026_at_14.43.12-image.png)
 
-The rule in the screen was built by Axur in the demo tenant. Note the **monitored query** it generates from the brand and its variations, and the results per day it expects. Your rule shows the same once saved.
+The screen shows the finished rule in the demo tenant. Yours looks the same once saved.
 
 **Your call**
 
@@ -174,18 +180,20 @@ further and flags pages that copy the official layout the moment they load.
 
 **Steps**
 
-1. Navigate to **Search Bots** under Searches
-2. Create a bot that hunts fake accounts on Facebook for the Netflix asset, using the keyword library you just built
-3. Open it and review the configuration, then come back later in the shift to see what it brought in
+1. Under Searches, open **Search bots** and click **Add bot**
+2. **Which source will this bot scan?** Choose **Facebook**. Some sources offer templates. Create this one from scratch to see every step
+3. **For which asset will this bot work?** Demo Netflix, Inc
+4. **What to search for?** Add the asset library **Brand name and variations** and the keyword library you just built
+5. Read **Searches generated**: one search per term and target, and how often they run. Facebook bots run once a day at a random time
+6. Give it a title such as **Netflix fake accounts on Facebook** and click **Save bot**. On the list, its toggle shows green
 
-The page defines:
+**What to notice**
 
-- which asset it applies to
-- which keyword library it uses
-- what it searches for
+- A bot is three choices: a source, an asset for the tickets, and what to search for
+- This bot's first harvest lands after your shift, since Facebook bots run once a day. The fake profile tickets already in Brand Protection show what that harvest looks like
 ![Jul-13-2026_at_14.40.31-image.png](../assets/Jul-13-2026_at_14.40.31-image.png)
 
-In the demo screen the asset's monitoring was switched off, hence the yellow warning. In your tenant fake social media profile monitoring is active on **Demo Netflix, Inc**, so your bot runs at its next slot.
+In the demo screen the asset's monitoring was switched off, hence the yellow warning. In your tenant fake social media profile monitoring is active on **Demo Netflix, Inc**, so your bot runs at its next daily slot.
 
 ***
 
@@ -204,7 +212,8 @@ pages carry a working login form, and a good share ask for payment.
 **Discarded** as a false positive, or sent for **Takedown**. Takedowns are what Axur is known for: the first
 phishing notification goes out in under four minutes, 86% of requests run fully automated from detection to
 decision to notification, and the success rate is around 98%, with a stay-down guarantee. Lookalike domains
-do not even wait for you: smart monitoring opens the ticket and quarantines the domain automatically.
+need no setup at all: smart monitoring compares new registrations and certificates against the brand and opens a
+ticket for each one. Parking the empty ones in Quarantine is your move, and Axur re-checks them every morning.
 
 ![The life of a ticket in Brand Protection](../assets/diag-ticket-lifecycle.png)
 
@@ -214,7 +223,7 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 
 1. Navigate to Workspaces > Brand Protection
 ![Jul-13-2026_at_14.46.30-image.png](../assets/Jul-13-2026_at_14.46.30-image.png)
-2. Filter by Ticket Type and select **Fake social media profile**
+2. In **Search ticket**, type **golden**. That is the fastest way to it: the Fake social media profile filter alone returns well over a thousand real profiles by now
 3. Open the sample ticket whose reference is **facebook.com/netflix.golden.lab.sample**. It stands for the Netflix Golden profile in the screen below and was placed in your tenant for this exercise, so please do not request a takedown on it
 4. Review the profile details, the logo similarity, the risk level assigned by Axur AI and the attributes on the ticket
 ![Jul-13-2026_at_14.46.56-image.png](../assets/Jul-13-2026_at_14.46.56-image.png)
@@ -247,15 +256,15 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 
 **Steps**
 
-1. Navigate to the **Quarantine** tab
-2. Open the similar domain findings
+1. In the **Open** tab, filter Ticket Type = **Similar domain name**
+2. Open a few. Most resolve to an empty page or a parked domain, which is what a phishing page looks like the week before it goes live
 3. Review how domain lookalikes are presented
 ![Jul-13-2026_at_14.53.07-image.png](../assets/Jul-13-2026_at_14.53.07-image.png)
 4. Look for signals such as branding overlap, impersonation patterns, hosting behavior, or campaign context
 
 **What to notice**
 
-- These landed here without anyone's help. Quarantine is re-checked daily, and a domain that turns hostile is flagged for reassessment
+- These were found without anyone's help. Send an empty one to **Quarantine**: Axur re-checks quarantined tickets every morning at 06:00 and flags the ticket the day content appears. The demo screen shows one already parked there
 
 #### The ones that are already closed
 
@@ -263,7 +272,7 @@ do not even wait for you: smart monitoring opens the ticket and quarantines the 
 
 1. Navigate to the **Closed** tickets tab
 2. Filter the ticket type to Phishing
-3. Open a phishing example tied to the Demo Netflix, Inc asset. If the tab is still empty, Axur's AI has not revisited any of today's findings yet, so come back later in the shift
+3. Open a ticket tied to the Demo Netflix, Inc asset. The first closed tickets appear 15 to 20 minutes into your shift, once the AI has revisited today's findings. If the tab is still empty, carry on and come back
 4. Review the timeline, the evidence, the disposition and the final resolution
 ![Screenshot%202026-08-13%20at%2010.58.33%E2%80%AFPM.png](../assets/Screenshot%202026-08-13%20at%2010.58.33%E2%80%AFPM.png)
 
@@ -317,24 +326,14 @@ malware. Secrets committed to public code are caught as well.
 
 **Steps**
 
-1. Navigate to Workspaces > Data Leakage
+1. Navigate to Workspaces > Data Leakage and open the **Credentials** tab
 ![Jul-13-2026_at_15.12.59-image.png](../assets/Jul-13-2026_at_15.12.59-image.png)
-2. Open the credentials tab (if not already open)
-3. Notice that the filter is set to status New or In treatment
-4. Click Leak Format and select **Table Format** (structured credential records with fields such as username or email, password, and URL)
-5. Select the **Employee** radio button to see leaked employee credentials
-6. Select the **Customer** radio button to see customer credentials captured on sites related to the asset
+2. The filter already applied is Status **New** or **In treatment**. Click **Add filter**, choose **Leak format** and select **Combolist**: the bulk of what leaks about example.com, thousands of records within minutes of the asset going live
+3. Select the **Employees** radio button for leaked employee credentials, then **Customers** for customer credentials captured on sites related to the domain
 ![Jul-13-2026_at_15.13.56-image.png](../assets/Jul-13-2026_at_15.13.56-image.png)
-7. Open a record to see the details of the leak
-8. Walk through what is available:
-
-- the source of the exposure
-- the group or community where it was found
-- the file name
-- the username, URL and other metadata
+4. Open a record and walk through what is there: the source and the forum or community where it was found, the leak's name and description, the file it came from, the username, the password type and the URL it grants access to
 ![Jul-13-2026_at_15.14.22-image.png](../assets/Jul-13-2026_at_15.14.22-image.png)
-9. Set the leak format to **Stealer Log** and open one of the users in the list
-10. Review the infected machine context, the original file or package, the malware details and the related evidence
+5. The other leak format is **Stealer log**. example.com is a documentation domain, no real laptop is logged into it, so a fresh tenant has no stealer logs for it. The record below comes from the demo tenant: the infected machine's file path, the browser profile and the source package, which is what turns a leaked password into an infected computer you can find
 ![Screenshot%202026-08-14%20at%2011.42.45%E2%80%AFAM.png](../assets/Screenshot%202026-08-14%20at%2011.42.45%E2%80%AFAM.png)
 
 **Your call**
@@ -384,10 +383,10 @@ profile you give it, and that profile is your job in this chapter.
 **Steps**
 
 1. Navigate to Settings > Monitoring Settings > Assets > **Executives** and open **Alex Rivera**
-2. Add the **name variations** an impersonator might use, for example "Alex J. Rivera", "A. Rivera" and "Alexandra Rivera"
-3. Enable **name similarity inspection**, so profiles whose name is 80% or more similar are caught even without a photo
-4. Note the remaining fields: a **face photo** for facial recognition, and the emails, phone numbers and documents whose leaks should raise a ticket. A real onboarding would fill these in, or send the executive a SafeShare form to fill them in themselves
-5. Save, then open Workspace > Executives & VIPs. This is where Alex's findings will land once the profile is complete and the collectors have run
+2. Under **Full name and variations**, add the spellings an impersonator might use, for example **Alex James Rivera** and **Alexandra Rivera**. The form only accepts names of two or more words and refuses initials with a dot, so "Alex J. Rivera" is rejected. Each variation saves as you add it
+3. Under the fake social media profile detection, switch on the option that catches profiles with a **similar name**. Axur calls it name similarity inspection: profiles whose name is 80% or more similar to a registered name are caught even without a photo
+4. Note the remaining fields: a **face photo** for facial recognition, and the emails, phone numbers, documents and cards whose leaks should raise a ticket. A real onboarding fills these in, or sends the executive a **SafeShare** form to fill in themselves
+5. There is no Save button, the profile saves as you go. Open Workspace > Executives & VIPs: this is where Alex's findings will land once the profile is complete and the collectors have run
 
 **What findings look like.** The screens below come from Axur's demo executive, Patrick Mahomes, a public figure
 with a complete profile. This is what lands in the workspace once collection runs: the executive filter, a
