@@ -67,17 +67,9 @@ easm_policy:
     weak_encryption: {enabled: true}
     wildcard: {enabled: true}
 
-requests:
-  # One curated sample ticket: the "Netflix Golden" fake profile the Lab Guide walks through. Real detections
-  # are phishing pages and lookalike domains, so without this the fake-profile chapter would have no example.
-  # Assets are string asset keys; "{asset:<name>}" is resolved from the tenant after the assets step, so the key
-  # never has to be guessed. A repeated reference answers 409, so re-runs are safe. Participants are told not to
-  # request takedowns on it.
-  - method: POST
-    path: /api/tickets-api/tickets
-    json: {reference: "https://www.facebook.com/netflix.golden.lab.sample", customer: "{key}", type: fake-social-media-profile, assets: ["{asset:Demo Netflix, Inc}"]}
-    ok: [200, 409]
-# Kept for reference (off): a curated phishing ticket. Not needed, the collectors deliver hundreds.
+requests: []
+# The curated "Netflix Golden" fake-profile ticket was removed on 2026-09-15 (decision with Sergio): the lab no longer
+# plants a sample ticket or checks a decision on it. Kept for reference (off): how a curated ticket would be seeded.
 #   - method: POST
 #     path: /api/tickets-api/tickets
 #     json: {reference: "https://netflix-billing-update.example.net/login", customer: "{key}", type: phishing, assets: ["{asset:Demo Netflix, Inc}"]}

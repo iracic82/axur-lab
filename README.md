@@ -213,18 +213,18 @@ the end. `instruqt track logs axur-lab --since 15m` shows the same from the CLI 
 | EASM | Empty until a **seed** is added. The preload registers example.com and queues discovery (`POST /easm/seeds/scan`), but Axur runs discovery in scheduled cycles: measured 2026-09-14, the first cycle came more than a day after seeding, so a lab session shows 0 assets. The guide says so and shows the finished result from the demo tenant | preload (tested), slow by design |
 | Executives & VIPs | Empty. A VIP asset can be created (monitoring id `executives`), but name variations and the face photo are UI-only, and a fictional executive yields no detections | needs a decision |
 
-**Enabled in `tenant_preload.yml`** (decision 2026-09-11): the EASM seed for example.com, one curated
-`fake-social-media-profile` ticket ("Netflix Golden", reference facebook.com/netflix.golden.lab.sample) so the
-fake-profile chapter has a predictable example from minute one, and the fictional executive **Alex Rivera** as a VIP asset so the Executives workspace is configured.
-A curated phishing ticket is kept commented out; the collectors deliver hundreds on their own.
+**Enabled in `tenant_preload.yml`**: the EASM seed for example.com with its monitoring policy, and the fictional
+executive **Alex Rivera** as a VIP asset so the Executives workspace is configured. The curated "Netflix Golden"
+fake-profile ticket and the Check built on it were removed on 2026-09-15 (decision with Sergio); a curated phishing
+ticket is kept commented out for reference. The collectors deliver hundreds of real tickets on their own.
 
 What the API can seed, all tested live:
 
 - `POST /api/easm/seeds?axur_tenant_key={key}` with `{"seed_names": ["example.com"], "policy": {...}}` registers the seed **with its monitoring policy** (`easm_policy` in the YAML). Verified 2026-09-14: a seed created without a policy has no monitoring at all (`GET /api/easm/seeds/{id}/policy` answers "record not found"), the account policy does not exist until a seed is created with one, and a policy cannot be attached to an existing seed, so the preload removes and re-creates such seeds. `POST /api/easm/seeds/scan` with the seed ids queues discovery for Axur's next scheduled cycle (409 if one is already queued).
 - `POST /api/tickets-api/tickets` creates curated tickets (`phishing`, `fake-social-media-profile`, ...). `assets`
   must be an **array of string asset keys** (objects give a 500). A repeated reference answers 409, so re-runs are
-  safe. Useful to guarantee a predictable example (e.g. the "Netflix Golden" profile the guide mentions) beside the
-  hundreds of real ones. Participants should not request takedowns on seeded tickets.
+  safe. Useful to guarantee a predictable example beside the hundreds of real ones (not used since 2026-09-15).
+  Participants should not request takedowns on seeded tickets.
 - `POST /api/assets-api/customers/{key}/asset` with `type: VIP, monitoring: [executives]` adds an executive.
 - `POST /api/touchpoints/items` adds safelist entries (works). Automations need a `status` precondition for
   `CREDENTIAL` match types (not enabled).
@@ -255,13 +255,12 @@ Axur ONE grows by one per participant.
 
 ## Validating what participants do (challenge checks)
 
-Instruqt's **Check** button runs `axur-lab/02-labguide/check-shell` on the `shell` host, which calls
-`check_progress.py --sample-decision`: it reads the tenant back from the Axur API and passes only when the seeded
-"Netflix Golden" ticket has left Potential threats (`current.status` no longer `open`, i.e. Quarantine, Incident or
-Closed/Discarded). Skipping runs `solve-shell`, which writes `/root/lab/challenge2.solved` because Axur has no API
-to move a ticket on a participant's behalf; the check honours that marker.
+No challenge has a Check any more. Until 2026-09-15 challenge 2 checked that a planted "Netflix Golden" ticket had
+left Potential threats (`check_progress.py`, removed with the sample ticket, see git history); both were dropped
+after the sync with Sergio, and the challenge now ends with Next. Setup-side validation (`validate_tenant.py`) is
+unchanged.
 
-What the API can verify, for future checks: ticket tab changes (`current.status` = open / quarantine / incident /
+What the API can verify, should a check come back: ticket tab changes (`current.status` = open / quarantine / incident /
 treatment / closed, filterable on `GET /tickets-api/tickets`), ticket history (`GET /tickets-api/ticket-history/{key}`),
 takedown requests, safelist items, EASM seeds, manually created tickets, asset changes. **Not verifiable** (UI only,
 no API): keyword libraries, filtering rules, search bots, CTI monitoring rules, executive profile details.
